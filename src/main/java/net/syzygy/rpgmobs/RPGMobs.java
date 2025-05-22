@@ -3,6 +3,7 @@ package net.syzygy.rpgmobs;
 import net.fabricmc.api.ModInitializer;
 
 import net.syzygy.rpgmobs.entity.ModEntities;
+import net.syzygy.rpgmobs.item.ModArmorMaterials;
 import net.syzygy.rpgmobs.item.ModItemGroups;
 import net.syzygy.rpgmobs.item.ModItems;
 import net.syzygy.rpgmobs.util.ModRegistries;
@@ -19,6 +20,7 @@ public class RPGMobs implements ModInitializer {
 		LOGGER.info("Hello Fabric world!");
 
 		ModItemGroups.registerItemGroups();
+		
 		ModItems.registerModItems();
 		ModRegistries.registerModStuffs();
 		ModEntities.registerModEntites();

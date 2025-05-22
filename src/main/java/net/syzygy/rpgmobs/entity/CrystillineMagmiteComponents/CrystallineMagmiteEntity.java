@@ -11,11 +11,15 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -28,7 +32,7 @@ import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteAttackGoal;
 import org.jetbrains.annotations.Nullable;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteModel;
 
-public class CrystallineMagmiteEntity extends HostileEntity {
+public class CrystallineMagmiteEntity extends AnimalEntity {
     private static final TrackedData<Boolean> ATTACKING =
             DataTracker.registerData(CrystallineMagmiteEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
@@ -43,7 +47,7 @@ public class CrystallineMagmiteEntity extends HostileEntity {
     public int attackAnimationTimeout = 0;
     public final AnimationState attack2AnimationState = new AnimationState();
 
-    public CrystallineMagmiteEntity(EntityType<? extends HostileEntity> entityType, World world) {
+    public CrystallineMagmiteEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -54,7 +58,8 @@ public class CrystallineMagmiteEntity extends HostileEntity {
     protected void initGoals() {
         this.goalSelector.add(2, new CrystallineMagmiteAttackGoal(this, 1f, true));
         this.goalSelector.add(2, new ShootCobbleProjectileGoal(this));
-        this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(2, new RevengeGoal(this));
+        // this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAtEntityGoal(this, LivingEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAroundGoal(this));
@@ -108,17 +113,6 @@ public class CrystallineMagmiteEntity extends HostileEntity {
             attack1AnimationState.stop();
             attack2AnimationState.stop();
         }
-
-        if(this.isShooting() && attackAnimationTimeout <= 0) {
-            attackAnimationTimeout = 30;
-            attack1AnimationState.start(this.age);
-        } else {
-            --this.attackAnimationTimeout;
-        }
-
-        if (!this.isShooting()) {
-            attack1AnimationState.stop();
-        }
     }
 
     @Override
@@ -144,6 +138,11 @@ public class CrystallineMagmiteEntity extends HostileEntity {
         if (this.getWorld().isClient()) {
             this.setupAnimationStates();
         }
+    }
+
+    @Override
+    public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+        return null;
     }
 
     @Override

@@ -1,5 +1,12 @@
 {
   "itemgroup.rpg_mobs_group": "Syz's RPG Mobs",
 
-  "entity.rpgmobs.crystalline_magmite": "Crystalline Magmite"
+  "entity.rpgmobs.crystalline_magmite": "Crystalline Magmite",
+
+  "item.rpgmobs.kandra_core": "Kandra Core",
+
+  "item.rpgmobs.crystalline_magmite_helmet": "Crystalline Magmite Helmet",
+  "item.rpgmobs.crystalline_magmite_chestplate": "Crystalline Magmite Chestplate",
+  "item.rpgmobs.crystalline_magmite_leggings": "Crystalline Magmite Leggings",
+  "item.rpgmobs.crystalline_magmite_boots": "Crystalline Magmite Boots"
 }

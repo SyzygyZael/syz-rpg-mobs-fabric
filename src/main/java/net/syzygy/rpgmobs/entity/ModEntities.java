@@ -15,7 +15,7 @@ public class ModEntities {
 
     public static final EntityType<CrystallineMagmiteEntity> CRYSTALLINE_MAGMITE = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(RPGMobs.MOD_ID, "crystalline_magmite"),
-            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, CrystallineMagmiteEntity::new)
+            FabricEntityTypeBuilder.create(SpawnGroup.AMBIENT, CrystallineMagmiteEntity::new)
                     .dimensions(EntityDimensions.fixed(1.5f, 3f)).build());
 
     public static final EntityType<CobbleProjectileEntity> COBBLE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,

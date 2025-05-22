@@ -15,8 +15,12 @@ public class ModItemGroups {
     public static final ItemGroup RPG_MOBS_GROUP = Registry.register(Registries.ITEM_GROUP,
             new Identifier(RPGMobs.MOD_ID, "rpg_mobs_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.rpg_mobs_group"))
-                    .icon(() -> new ItemStack(Items.ITEM_FRAME)).entries((displayContext, entries) -> {
-
+                    .icon(() -> new ItemStack(ModItems.KANDRA_CORE)).entries((displayContext, entries) -> {
+                        entries.add(ModItems.KANDRA_CORE);
+                        entries.add(ModItems.CRYSTALLINE_MAGMITE_HELMET);
+                        entries.add(ModItems.CRYSTALLINE_MAGMITE_CHESTPLATE);
+                        entries.add(ModItems.CRYSTALLINE_MAGMITE_LEGGINGS);
+                        entries.add(ModItems.CRYSTALLINE_MAGMITE_BOOTS);
                     }).build());
 
     public static void registerItemGroups() {

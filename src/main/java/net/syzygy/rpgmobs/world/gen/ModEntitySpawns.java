@@ -17,9 +17,9 @@ public class ModEntitySpawns {
                 BiomeKeys.PLAINS,
                 BiomeKeys.WINDSWEPT_FOREST,
                 BiomeKeys.STONY_SHORE,
-                BiomeKeys.STONY_PEAKS), SpawnGroup.MONSTER, ModEntities.CRYSTALLINE_MAGMITE, 35, 1, 1);
+                BiomeKeys.STONY_PEAKS), SpawnGroup.AMBIENT, ModEntities.CRYSTALLINE_MAGMITE, 20, 1, 1);
         SpawnRestriction.register(ModEntities.CRYSTALLINE_MAGMITE, SpawnRestriction.Location.ON_GROUND,
-                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, HostileEntity::canSpawnIgnoreLightLevel);
+                Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
 
 
     }
