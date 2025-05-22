@@ -10,9 +10,9 @@
     }
   },
   "pattern": [
-    "S S",
+    "SSS",
     "SPS",
-    "SSS"
+    "   "
   ],
   "result": {
     "item": "rpgmobs:crystalline_magmite_helmet"

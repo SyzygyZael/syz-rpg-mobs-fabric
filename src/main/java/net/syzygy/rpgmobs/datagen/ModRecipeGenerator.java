@@ -19,6 +19,16 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
     @Override
     public void generate(Consumer<RecipeJsonProvider> exporter) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CRYSTALLINE_MAGMITE_HELMET, 1)
+                .pattern("SSS")
+                .pattern("SPS")
+                .pattern("   ")
+                .input('S', Items.STONE)
+                .input('P', ModItems.KANDRA_CORE)
+                .criterion(hasItem(Items.STONE), conditionsFromItem(Items.STONE))
+                .criterion(hasItem(ModItems.KANDRA_CORE), conditionsFromItem(ModItems.KANDRA_CORE))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.CRYSTALLINE_MAGMITE_HELMET)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CRYSTALLINE_MAGMITE_CHESTPLATE, 1)
                 .pattern("S S")
                 .pattern("SPS")
                 .pattern("SSS")
@@ -26,6 +36,24 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .input('P', ModItems.KANDRA_CORE)
                 .criterion(hasItem(Items.STONE), conditionsFromItem(Items.STONE))
                 .criterion(hasItem(ModItems.KANDRA_CORE), conditionsFromItem(ModItems.KANDRA_CORE))
-                .offerTo(exporter, new Identifier(getRecipeName(ModItems.CRYSTALLINE_MAGMITE_HELMET)));
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.CRYSTALLINE_MAGMITE_CHESTPLATE)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CRYSTALLINE_MAGMITE_LEGGINGS, 1)
+                .pattern("SPS")
+                .pattern("S S")
+                .pattern("S S")
+                .input('S', Items.STONE)
+                .input('P', ModItems.KANDRA_CORE)
+                .criterion(hasItem(Items.STONE), conditionsFromItem(Items.STONE))
+                .criterion(hasItem(ModItems.KANDRA_CORE), conditionsFromItem(ModItems.KANDRA_CORE))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.CRYSTALLINE_MAGMITE_LEGGINGS)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CRYSTALLINE_MAGMITE_BOOTS, 1)
+                .pattern("   ")
+                .pattern("S S")
+                .pattern("S S")
+                .input('S', Items.STONE)
+                .criterion(hasItem(Items.STONE), conditionsFromItem(Items.STONE))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.CRYSTALLINE_MAGMITE_BOOTS)));
     }
 }
