@@ -6,6 +6,7 @@ import net.minecraft.registry.RegistryBuilder;
 import net.minecraft.registry.RegistryKeys;
 import net.syzygy.rpgmobs.datagen.ModItemTagProvider;
 import net.syzygy.rpgmobs.datagen.ModModelProvider;
+import net.syzygy.rpgmobs.datagen.ModRecipeGenerator;
 
 public class RPGMobsDataGenerator implements DataGeneratorEntrypoint {
 	@Override
@@ -13,5 +14,6 @@ public class RPGMobsDataGenerator implements DataGeneratorEntrypoint {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 
 		pack.addProvider(ModModelProvider::new);
+		pack.addProvider(ModRecipeGenerator::new);
 	}
 }
