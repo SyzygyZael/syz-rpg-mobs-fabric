@@ -4,11 +4,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.util.Hand;
-import net.syzygy.rpgmobs.entity.Archangel.ArchangelEntity;
+import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
 
 public class ArchangelAttackGoal extends MeleeAttackGoal {
     private final ArchangelEntity entity;
-    private int attackDelay = 20;
+    private int attackDelay = 10;
     private int ticksUntilNextAttack = 20;
     private boolean shouldCountTillNextAttack = false;
 
@@ -20,13 +20,13 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
     @Override
     public void start() {
         super.start();
-        attackDelay = 20;
+        attackDelay = 10;
         ticksUntilNextAttack = 20;
     }
 
     @Override
     protected void attack(LivingEntity pEnemy, double squaredDistance ) {
-        if (isEnemyWithinAttackDistance(pEnemy, squaredDistance)) {
+        if (isEnemyWithinAttackDistance(pEnemy)) {
             shouldCountTillNextAttack = true;
 
             if(isTimeToStartAttackAnimation()) {
@@ -45,8 +45,8 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
         }
     }
 
-    private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy, double squaredDistance) {
-        return squaredDistance < 36f;
+    private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy) {
+        return this.mob.squaredDistanceTo(pEnemy) < 7f;
     }
 
     protected void resetAttackCooldown() {

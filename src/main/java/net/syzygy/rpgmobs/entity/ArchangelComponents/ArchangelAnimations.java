@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.Archangel;// Save this class in your mod and generate all required imports
+package net.syzygy.rpgmobs.entity.ArchangelComponents;// Save this class in your mod and generate all required imports
 
 import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.animation.AnimationHelper;
@@ -49,7 +49,7 @@ public class ArchangelAnimations {
 		))
 		.build();
 
-	public static final Animation normal_attack_animation = Animation.Builder.create(1.0F).looping()
+	public static final Animation normal_attack_animation = Animation.Builder.create(1.0F)
 		.addBoneAnimation("archangel", new Transformation(Transformation.Targets.ROTATE, 
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.25F, AnimationHelper.createRotationalVector(0.0F, 25.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -104,7 +104,7 @@ public class ArchangelAnimations {
 		))
 		.build();
 
-	public static final Animation air_attack_animation = Animation.Builder.create(1.25F).looping()
+	public static final Animation air_attack_animation = Animation.Builder.create(1.25F)
 		.addBoneAnimation("archangel", new Transformation(Transformation.Targets.ROTATE, 
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(-29.5202F, -46.0418F, 202.176F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.3333F, AnimationHelper.createRotationalVector(-20.0F, 0.0F, 180.0F), Transformation.Interpolations.LINEAR),
@@ -151,7 +151,7 @@ public class ArchangelAnimations {
 		))
 		.build();
 
-	public static final Animation second_attack_animation = Animation.Builder.create(1.0F).looping()
+	public static final Animation second_attack_animation = Animation.Builder.create(1.0F)
 		.addBoneAnimation("archangel", new Transformation(Transformation.Targets.ROTATE, 
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.25F, AnimationHelper.createRotationalVector(0.0F, -37.5F, 0.0F), Transformation.Interpolations.LINEAR),

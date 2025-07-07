@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.Archangel;
+package net.syzygy.rpgmobs.entity.ArchangelComponents;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.AnimationState;
@@ -76,11 +76,12 @@ public class ArchangelEntity extends AnimalEntity {
 
         if(this.isAttacking() && attackAnimationTimeout <= 0) {
             int attackTypeChooser = (int) (Math.random() * 2) + 1;
+            RPGMobs.LOGGER.info(String.valueOf(attackTypeChooser));
             if (attackTypeChooser == 1) {
                 attackAnimationTimeout = 20; // THIS IS LENGTH OF ANIMATION IN TICKS
                 attack1AnimationState.start(this.age);
             }
-            if (attackTypeChooser == 2) {
+            else if (attackTypeChooser == 2) {
                 attackAnimationTimeout = 20; // THIS IS LENGTH OF ANIMATION IN TICKS
                 attack2AnimationState.start(this.age);
             }

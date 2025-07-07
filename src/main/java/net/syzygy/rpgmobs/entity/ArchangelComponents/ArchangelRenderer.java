@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.Archangel;
+package net.syzygy.rpgmobs.entity.ArchangelComponents;
 
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
