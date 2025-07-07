@@ -36,7 +36,8 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
     private static final TrackedData<Boolean> ATTACKING =
             DataTracker.registerData(CrystallineMagmiteEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
-    private static final TrackedData<Boolean> SHOOTING = DataTracker.registerData(CrystallineMagmiteEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+    private static final TrackedData<Boolean> SHOOTING =
+            DataTracker.registerData(CrystallineMagmiteEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
             DataTracker.registerData(CrystallineMagmiteEntity.class, TrackedDataHandlerRegistry.INTEGER);
@@ -58,8 +59,7 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
     protected void initGoals() {
         this.goalSelector.add(2, new CrystallineMagmiteAttackGoal(this, 1f, true));
         this.goalSelector.add(2, new ShootCobbleProjectileGoal(this));
-        this.targetSelector.add(2, new RevengeGoal(this));
-        // this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.targetSelector.add(1, new RevengeGoal(this));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAtEntityGoal(this, LivingEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAroundGoal(this));
@@ -205,7 +205,7 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
                     World world = this.entity.getWorld();
                     this.cooldown++;
 
-                    if (this.cooldown == 20) {
+                    if (this.cooldown == 30) {
                         double e = 4.0;
                         Vec3d vec3d = this.entity.getRotationVec(1.0F);
                         double f = livingEntity.getX() - (this.entity.getX() + vec3d.x * 4.0);

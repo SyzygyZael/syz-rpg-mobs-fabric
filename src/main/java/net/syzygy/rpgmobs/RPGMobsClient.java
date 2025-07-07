@@ -3,6 +3,9 @@ package net.syzygy.rpgmobs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
+import net.syzygy.rpgmobs.entity.Archangel.ArchangelEntity;
+import net.syzygy.rpgmobs.entity.Archangel.ArchangelModel;
+import net.syzygy.rpgmobs.entity.Archangel.ArchangelRenderer;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileModel;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileRenderer;
@@ -20,5 +23,8 @@ public class RPGMobsClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(CobbleProjectileEntity.COBBLE_PROJECTILE, CobbleProjectileModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.COBBLE_PROJECTILE, CobbleProjectileRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ArchangelEntity.ARCHANGEL, ArchangelModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.ARCHANGEL, ArchangelRenderer::new);
     }
 }

@@ -14,8 +14,8 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
-    CRYSTALLINE_MAGMITE("crystalline_magmite", 25, new int[] { 3, 8, 6, 3 }, 19,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 2f, 0.1f, () -> Ingredient.ofItems(ModItems.KANDRA_CORE));
+    CRYSTALLINE_MAGMITE("crystalline_magmite", 20, new int[] { 3, 7, 6, 3 }, 19,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 1.5f, 0.1f, () -> Ingredient.ofItems(ModItems.KANDRA_CORE));
 
     private final String name;
     private final int durabilityMultiplier;
