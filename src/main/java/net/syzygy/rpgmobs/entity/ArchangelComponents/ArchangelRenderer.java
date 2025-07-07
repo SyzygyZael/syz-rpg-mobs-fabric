@@ -11,7 +11,7 @@ public class ArchangelRenderer extends MobEntityRenderer<ArchangelEntity, Archan
     private static final Identifier TEXTURE = new Identifier(RPGMobs.MOD_ID, "textures/entity/archangel.png");
 
     public ArchangelRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new ArchangelModel<>(ctx.getPart(ArchangelEntity.ARCHANGEL)), 1.0f);
+        super(ctx, new ArchangelModel<>(ctx.getPart(ArchangelEntity.ARCHANGEL)), 0.7f);
     }
 
     @Override

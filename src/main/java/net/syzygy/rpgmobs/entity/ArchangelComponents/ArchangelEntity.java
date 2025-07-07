@@ -1,28 +1,27 @@
 package net.syzygy.rpgmobs.entity.ArchangelComponents;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.entity.AnimationState;
-import net.minecraft.entity.EntityPose;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.ActiveTargetGoal;
-import net.minecraft.entity.ai.goal.LookAroundGoal;
-import net.minecraft.entity.ai.goal.LookAtEntityGoal;
-import net.minecraft.entity.ai.goal.WanderAroundFarGoal;
+import net.minecraft.entity.*;
+import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.entity.ai.ArchangelAttackGoal;
+import net.syzygy.rpgmobs.particle.ModParticles;
 import org.jetbrains.annotations.Nullable;
 
 public class ArchangelEntity extends AnimalEntity {
@@ -58,7 +57,7 @@ public class ArchangelEntity extends AnimalEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)35.0F)
+                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)32.0F)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.30F)
                 .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double)5.0F)
                 .add(EntityAttributes.GENERIC_ARMOR, (double)3.0F)
@@ -76,8 +75,11 @@ public class ArchangelEntity extends AnimalEntity {
 
         if(this.isAttacking() && attackAnimationTimeout <= 0) {
             int attackTypeChooser = (int) (Math.random() * 2) + 1;
-            RPGMobs.LOGGER.info(String.valueOf(attackTypeChooser));
-            if (attackTypeChooser == 1) {
+            if (this.hasNoGravity()) {
+                attackAnimationTimeout = 17;
+                airAttackAnimationState.start(this.age);
+            }
+            else if (attackTypeChooser == 1) {
                 attackAnimationTimeout = 20; // THIS IS LENGTH OF ANIMATION IN TICKS
                 attack1AnimationState.start(this.age);
             }
@@ -92,6 +94,7 @@ public class ArchangelEntity extends AnimalEntity {
         if (!this.isAttacking()) {
             attack1AnimationState.stop();
             attack2AnimationState.stop();
+            airAttackAnimationState.stop();
         }
     }
 
@@ -138,5 +141,25 @@ public class ArchangelEntity extends AnimalEntity {
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
+    }
+
+    @Override
+    public void tickMovement() {
+        if (this.getWorld().isClient) {
+            for (int i = 0; i < 2; i++) {
+                this.getWorld()
+                        .addParticle(
+                                ParticleTypes.WHITE_ASH,
+                                this.getParticleX(0.5),
+                                this.getRandomBodyY() - 0.25,
+                                this.getParticleZ(0.5),
+                                (this.random.nextDouble() - 0.5) * 2.0,
+                                -this.random.nextDouble(),
+                                (this.random.nextDouble() - 0.5) * 2.0
+                        );
+            }
+        }
+        this.jumping = false;
+        super.tickMovement();
     }
 }
