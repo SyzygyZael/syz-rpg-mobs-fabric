@@ -34,7 +34,7 @@ public class ModEntitySpawns {
                 BiomeKeys.FROZEN_PEAKS,
                 BiomeKeys.SNOWY_PLAINS,
                 BiomeKeys.SUNFLOWER_PLAINS
-                ), SpawnGroup.AMBIENT, ModEntities.CRYSTALLINE_MAGMITE, 8, 1, 1);
+                ), SpawnGroup.AMBIENT, ModEntities.CRYSTALLINE_MAGMITE, 10, 1, 1);
         SpawnRestriction.register(ModEntities.CRYSTALLINE_MAGMITE, SpawnRestriction.Location.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
 
@@ -57,7 +57,7 @@ public class ModEntitySpawns {
                 BiomeKeys.FROZEN_PEAKS,
                 BiomeKeys.SNOWY_PLAINS,
                 BiomeKeys.SUNFLOWER_PLAINS
-                ), SpawnGroup.AMBIENT, ModEntities.ARCHANGEL, 4, 1, 1);
+                ), SpawnGroup.AMBIENT, ModEntities.ARCHANGEL, 7, 1, 1);
         SpawnRestriction.register(ModEntities.ARCHANGEL, SpawnRestriction.Location.ON_GROUND,
                 Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, AnimalEntity::isValidNaturalSpawn);
     }

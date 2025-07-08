@@ -50,6 +50,7 @@ public class ArchangelEntity extends AnimalEntity {
     protected void initGoals() {
         this.goalSelector.add(2, new ArchangelAttackGoal(this, 1f, true));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
+        this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAtEntityGoal(this, LivingEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAroundGoal(this));
