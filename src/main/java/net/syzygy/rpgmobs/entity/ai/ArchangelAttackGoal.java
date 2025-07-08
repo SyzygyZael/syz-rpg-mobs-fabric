@@ -1,5 +1,6 @@
 package net.syzygy.rpgmobs.entity.ai;
 
+import net.minecraft.client.sound.Sound;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
@@ -8,6 +9,11 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -22,6 +28,7 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
     public int cooldown = 0;
     public int wait = 0;
     public int damageDelay = 5;
+    public int teleCount = 0;
 
     public ArchangelAttackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
         super(mob, speed, pauseWhenMobIdle);
@@ -57,7 +64,7 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
     }
 
     private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy) {
-        return this.mob.squaredDistanceTo(pEnemy) < 7f;
+        return this.mob.squaredDistanceTo(pEnemy) < 8f;
     }
 
     protected void resetAttackCooldown() {
@@ -91,6 +98,7 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
 
         int randNum = (int) (Math.random() * 18) + 1;
 
+        // initial teleport wind up
         if (randNum == 5 && cooldown <= 0 && entity.isAttacking()) {
             if (ArchangelCompassDirection(entity).equals("NORTH")) {
                 entity.teleport(entity.getX(), entity.getY() + 7, entity.getZ() + 10);
@@ -104,6 +112,7 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
             else {
                 entity.teleport(entity.getX() + 10, entity.getY() + 7, entity.getZ());
             }
+            entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
 
             entity.setAttacking(false);
             entity.setVelocity(0, 0, 0);
@@ -116,18 +125,46 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
             --this.cooldown;
         }
 
+        // teleport to enemy and deal damage if not blocking
         if (this.wait <= 13 && entity.hasNoGravity() && pEnemy != null) {
-            entity.teleport(pEnemy.getX(), pEnemy.getY() + 2, pEnemy.getZ());
+            if (teleCount == 0) {
+                entity.teleport(pEnemy.getX(), pEnemy.getY() + 2, pEnemy.getZ());
+                entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
+                teleCount = 1;
+            }
+
             entity.setAttacking(true);
 
-            if (this.damageDelay <= 0) {
-                pEnemy.damage(magicDamage, 4.0F);
+            // forge damage upon enemy
+            if (this.damageDelay <= 0 && !pEnemy.isBlocking()) {
+                pEnemy.damage(magicDamage, 6.5F);
                 // RPGMobs.LOGGER.info(String.valueOf(this.damageDelay));
                 this.damageDelay = 5;
+            } else if (this.damageDelay <= 0) {
+
+                // animate shield block, damage the shield, and call the sound
+                PlayerEntity player = ((PlayerEntity) pEnemy);
+                ItemStack shield = player.getOffHandStack();
+                if (shield.isOf(Items.SHIELD)) {
+                    player.setCurrentHand(Hand.OFF_HAND);
+                    player.getItemCooldownManager().set(shield.getItem(), 5);
+
+                    // damage the shield
+                    shield.damage(1, player, (p) -> {
+                        p.sendToolBreakStatus(Hand.OFF_HAND);
+                    });
+
+                    player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(),
+                            SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                }
+
+                // set delay to 10 so shield is not damaged every tick
+                this.damageDelay = 10;
             }
             --this.damageDelay;
         }
 
+        // teleport away short distance
         if (this.wait <= 0 && entity.hasNoGravity()) {
             entity.airAttackAnimationState.stop();
 
@@ -144,7 +181,9 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
                 entity.teleport(entity.getX() + 5, entity.getY(), entity.getZ());
             }
 
+            entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
             entity.setNoGravity(false);
+            this.teleCount = 0;
         } else {
             --this.wait;
         }

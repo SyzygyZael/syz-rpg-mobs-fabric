@@ -1,4 +1,4 @@
-// 1.20.1	2025-05-22T09:13:16.2148484	Syz's RPG Mobs/Model Definitions
+// 1.20.1	2025-07-08T11:46:24.1393231	Syz's RPG Mobs/Model Definitions
 10732d5fd09dca6870ff68d6d65f8b43eeba3a74 assets\rpgmobs\models\item\kandra_core.json
 933479dc46ba496f93a65dd522b23869fdf20929 assets\rpgmobs\models\item\crystalline_magmite_boots_iron_trim.json
 460bbae24b09cfd39bddca22b0cdd196b92272e0 assets\rpgmobs\models\item\crystalline_magmite_boots_diamond_trim.json
@@ -7,6 +7,7 @@ da2fa2dbe9d6dfcb99cca8f0db2cba61f1d60332 assets\rpgmobs\models\item\crystalline_
 237752454600e1e701853d068643e2b562533a66 assets\rpgmobs\models\item\crystalline_magmite_leggings_amethyst_trim.json
 d9913b1d3f8919667c583062119fc5c2e2033445 assets\rpgmobs\models\item\crystalline_magmite_leggings_netherite_trim.json
 ca2b1a6ed3febf2c33e900e60878785a1dd177c9 assets\rpgmobs\models\item\crystalline_magmite_chestplate_iron_trim.json
+276983194c6637dce844d2b96ec237805114158e assets\rpgmobs\models\item\shard_piece.json
 5dbb2ab5c0d3c567ba1f46e4c90f27fbee66b85f assets\rpgmobs\models\item\crystalline_magmite_leggings_redstone_trim.json
 45277784136d8fdda961072d1d32b186b6005919 assets\rpgmobs\models\item\crystalline_magmite_chestplate_emerald_trim.json
 e35ae4b0408464b86424cce60ac61aa6c73c5d48 assets\rpgmobs\models\item\crystalline_magmite_helmet_diamond_trim.json

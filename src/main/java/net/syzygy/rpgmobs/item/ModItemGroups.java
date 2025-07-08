@@ -21,6 +21,8 @@ public class ModItemGroups {
                         entries.add(ModItems.CRYSTALLINE_MAGMITE_CHESTPLATE);
                         entries.add(ModItems.CRYSTALLINE_MAGMITE_LEGGINGS);
                         entries.add(ModItems.CRYSTALLINE_MAGMITE_BOOTS);
+                        entries.add(ModItems.SHARD_PIECE);
+                        entries.add(ModItems.SHARD_BLADE);
                     }).build());
 
     public static void registerItemGroups() {

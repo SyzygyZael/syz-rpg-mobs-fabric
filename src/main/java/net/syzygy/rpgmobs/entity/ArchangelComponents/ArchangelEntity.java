@@ -5,6 +5,7 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -59,9 +60,8 @@ public class ArchangelEntity extends AnimalEntity {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)32.0F)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.30F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double)5.0F)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double)6.5F)
                 .add(EntityAttributes.GENERIC_ARMOR, (double)3.0F)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, (double)2.0F)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, (double)45.0F);
     }
 
@@ -121,6 +121,11 @@ public class ArchangelEntity extends AnimalEntity {
         if (this.getWorld().isClient()) {
             this.setupAnimationStates();
         }
+    }
+
+    @Override
+    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+        return false;
     }
 
     @Override

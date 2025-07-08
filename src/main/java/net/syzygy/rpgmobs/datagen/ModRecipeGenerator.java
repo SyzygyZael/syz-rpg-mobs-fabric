@@ -55,5 +55,15 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .input('S', Items.STONE)
                 .criterion(hasItem(Items.STONE), conditionsFromItem(Items.STONE))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.CRYSTALLINE_MAGMITE_BOOTS)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SHARD_BLADE, 1)
+                .pattern(" S ")
+                .pattern(" S ")
+                .pattern(" P ")
+                .input('S', ModItems.SHARD_PIECE)
+                .input('P', Items.STICK)
+                .criterion(hasItem(ModItems.SHARD_PIECE), conditionsFromItem(ModItems.SHARD_PIECE))
+                .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.SHARD_BLADE)));
     }
 }
