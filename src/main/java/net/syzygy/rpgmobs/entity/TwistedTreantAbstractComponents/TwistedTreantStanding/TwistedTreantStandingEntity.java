@@ -43,10 +43,11 @@ public class TwistedTreantStandingEntity extends TwistedTreantAbstractEntity {
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double) 32.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double) 0.30F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) 6.5F)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double) 0.35F)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) 6.8F)
                 .add(EntityAttributes.GENERIC_ARMOR, (double) 3.0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double) 36.0F);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double) 36.0F)
+                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, (double) 2.0F);
     }
 
     private void setupAnimationStates() {
