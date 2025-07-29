@@ -65,5 +65,15 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.SHARD_PIECE), conditionsFromItem(ModItems.SHARD_PIECE))
                 .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.SHARD_BLADE)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.STAFF_OF_THE_FOREST_MONARCH, 1)
+                .pattern(" SP")
+                .pattern(" SS")
+                .pattern("S  ")
+                .input('S', Items.STICK)
+                .input('P', ModItems.TREANT_ESSENCE_GEM)
+                .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
+                .criterion(hasItem(ModItems.TREANT_ESSENCE_GEM), conditionsFromItem(ModItems.TREANT_ESSENCE_GEM))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.STAFF_OF_THE_FOREST_MONARCH)));
     }
 }

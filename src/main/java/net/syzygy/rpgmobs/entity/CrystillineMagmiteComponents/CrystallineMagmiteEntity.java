@@ -23,12 +23,16 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.random.Random;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldEvents;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
 import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteAttackGoal;
+import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteRevengeGoal;
 import org.jetbrains.annotations.Nullable;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteModel;
 
@@ -48,6 +52,8 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
     public int attackAnimationTimeout = 0;
     public final AnimationState attack2AnimationState = new AnimationState();
 
+    private LivingEntity attacker;
+
     public CrystallineMagmiteEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -59,7 +65,7 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
     protected void initGoals() {
         this.goalSelector.add(2, new CrystallineMagmiteAttackGoal(this, 1f, true));
         this.goalSelector.add(2, new ShootCobbleProjectileGoal(this));
-        this.targetSelector.add(1, new RevengeGoal(this));
+        this.targetSelector.add(1, new CrystallineMagmiteRevengeGoal(this, this.attacker));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAtEntityGoal(this, LivingEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAroundGoal(this));
@@ -224,6 +230,16 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
                 this.entity.setShooting(this.cooldown > 10);
             }
         }
+    }
+
+    public void setMagmiteTarget(LivingEntity targetMob) {
+        this.attacker = targetMob;
+    }
+
+    public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
+                world.getFluidState(pos).isEmpty() &&
+                world.getLightLevel(pos) >= 0;
     }
 
     @Override

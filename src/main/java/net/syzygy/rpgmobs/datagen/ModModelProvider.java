@@ -24,6 +24,7 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateItemModels(ItemModelGenerator itemModelGenerator) {
         itemModelGenerator.register(ModItems.KANDRA_CORE, Models.GENERATED);
         itemModelGenerator.register(ModItems.SHARD_PIECE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.TREANT_ESSENCE_GEM, Models.GENERATED);
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.CRYSTALLINE_MAGMITE_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.CRYSTALLINE_MAGMITE_CHESTPLATE));

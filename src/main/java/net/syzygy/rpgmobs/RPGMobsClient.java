@@ -13,11 +13,16 @@ import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmite
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteModel;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteRenderer;
 import net.syzygy.rpgmobs.entity.ModEntities;
+import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
+import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantModel;
+import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantRenderer;
+import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingEntity;
+import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingModel;
+import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingRenderer;
 
 public class RPGMobsClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-
         EntityModelLayerRegistry.registerModelLayer(CrystallineMagmiteEntity.CRYSTALLINE_MAGMITE, CrystallineMagmiteModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.CRYSTALLINE_MAGMITE, CrystallineMagmiteRenderer::new);
 
@@ -26,5 +31,11 @@ public class RPGMobsClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(ArchangelEntity.ARCHANGEL, ArchangelModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ARCHANGEL, ArchangelRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(TwistedTreantEntity.TWISTED_TREANT, TwistedTreantModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.TWISTED_TREANT, TwistedTreantRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(TwistedTreantStandingEntity.TWISTED_TREANT_STANDING, TwistedTreantStandingModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.TWISTED_TREANT_STANDING, TwistedTreantStandingRenderer::new);
     }
 }

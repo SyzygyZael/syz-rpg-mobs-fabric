@@ -3,14 +3,12 @@ package net.syzygy.rpgmobs.item;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ToolMaterials;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
-import net.syzygy.rpgmobs.item.custom.KandraArmorItem;
-import net.syzygy.rpgmobs.item.custom.KandraCoreItem;
-import net.syzygy.rpgmobs.item.custom.ShardBladeItem;
-import net.syzygy.rpgmobs.item.custom.ShardPieceItem;
+import net.syzygy.rpgmobs.item.custom.*;
 
 import java.security.PublicKey;
 
@@ -19,8 +17,13 @@ public class ModItems {
             new KandraCoreItem(new FabricItemSettings()));
     public static final Item SHARD_PIECE = registerItem("shard_piece",
             new ShardPieceItem(new FabricItemSettings()));
+    public static final Item TREANT_ESSENCE_GEM = registerItem("treant_essence_gem",
+            new TreantEssenceGemItem(new FabricItemSettings()));
+
     public static final Item SHARD_BLADE = registerItem("shard_blade",
             new ShardBladeItem(ModToolMaterial.SHARD, 5, -2.2f, new FabricItemSettings()));
+    public static final Item STAFF_OF_THE_FOREST_MONARCH = registerItem("staff_of_the_forest_monarch",
+            new StaffOfTheForestMonarchItem(ToolMaterials.STONE, 1, 1.0f, new FabricItemSettings()));
 
     public static final Item CRYSTALLINE_MAGMITE_HELMET = registerItem("crystalline_magmite_helmet",
             new KandraArmorItem(ModArmorMaterials.CRYSTALLINE_MAGMITE, ArmorItem.Type.HELMET, new FabricItemSettings()));

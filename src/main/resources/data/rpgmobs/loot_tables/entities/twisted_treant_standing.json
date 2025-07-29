@@ -7,21 +7,18 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:feather",
-          "functions": [
+          "name": "minecraft:oak_log",
+          "conditions": [
             {
-              "function": "minecraft:furnace_smelt",
-              "conditions": [
-                {
-                  "condition": "minecraft:killed_by_player"
-                },
-                {
-                  "condition": "minecraft:random_chance_with_looting",
-                  "chance": 0.50,
-                  "looting_multiplier": 0.01
-                }
-              ]
+              "condition": "minecraft:killed_by_player"
             },
+            {
+              "condition": "minecraft:random_chance_with_looting",
+              "chance": 0.50,
+              "looting_multiplier": 0.05
+            }
+          ],
+          "functions": [
             {
               "function": "minecraft:set_count",
               "add": false,
@@ -49,21 +46,18 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "rpgmobs:shard_piece",
-          "functions": [
+          "name": "rpgmobs:treant_essence_gem",
+          "conditions": [
             {
-              "function": "minecraft:furnace_smelt",
-              "conditions": [
-                {
-                  "condition": "minecraft:killed_by_player"
-                },
-                {
-                  "condition": "minecraft:random_chance_with_looting",
-                  "chance": 0.03,
-                  "looting_multiplier": 0.01
-                }
-              ]
+              "condition": "minecraft:killed_by_player"
             },
+            {
+              "condition": "minecraft:random_chance_with_looting",
+              "chance": 0.05,
+              "looting_multiplier": 0.01
+            }
+          ],
+          "functions": [
             {
               "function": "minecraft:set_count",
               "add": false,
@@ -77,6 +71,5 @@
         }
       ]
     }
-  ],
-  "random_sequence": "rpgmobs:entities/archangel"
+  ]
 }

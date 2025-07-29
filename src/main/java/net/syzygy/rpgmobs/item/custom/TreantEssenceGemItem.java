@@ -10,14 +10,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class ShardPieceItem extends Item {
-    public ShardPieceItem(Settings settings) {
+public class TreantEssenceGemItem extends Item {
+    public TreantEssenceGemItem(Settings settings) {
         super(settings);
     }
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("item.rpgmobs.shard_piece.tooltip_line1").formatted(Formatting.GRAY));
-        tooltip.add(Text.translatable("item.rpgmobs.shard_piece.tooltip_line2").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("item.rpgmobs.treant_essence_gem.tooltip_line1").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("item.rpgmobs.treant_essence_gem.tooltip_line2").formatted(Formatting.GRAY));
     }
 }

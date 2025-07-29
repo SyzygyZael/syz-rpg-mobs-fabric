@@ -17,6 +17,7 @@ public class KandraCoreItem extends Item {
 
     @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("item.rpgmobs.kandra_core.tooltip").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("item.rpgmobs.kandra_core.tooltip_line1").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("item.rpgmobs.kandra_core.tooltip_line2").formatted(Formatting.GRAY));
     }
 }

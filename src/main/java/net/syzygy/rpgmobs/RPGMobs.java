@@ -7,6 +7,7 @@ import net.syzygy.rpgmobs.item.ModArmorMaterials;
 import net.syzygy.rpgmobs.item.ModItemGroups;
 import net.syzygy.rpgmobs.item.ModItems;
 import net.syzygy.rpgmobs.particle.ModParticles;
+import net.syzygy.rpgmobs.sound.ModSounds;
 import net.syzygy.rpgmobs.util.ModRegistries;
 import net.syzygy.rpgmobs.world.gen.ModEntitySpawns;
 import org.slf4j.Logger;
@@ -27,5 +28,6 @@ public class RPGMobs implements ModInitializer {
 		ModEntities.registerModEntites();
 		ModEntitySpawns.addSpawns();
 		ModParticles.registerParticles();
+		ModSounds.registerSounds();
 	}
 }
