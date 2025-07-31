@@ -9,32 +9,24 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
 import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteAttackGoal;
 import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteRevengeGoal;
 import org.jetbrains.annotations.Nullable;
-import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteModel;
 
 public class CrystallineMagmiteEntity extends AnimalEntity {
     private static final TrackedData<Boolean> ATTACKING =
@@ -74,10 +66,6 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
 
     public void setShooting(boolean shooting) {
         this.dataTracker.set(ATTACKING, shooting);
-    }
-
-    public int getProjectileStrength() {
-        return 1;
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
@@ -206,18 +194,11 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
         public void tick() {
             LivingEntity livingEntity = this.entity.getTarget();
             if (livingEntity != null) {
-                double d = 64.0;
                 if (livingEntity.squaredDistanceTo(this.entity) < 4096.0 && this.entity.canSee(livingEntity)) {
                     World world = this.entity.getWorld();
                     this.cooldown++;
 
                     if (this.cooldown == 30) {
-                        double e = 4.0;
-                        Vec3d vec3d = this.entity.getRotationVec(1.0F);
-                        double f = livingEntity.getX() - (this.entity.getX() + vec3d.x * 4.0);
-                        double g = livingEntity.getBodyY(0.5) - (0.5 + this.entity.getBodyY(0.5));
-                        double h = livingEntity.getZ() - (this.entity.getZ() + vec3d.z * 4.0);
-
                         CobbleProjectileEntity cobbleEntity = new CobbleProjectileEntity(world, entity);
                         cobbleEntity.setVelocity(entity, entity.getPitch(), entity.getHeadYaw(), 0.0F, 1.0F, 0.15F);
                         world.spawnEntity(cobbleEntity);

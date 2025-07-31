@@ -9,15 +9,9 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractFireballEntity;
-import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtElement;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -36,12 +30,12 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
             DataTracker.registerData(CobbleProjectileEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private int counter = 0;
 
-    public CobbleProjectileEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
-        super(entityType, world);
+    public CobbleProjectileEntity(EntityType<CobbleProjectileEntity> type, World world) {
+        super(type, world, ItemStack.EMPTY);
     }
 
     public CobbleProjectileEntity(World world, LivingEntity entity) {
-        super(ModEntities.COBBLE_PROJECTILE, world);
+        super(ModEntities.COBBLE_PROJECTILE, world, ItemStack.EMPTY);
         setOwner(entity);
         BlockPos blockpos = entity.getBlockPos();
         double d0 = (double)blockpos.getX() + 0.5D;
@@ -52,6 +46,7 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
 
     public static final EntityModelLayer COBBLE_PROJECTILE =
             new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "cobble_projectile"), "main");
+
 
     @Override
     public void tick() {

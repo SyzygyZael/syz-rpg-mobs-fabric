@@ -25,7 +25,7 @@ public class TwistedTreantAttackGoal extends MeleeAttackGoal {
     }
 
     @Override
-    protected void attack(LivingEntity pEnemy, double squaredDistance) {
+    protected void attack(LivingEntity pEnemy) {
         if (isEnemyWithinAttackDistance(pEnemy)) {
             shouldCountTillNextAttack = true;
 

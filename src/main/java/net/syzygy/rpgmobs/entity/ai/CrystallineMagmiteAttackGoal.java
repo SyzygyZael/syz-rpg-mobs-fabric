@@ -26,8 +26,8 @@ public class CrystallineMagmiteAttackGoal extends MeleeAttackGoal {
     }
 
     @Override
-    protected void attack(LivingEntity pEnemy, double squaredDistance ) {
-        if (isEnemyWithinAttackDistance(pEnemy, squaredDistance)) {
+    protected void attack(LivingEntity pEnemy) {
+        if (isEnemyWithinAttackDistance(entity.distanceTo(pEnemy))) {
             shouldCountTillNextAttack = true;
 
             if(isTimeToStartAttackAnimation()) {
@@ -46,7 +46,7 @@ public class CrystallineMagmiteAttackGoal extends MeleeAttackGoal {
         }
     }
 
-    private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy, double squaredDistance) {
+    private boolean isEnemyWithinAttackDistance(double squaredDistance) {
         return squaredDistance < 36f;
     }
 

@@ -2,7 +2,7 @@ package net.syzygy.rpgmobs.datagen;
 
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
@@ -17,7 +17,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
     }
 
     @Override
-    public void generate(Consumer<RecipeJsonProvider> exporter) {
+    public void generate(RecipeExporter exporter) {
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CRYSTALLINE_MAGMITE_HELMET, 1)
                 .pattern("SSS")
                 .pattern("SPS")
