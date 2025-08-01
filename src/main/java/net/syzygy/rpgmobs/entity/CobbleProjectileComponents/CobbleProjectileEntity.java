@@ -108,7 +108,7 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
 
         LivingEntity livingentity = owner instanceof LivingEntity ? (LivingEntity)owner : null;
         float damage = 5f;
-        hitEntity.damage(this.getDamageSources().mobProjectile(this, livingentity), damage);
+         hitEntity.damage(this.getDamageSources().mobProjectile(this, livingentity), damage);
 
         boolean bl = this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
         this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0, bl, World.ExplosionSourceType.MOB);
