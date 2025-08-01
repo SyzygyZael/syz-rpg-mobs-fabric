@@ -1,10 +1,7 @@
 package net.syzygy.rpgmobs.entity.ai;
 
-import net.minecraft.client.sound.Sound;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.damage.DamageEffects;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.mob.MobEntity;
@@ -17,7 +14,6 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
 
 public class ArchangelAttackGoal extends MeleeAttackGoal {

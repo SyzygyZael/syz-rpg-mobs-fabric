@@ -3,7 +3,6 @@ package net.syzygy.rpgmobs;
 import net.fabricmc.api.ModInitializer;
 
 import net.syzygy.rpgmobs.entity.ModEntities;
-import net.syzygy.rpgmobs.item.ModArmorMaterials;
 import net.syzygy.rpgmobs.item.ModItemGroups;
 import net.syzygy.rpgmobs.item.ModItems;
 import net.syzygy.rpgmobs.particle.ModParticles;

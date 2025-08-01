@@ -9,8 +9,6 @@ import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.item.ModItems;
 
-import java.util.function.Consumer;
-
 public class ModRecipeGenerator extends FabricRecipeProvider {
     public ModRecipeGenerator(FabricDataOutput output) {
         super(output);

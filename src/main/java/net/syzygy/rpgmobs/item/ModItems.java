@@ -10,8 +10,6 @@ import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.item.custom.*;
 
-import java.security.PublicKey;
-
 public class ModItems {
     public static final Item KANDRA_CORE = registerItem("kandra_core",
             new KandraCoreItem(new FabricItemSettings()));
