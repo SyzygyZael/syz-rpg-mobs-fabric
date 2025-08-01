@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stone",
-      "has_kandra_core",
-      "has_the_recipe"
+      "has_kandra_core"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:crystalline_magmite_chestplate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_stick",
-      "has_treant_essence_gem",
-      "has_the_recipe"
+      "has_treant_essence_gem"
     ]
   ],
   "rewards": {
     "recipes": [
       "minecraft:staff_of_the_forest_monarch"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
