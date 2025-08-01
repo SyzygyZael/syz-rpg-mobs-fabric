@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "rpgmobs:item/crystalline_magmite_leggings",
+    "layer1": "minecraft:trims/items/leggings_trim_redstone"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "P": {
+      "item": "minecraft:stick"
+    },
+    "S": {
+      "item": "rpgmobs:shard_piece"
+    }
+  },
+  "pattern": [
+    " S ",
+    " S ",
+    " P "
+  ],
+  "result": {
+    "item": "rpgmobs:shard_blade"
+  },
+  "show_notification": true
+}

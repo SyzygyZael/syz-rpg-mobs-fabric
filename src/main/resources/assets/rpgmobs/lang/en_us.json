@@ -1,0 +1,39 @@
+{
+  "itemgroup.rpg_mobs_group": "Syz's RPG Mobs",
+
+  "entity.rpgmobs.crystalline_magmite": "Crystalline Magmite",
+  "entity.rpgmobs.archangel": "Archangel",
+  "entity.rpgmobs.twisted_treant": "Twisted Treant",
+  "entity.rpgmobs.twisted_treant_standing": "Twisted Treant",
+
+  "item.rpgmobs.kandra_core": "Kandra Core",
+  "item.rpgmobs.shard_piece": "Shard Piece",
+  "item.rpgmobs.treant_essence_gem": "Treant Essence Gem",
+
+  "item.rpgmobs.crystalline_magmite_helmet": "Crystalline Magmite Helmet",
+  "item.rpgmobs.crystalline_magmite_chestplate": "Crystalline Magmite Chestplate",
+  "item.rpgmobs.crystalline_magmite_leggings": "Crystalline Magmite Leggings",
+  "item.rpgmobs.crystalline_magmite_boots": "Crystalline Magmite Boots",
+
+  "item.rpgmobs.shard_blade": "Shard Blade",
+
+  "item.rpgmobs.staff_of_the_forest_monarch": "Staff of the Forest Monarch",
+
+  "item.rpgmobs.kandra_core.tooltip_line1": "The life force of the inanimate ",
+  "item.rpgmobs.kandra_core.tooltip_line2": "made animate",
+
+  "item.rpgmobs.kandra_armor.tooltip_line1": "Armor forged using a Kandra Core. Only ",
+  "item.rpgmobs.kandra_armor.tooltip_line2": "held together by it alone.",
+
+  "item.rpgmobs.shard_piece.tooltip_line1": "A piece of Shard broken off during ",
+  "item.rpgmobs.shard_piece.tooltip_line2": "a battle with a shard bearer.",
+
+  "item.rpgmobs.shard_blade.tooltip_line1": "An extremely powerful, lightweight sword ",
+  "item.rpgmobs.shard_blade.tooltip_line2": "that cuts through living matter like butter.",
+
+  "item.rpgmobs.staff_of_the_forest_monarch.tooltip_line1": "A staff that is revered by the ",
+  "item.rpgmobs.staff_of_the_forest_monarch.tooltip_line2": "inhabitants of the forests.",
+
+  "item.rpgmobs.treant_essence_gem.tooltip_line1": "The life force of strange, twisted, forest ",
+  "item.rpgmobs.treant_essence_gem.tooltip_line2": "creatures lies within this gem."
+}

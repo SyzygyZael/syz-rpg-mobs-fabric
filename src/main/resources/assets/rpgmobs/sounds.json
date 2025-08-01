@@ -1,0 +1,14 @@
+{
+  "twisted_treant_roar": {
+    "subtitle": "sounds.rpgmobs.twisted_treant_roar",
+    "sounds": [
+      "rpgmobs:monster_roar"
+    ]
+  },
+  "twisted_treant_ambient": {
+    "subtitle": "sounds.rpgmobs.twisted_treant_ambient",
+    "sounds": [
+      "rpgmobs:tree_creaking"
+    ]
+  }
+}
