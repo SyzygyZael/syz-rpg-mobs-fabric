@@ -1,9 +1,11 @@
 package net.syzygy.rpgmobs;
 
+import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.ModInitializer;
 
+import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.ModEntities;
-import net.syzygy.rpgmobs.item.ModArmorMaterials;
+import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.syzygy.rpgmobs.item.ModItemGroups;
 import net.syzygy.rpgmobs.item.ModItems;
 import net.syzygy.rpgmobs.particle.ModParticles;
@@ -22,6 +24,7 @@ public class RPGMobs implements ModInitializer {
 		LOGGER.info("Hello Fabric world!");
 
 		ModItemGroups.registerItemGroups();
+		AutoConfig.register(ModConfig.class, Toml4jConfigSerializer::new);
 		
 		ModItems.registerModItems();
 		ModRegistries.registerModStuffs();

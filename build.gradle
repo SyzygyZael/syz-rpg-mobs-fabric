@@ -23,6 +23,8 @@ repositories {
 	maven {
 		url 'https://libraries.minecraft.net/'
 	}
+	maven { url = "https://maven.shedaniel.me/" }
+	// the essential Fabric/fabricmc repositories are already included
 	mavenCentral()
 }
 
@@ -40,6 +42,10 @@ dependencies {
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+	// Add config dependencies
+	modImplementation("me.shedaniel.cloth:cloth-config-fabric:11.1.106")
+	modImplementation(files("libs/auto-config-updated-api-3.4.0.jar"))
 
 }
 
