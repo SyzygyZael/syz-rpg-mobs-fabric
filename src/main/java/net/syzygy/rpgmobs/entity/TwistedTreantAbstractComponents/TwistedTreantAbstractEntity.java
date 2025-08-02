@@ -70,9 +70,4 @@ public class TwistedTreantAbstractEntity extends TameableEntity {
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
     }
-
-    @Override
-    public EntityView method_48926() {
-        return getWorld();
-    }
 }

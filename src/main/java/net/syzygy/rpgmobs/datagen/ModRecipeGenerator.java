@@ -1,24 +1,24 @@
 package net.syzygy.rpgmobs.datagen;
 
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.item.Items;
-import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.item.ModItems;
 
 import java.util.function.Consumer;
 
 public class ModRecipeGenerator extends FabricRecipeProvider {
-    public ModRecipeGenerator(FabricDataOutput output) {
-        super(output);
+
+    public ModRecipeGenerator(FabricDataGenerator dataGenerator) {
+        super(dataGenerator);
     }
 
     @Override
-    public void generate(Consumer<RecipeJsonProvider> exporter) {
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CRYSTALLINE_MAGMITE_HELMET, 1)
+    protected void generateRecipes(Consumer<RecipeJsonProvider> exporter) {
+        ShapedRecipeJsonBuilder.create(ModItems.CRYSTALLINE_MAGMITE_HELMET, 1)
                 .pattern("SSS")
                 .pattern("SPS")
                 .pattern("   ")
@@ -28,7 +28,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.KANDRA_CORE), conditionsFromItem(ModItems.KANDRA_CORE))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.CRYSTALLINE_MAGMITE_HELMET)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CRYSTALLINE_MAGMITE_CHESTPLATE, 1)
+        ShapedRecipeJsonBuilder.create(ModItems.CRYSTALLINE_MAGMITE_CHESTPLATE, 1)
                 .pattern("S S")
                 .pattern("SPS")
                 .pattern("SSS")
@@ -38,7 +38,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.KANDRA_CORE), conditionsFromItem(ModItems.KANDRA_CORE))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.CRYSTALLINE_MAGMITE_CHESTPLATE)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CRYSTALLINE_MAGMITE_LEGGINGS, 1)
+        ShapedRecipeJsonBuilder.create(ModItems.CRYSTALLINE_MAGMITE_LEGGINGS, 1)
                 .pattern("SPS")
                 .pattern("S S")
                 .pattern("S S")
@@ -48,7 +48,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.KANDRA_CORE), conditionsFromItem(ModItems.KANDRA_CORE))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.CRYSTALLINE_MAGMITE_LEGGINGS)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.CRYSTALLINE_MAGMITE_BOOTS, 1)
+        ShapedRecipeJsonBuilder.create(ModItems.CRYSTALLINE_MAGMITE_BOOTS, 1)
                 .pattern("   ")
                 .pattern("S S")
                 .pattern("S S")
@@ -56,7 +56,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(Items.STONE), conditionsFromItem(Items.STONE))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.CRYSTALLINE_MAGMITE_BOOTS)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.SHARD_BLADE, 1)
+        ShapedRecipeJsonBuilder.create(ModItems.SHARD_BLADE, 1)
                 .pattern(" S ")
                 .pattern(" S ")
                 .pattern(" P ")
@@ -66,7 +66,7 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.SHARD_BLADE)));
 
-        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.STAFF_OF_THE_FOREST_MONARCH, 1)
+        ShapedRecipeJsonBuilder.create(ModItems.STAFF_OF_THE_FOREST_MONARCH, 1)
                 .pattern(" SP")
                 .pattern(" SS")
                 .pattern("S  ")

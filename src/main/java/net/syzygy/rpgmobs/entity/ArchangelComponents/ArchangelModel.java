@@ -2,9 +2,12 @@ package net.syzygy.rpgmobs.entity.ArchangelComponents;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.animation.AnimationHelper;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3f;
 
 // Made with Blockbench 4.12.5
 // Exported for Minecraft version 1.17+ for Yarn
@@ -23,6 +26,8 @@ public class ArchangelModel<T extends ArchangelEntity> extends SinglePartEntityM
 	private final ModelPart torso;
 	private final ModelPart right_leg;
 	private final ModelPart left_leg;
+
+	private static final Vec3f TEMP = new Vec3f();
 
 	public float headYaw;
 	public float headPitch;
@@ -102,6 +107,12 @@ public class ArchangelModel<T extends ArchangelEntity> extends SinglePartEntityM
 		this.updateAnimation(entity.attack1AnimationState, ArchangelAnimations.normal_attack_animation, ageInTicks, 1f);
 		this.updateAnimation(entity.attack2AnimationState, ArchangelAnimations.second_attack_animation, ageInTicks, 1f);
 		this.updateAnimation(entity.airAttackAnimationState, ArchangelAnimations.air_attack_animation, ageInTicks, 1f);
+	}
+
+	public void animateMovement(Animation animation, float limbAngle, float limbDistance, float limbAngleScale, float limbDistanceScale) {
+		long l = (long)(limbAngle * 50.0F * limbAngleScale);
+		float f = Math.min(limbDistance * limbDistanceScale, 1.0F);
+		AnimationHelper.animate(this, animation, l, f, TEMP);
 	}
 
 	private void setHeadAngles(ArchangelEntity entity, float headYaw, float headPitch, float animationProgress){

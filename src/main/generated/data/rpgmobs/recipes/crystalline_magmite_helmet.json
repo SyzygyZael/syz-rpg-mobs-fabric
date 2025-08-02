@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "P": {
       "item": "rpgmobs:kandra_core"
@@ -16,6 +15,5 @@
   ],
   "result": {
     "item": "rpgmobs:crystalline_magmite_helmet"
-  },
-  "show_notification": true
+  }
 }

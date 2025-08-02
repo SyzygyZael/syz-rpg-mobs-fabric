@@ -1,6 +1,7 @@
 package net.syzygy.rpgmobs.item.custom;
 
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.ItemStack;
@@ -12,8 +13,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class KandraArmorItem extends ArmorItem {
-    public KandraArmorItem(ArmorMaterial material, Type type, Settings settings) {
-        super(material, type, settings);
+    public KandraArmorItem(ArmorMaterial material, EquipmentSlot slot, Settings settings) {
+        super(material, slot, settings);
     }
 
     @Override

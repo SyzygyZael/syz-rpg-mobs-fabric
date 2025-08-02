@@ -27,7 +27,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:crystalline_magmite_chestplate"
+        "recipe": "minecraft:crystalline_magmite_helmet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -41,8 +41,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:crystalline_magmite_chestplate"
+      "minecraft:crystalline_magmite_helmet"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

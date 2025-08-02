@@ -104,7 +104,7 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        // this.limbAnimator.updateLimbs(f, 0.2F);
     }
 
     @Override

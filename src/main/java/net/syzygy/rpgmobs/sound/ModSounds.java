@@ -1,9 +1,8 @@
 package net.syzygy.rpgmobs.sound;
 
-import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.syzygy.rpgmobs.RPGMobs;
 
 public class ModSounds {
@@ -12,7 +11,9 @@ public class ModSounds {
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier identifier = new Identifier(RPGMobs.MOD_ID, name);
-        return Registry.register(Registries.SOUND_EVENT, identifier, SoundEvent.of(identifier));
+        SoundEvent soundEvent = new SoundEvent(new Identifier(RPGMobs.MOD_ID, name));
+
+        return Registry.register(Registry.SOUND_EVENT, identifier, soundEvent);
     }
 
     public static void registerSounds() {

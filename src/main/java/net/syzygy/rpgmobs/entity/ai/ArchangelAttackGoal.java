@@ -4,9 +4,7 @@ import net.minecraft.client.sound.Sound;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
-import net.minecraft.entity.damage.DamageEffects;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -89,9 +87,7 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
     public void tick() {
         super.tick();
         LivingEntity pEnemy = this.entity.getTarget();
-        World world = pEnemy.getWorld();
-        DamageSources sources = world.getDamageSources();
-        DamageSource magicDamage = sources.mobAttack(entity);
+        DamageSource magicDamage = DamageSource.mob(this.entity);
         if(shouldCountTillNextAttack) {
             this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
         }

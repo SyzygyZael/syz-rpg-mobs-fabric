@@ -9,16 +9,11 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
-import net.minecraft.entity.mob.GhastEntity;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.FireballEntity;
-import net.minecraft.entity.projectile.PersistentProjectileEntity;
-import net.minecraft.entity.projectile.ProjectileUtil;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -28,13 +23,11 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldEvents;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
 import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteAttackGoal;
 import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteRevengeGoal;
 import org.jetbrains.annotations.Nullable;
-import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteModel;
 
 public class CrystallineMagmiteEntity extends AnimalEntity {
     private static final TrackedData<Boolean> ATTACKING =
@@ -134,7 +127,7 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        // this.limbAnimator.updateLimbs(f, 0.2F);
     }
 
     @Override

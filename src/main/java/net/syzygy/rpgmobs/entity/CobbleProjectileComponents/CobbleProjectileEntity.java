@@ -6,6 +6,7 @@ import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -28,6 +29,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.entity.ModEntities;
 
@@ -108,10 +110,10 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
 
         LivingEntity livingentity = owner instanceof LivingEntity ? (LivingEntity)owner : null;
         float damage = 5f;
-        boolean hurt = hitEntity.damage(this.getDamageSources().mobProjectile(this, livingentity), damage);
+        hitEntity.damage(DamageSource.mobProjectile(this, livingentity), damage);
 
         boolean bl = this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-        this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0, bl, World.ExplosionSourceType.MOB);
+        this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0, bl, Explosion.DestructionType.NONE);
         this.discard();
     }
 
@@ -126,7 +128,7 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
         blockState.onProjectileHit(this.getWorld(), blockState, blockHitResult, this);
 
         boolean bl = this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-        this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0, bl, World.ExplosionSourceType.MOB);
+        this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0, bl, Explosion.DestructionType.NONE);
         this.discard();
     }
 

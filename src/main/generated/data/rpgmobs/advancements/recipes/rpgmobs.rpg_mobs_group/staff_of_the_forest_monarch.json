@@ -43,6 +43,5 @@
     "recipes": [
       "minecraft:staff_of_the_forest_monarch"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

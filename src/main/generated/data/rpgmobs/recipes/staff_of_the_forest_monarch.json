@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "equipment",
   "key": {
     "P": {
       "item": "rpgmobs:treant_essence_gem"
@@ -16,6 +15,5 @@
   ],
   "result": {
     "item": "rpgmobs:staff_of_the_forest_monarch"
-  },
-  "show_notification": true
+  }
 }

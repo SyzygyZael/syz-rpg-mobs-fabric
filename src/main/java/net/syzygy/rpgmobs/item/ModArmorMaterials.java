@@ -1,16 +1,11 @@
 package net.syzygy.rpgmobs.item;
 
-import net.minecraft.item.ArmorItem;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Lazy;
-import net.minecraft.util.Util;
 import net.syzygy.rpgmobs.RPGMobs;
-
-import java.util.EnumMap;
-import java.util.Objects;
 import java.util.function.Supplier;
 
 public enum ModArmorMaterials implements ArmorMaterial {
@@ -41,13 +36,19 @@ public enum ModArmorMaterials implements ArmorMaterial {
     }
 
     @Override
-    public int getDurability(ArmorItem.Type type) {
-        return BASE_DURABILITY[type.ordinal()] * this.durabilityMultiplier;
+    public int getDurability(EquipmentSlot slot) {
+        if (slot.getType() != EquipmentSlot.Type.ARMOR) {
+            throw new IllegalArgumentException("Slot must be an armor slot: " + slot);
+        }
+        return BASE_DURABILITY[slot.getEntitySlotId()] * this.durabilityMultiplier;
     }
 
     @Override
-    public int getProtection(ArmorItem.Type type) {
-        return protectionAmounts[type.ordinal()];
+    public int getProtectionAmount(EquipmentSlot slot) {
+        if (slot.getType() != EquipmentSlot.Type.ARMOR) {
+            throw new IllegalArgumentException("Slot must be an armor slot: " + slot);
+        }
+        return protectionAmounts[slot.getEntitySlotId()];
     }
 
     @Override

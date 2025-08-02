@@ -73,7 +73,6 @@ public class ModEntitySpawns {
         BiomeModifications.addSpawn(BiomeSelectors.includeByKey(
                 BiomeKeys.BAMBOO_JUNGLE,
                 BiomeKeys.BIRCH_FOREST,
-                BiomeKeys.CHERRY_GROVE,
                 BiomeKeys.CRIMSON_FOREST,
                 BiomeKeys.DARK_FOREST,
                 BiomeKeys.FLOWER_FOREST,

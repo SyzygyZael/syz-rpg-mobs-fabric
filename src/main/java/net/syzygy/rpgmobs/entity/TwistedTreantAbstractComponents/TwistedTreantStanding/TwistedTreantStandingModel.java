@@ -2,9 +2,12 @@ package net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantS
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.animation.AnimationHelper;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.Vec3f;
 
 // Made with Blockbench 4.12.5
 // Exported for Minecraft version 1.17+ for Yarn
@@ -30,6 +33,8 @@ public class TwistedTreantStandingModel<T extends TwistedTreantStandingEntity> e
 	private final ModelPart waist;
 	private final ModelPart right_leg;
 	private final ModelPart left_leg;
+
+	private static final Vec3f TEMP = new Vec3f();
 
 	public float headPitch;
 	public float headYaw;
@@ -220,6 +225,12 @@ public class TwistedTreantStandingModel<T extends TwistedTreantStandingEntity> e
 		this.updateAnimation(entity.standingIdleAnimationState, TwistedTreantStandingAnimations.standing_idle_animation, ageInTicks, 1f);
 		this.updateAnimation(entity.standingAttack1AnimationState, TwistedTreantStandingAnimations.standing_attack_animation_1, ageInTicks, 1f);
 		this.updateAnimation(entity.standingAttack2AnimationState, TwistedTreantStandingAnimations.standing_attack_animation_2, ageInTicks, 1f);
+	}
+
+	protected void animateMovement(Animation animation, float limbAngle, float limbDistance, float limbAngleScale, float limbDistanceScale) {
+		long l = (long)(limbAngle * 50.0F * limbAngleScale);
+		float f = Math.min(limbDistance * limbDistanceScale, 1.0F);
+		AnimationHelper.animate(this, animation, l, f, TEMP);
 	}
 
 	private void setHeadAngles(TwistedTreantStandingEntity entity, float headYaw, float headPitch, float animationProgress) {
