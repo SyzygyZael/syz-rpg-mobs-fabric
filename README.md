@@ -72,17 +72,6 @@ Current Items:
 
 *Screenshots taken with Bliss Shaders*
 
-
-# 🪲 Known Issues & Prospective Updates
-
-*Next update*
-- Port to 1.21.8
-
-*These will come in unknown future updates*
-- Different textures for the Crystalline Magmite depending on which biome it spawns in (ie. snowy texture for snowy biomes & sandstone texture for desert biomes)
-
-**Please report any issues to GitHub so they can be fixed!!!**
-
 # 🔎 Important Info!
 
 This mod will only be kept up-to-date on following Minecraft versions:
