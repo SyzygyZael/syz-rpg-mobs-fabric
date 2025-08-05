@@ -14,6 +14,7 @@ import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantAbstractEntity;
 
@@ -40,7 +41,7 @@ public class TwistedTreantStandingEntity extends TwistedTreantAbstractEntity {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double) 32.0F)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double) 0.35F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) 6.8F)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.standingTwistedTreantAttackDamage)
                 .add(EntityAttributes.GENERIC_ARMOR, (double) 3.0F)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, (double) 36.0F)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, (double) 2.0F);

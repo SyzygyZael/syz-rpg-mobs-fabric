@@ -2,6 +2,7 @@ package net.syzygy.rpgmobs;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.item.ModItemGroups;
 import net.syzygy.rpgmobs.item.ModItems;
@@ -20,6 +21,7 @@ public class RPGMobs implements ModInitializer {
 	public void onInitialize() {
 		LOGGER.info("Hello Fabric world!");
 
+        ModConfig.registerConfigs();
 		ModItemGroups.registerItemGroups();
 		
 		ModItems.registerModItems();
