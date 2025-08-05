@@ -24,6 +24,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
 import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteAttackGoal;
 import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteRevengeGoal;
@@ -77,7 +78,7 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)35.0F)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.23F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double)6.5F)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.crystallineMagmiteAttackDamage)
                 .add(EntityAttributes.GENERIC_ARMOR, (double)4.0F)
                 .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, (double)3.0F)
                 .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, (double)3.0F)

@@ -8,6 +8,7 @@ import net.minecraft.item.ToolMaterials;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.item.custom.*;
 
 
@@ -20,7 +21,7 @@ public class ModItems {
             new TreantEssenceGemItem(new FabricItemSettings().group(ModItemGroups.RPG_MOBS_GROUP)));
 
     public static final Item SHARD_BLADE = registerItem("shard_blade",
-            new ShardBladeItem(ModToolMaterial.SHARD, 5, -2.2f, new FabricItemSettings().group(ModItemGroups.RPG_MOBS_GROUP)));
+            new ShardBladeItem(ModToolMaterial.SHARD, ModConfig.shardBladeDamage - 6, -2.2f, new FabricItemSettings().group(ModItemGroups.RPG_MOBS_GROUP)));
     public static final Item STAFF_OF_THE_FOREST_MONARCH = registerItem("staff_of_the_forest_monarch",
             new StaffOfTheForestMonarchItem(ToolMaterials.STONE, 1, 1.0f, new FabricItemSettings().group(ModItemGroups.RPG_MOBS_GROUP)));
 
