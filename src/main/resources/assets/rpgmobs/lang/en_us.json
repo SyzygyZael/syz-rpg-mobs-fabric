@@ -35,5 +35,24 @@
   "item.rpgmobs.staff_of_the_forest_monarch.tooltip_line2": "inhabitants of the forests.",
 
   "item.rpgmobs.treant_essence_gem.tooltip_line1": "The life force of strange, twisted, forest ",
-  "item.rpgmobs.treant_essence_gem.tooltip_line2": "creatures lies within this gem."
+  "item.rpgmobs.treant_essence_gem.tooltip_line2": "creatures lies within this gem.",
+
+  "rpgmobs.midnightconfig.category.entities": "Entites",
+  "rpgmobs.midnightconfig.category.items": "Items",
+
+  "rpgmobs.midnightconfig.archangelSpawnWeight": "Archangel Spawn Weight",
+  "rpgmobs.midnightconfig.crystallineMagmiteSpawnWeight": "Crystalling Magmite Spawn Weight",
+  "rpgmobs.midnightconfig.twistedTreantSpawnWeight": "Twisted Treant Spawn Weight",
+
+  "rpgmobs.midnightconfig.archangelDoSpawn": "Archangel Do Spawn",
+  "rpgmobs.midnightconfig.crystallineMagmiteDoSpawn": "Crystalline Magmite Do Spawn",
+  "rpgmobs.midnightconfig.twistedTreantDoSpawn": "Twisted Treant Do Spawn",
+
+  "rpgmobs.midnightconfig.archangelAttackDamage": "Archangel Attack Damage",
+  "rpgmobs.midnightconfig.crystallineMagmiteAttackDamage": "Crystaline Magmite Attack Damage",
+  "rpgmobs.midnightconfig.twistedTreantAttackDamage": "Twisted Treant Attack Damage",
+  "rpgmobs.midnightconfig.standingTwistedTreantAttackDamage": "Standing Twisted Treant Attack Damage",
+
+  "rpgmobs.midnightconfig.shardBladeDamage": "Shard Blade Damage",
+  "rpgmobs.midnightconfig.staffOfTheForestMonarchSpawnLimit": "Staff of the Forest Monarch Spawn Limit"
 }

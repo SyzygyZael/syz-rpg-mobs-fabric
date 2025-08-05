@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom' version '1.10-SNAPSHOT'
 	id 'maven-publish'
+	id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 version = project.mod_version
@@ -23,9 +24,11 @@ repositories {
 	maven {
 		url 'https://libraries.minecraft.net/'
 	}
-	maven { url = "https://maven.shedaniel.me/" }
-	// the essential Fabric/fabricmc repositories are already included
 	mavenCentral()
+
+	flatDir {
+		dirs 'libs'
+	}
 }
 
 fabricApi {
@@ -35,18 +38,14 @@ fabricApi {
 }
 
 dependencies {
-	// To change the versions see the gradle.properties file
+	// Minecraft & Fabric setup
 	minecraft "net.minecraft:minecraft:${project.minecraft_version}"
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Add config dependencies
-	modImplementation("me.shedaniel.cloth:cloth-config-fabric:11.1.106")
-	modImplementation(files("libs/auto-config-updated-api-3.4.0.jar"))
-
+	// Local YACL jar for compile only (don't include in final build)
+	implementation files('libs/midnightlib-fabric-1.4.1.1.jar')
 }
 
 processResources {
@@ -55,6 +54,11 @@ processResources {
 	filesMatching("fabric.mod.json") {
 		expand "version": inputs.properties.version
 	}
+}
+
+configurations {
+	shadow
+	implementation.extendsFrom shadow
 }
 
 tasks.withType(JavaCompile).configureEach {

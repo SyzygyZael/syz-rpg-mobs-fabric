@@ -24,6 +24,7 @@ import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
 import net.syzygy.rpgmobs.entity.ai.ArchangelAttackGoal;
 import net.syzygy.rpgmobs.particle.ModParticles;
@@ -65,7 +66,7 @@ public class ArchangelEntity extends AnimalEntity {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)32.0F)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.30F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double)6.5F)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.archangelAttackDamage)
                 .add(EntityAttributes.GENERIC_ARMOR, (double)3.0F)
                 .add(EntityAttributes.GENERIC_MAX_HEALTH, (double)45.0F);
     }

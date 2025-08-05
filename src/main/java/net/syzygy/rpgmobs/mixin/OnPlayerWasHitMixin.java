@@ -4,6 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
 import net.syzygy.rpgmobs.item.custom.StaffOfTheForestMonarchItem;
@@ -26,7 +27,7 @@ public class OnPlayerWasHitMixin {
 				ItemStack mainHandItem = player.getMainHandStack();
 				ItemStack offHandItem = player.getOffHandStack();
 
-				if (treant.getTreantCounter() < 2 && (mainHandItem.getItem() instanceof StaffOfTheForestMonarchItem || offHandItem.getItem() instanceof StaffOfTheForestMonarchItem)) {
+				if (treant.getTreantCounter() < ModConfig.staffOfTheForestMonarchSpawnLimit && (mainHandItem.getItem() instanceof StaffOfTheForestMonarchItem || offHandItem.getItem() instanceof StaffOfTheForestMonarchItem)) {
 					double spawnX = player.getX() + 2;
 					double spawnY = player.getY();
 					double spawnZ = player.getZ();
