@@ -17,7 +17,7 @@ jobs:
 
       - name: Fetch CurseForge download count
         run: |
-          SLUG="syzs-rpg-mobs"  # ⬅️ Replace this with your actual CurseForge slug
+          SLUG="syzs-rpg-mobs"
           API="https://api.cfwidget.com/minecraft/mc-mods/$SLUG"
           DOWNLOADS=$(curl -s "$API" | jq '.downloads')
 
