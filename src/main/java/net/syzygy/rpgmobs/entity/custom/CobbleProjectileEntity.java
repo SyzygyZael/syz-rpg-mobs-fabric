@@ -1,11 +1,13 @@
-package net.syzygy.rpgmobs.entity;
+package net.syzygy.rpgmobs.entity.custom;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.render.entity.model.EntityModelLayer;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
@@ -21,8 +23,10 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.entity.ModEntities;
 
 public class CobbleProjectileEntity extends PersistentProjectileEntity {
     private static final TrackedData<Boolean> HIT =
@@ -86,23 +90,17 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
 
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
-        Entity hitEntity = entityHitResult.getEntity();
-        Entity owner = this.getOwner();
-        World world = hitEntity.getWorld();
-
-        if(hitEntity == owner && this.getWorld().isClient()) {
-            return;
+        super.onEntityHit(entityHitResult);
+        World var3 = this.getWorld();
+        if (var3 instanceof ServerWorld serverWorld) {
+            Entity var6 = entityHitResult.getEntity();
+            Entity entity2 = this.getOwner();
+            DamageSource damageSource = this.getDamageSources().arrow(this, entity2);
+            var6.damage(serverWorld, damageSource, 6.0F);
+            EnchantmentHelper.onTargetDamaged(serverWorld, var6, damageSource);
+            this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL,
+                    2F, 1F);
         }
-
-        this.getWorld().playSound(null, this.getX(), this.getY(), this.getZ(), SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.NEUTRAL,
-                2F, 1F);
-
-        LivingEntity livingentity = owner instanceof LivingEntity ? (LivingEntity)owner : null;
-        float damage = 5f;
-        hitEntity.damage((ServerWorld) world, this.getDamageSources().mobProjectile(this, livingentity), damage);
-
-        this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0, false, World.ExplosionSourceType.MOB);
-        this.discard();
     }
 
     @Override
@@ -127,21 +125,11 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
     @Override
     protected void onCollision(HitResult hitResult) {
         super.onCollision(hitResult);
-        if(this.getWorld().isClient()) {
-            return;
-        }
-
-        if(hitResult.getType() == HitResult.Type.ENTITY && hitResult instanceof EntityHitResult entityHitResult) {
-            Entity hit = entityHitResult.getEntity();
-            Entity owner = this.getOwner();
-
-            if(owner != hit) {
-                this.dataTracker.set(HIT, true);
-                counter = this.age + 5;
-            }
-        } else if(hitResult.getType() == HitResult.Type.BLOCK) {
-            this.dataTracker.set(HIT, true);
-            counter = this.age + 5;
+        World var3 = this.getWorld();
+        if (var3 instanceof ServerWorld serverWorld) {
+            boolean bl = serverWorld.getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
+            this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0.0F, bl, World.ExplosionSourceType.MOB);
+            this.discard();
         }
     }
 

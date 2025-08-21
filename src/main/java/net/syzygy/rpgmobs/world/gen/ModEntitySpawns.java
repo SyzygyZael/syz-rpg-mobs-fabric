@@ -7,10 +7,10 @@ import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.BiomeKeys;
 import net.syzygy.rpgmobs.config.ModConfig;
-import net.syzygy.rpgmobs.entity.ArchangelEntity;
-import net.syzygy.rpgmobs.entity.CrystallineMagmiteEntity;
+import net.syzygy.rpgmobs.entity.custom.ArchangelEntity;
+import net.syzygy.rpgmobs.entity.custom.CrystallineMagmiteEntity;
 import net.syzygy.rpgmobs.entity.ModEntities;
-import net.syzygy.rpgmobs.entity.TwistedTreantEntity;
+import net.syzygy.rpgmobs.entity.custom.TwistedTreantEntity;
 
 public class ModEntitySpawns {
 

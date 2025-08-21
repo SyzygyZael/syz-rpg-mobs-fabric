@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity;
+package net.syzygy.rpgmobs.entity.custom;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.*;

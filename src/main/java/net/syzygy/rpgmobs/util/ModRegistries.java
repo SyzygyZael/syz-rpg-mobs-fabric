@@ -2,11 +2,11 @@ package net.syzygy.rpgmobs.util;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.syzygy.rpgmobs.RPGMobs;
-import net.syzygy.rpgmobs.entity.ArchangelEntity;
-import net.syzygy.rpgmobs.entity.CrystallineMagmiteEntity;
+import net.syzygy.rpgmobs.entity.custom.ArchangelEntity;
+import net.syzygy.rpgmobs.entity.custom.CrystallineMagmiteEntity;
 import net.syzygy.rpgmobs.entity.ModEntities;
-import net.syzygy.rpgmobs.entity.TwistedTreantEntity;
-import net.syzygy.rpgmobs.entity.TwistedTreantStandingEntity;
+import net.syzygy.rpgmobs.entity.custom.TwistedTreantEntity;
+import net.syzygy.rpgmobs.entity.custom.TwistedTreantStandingEntity;
 
 public class ModRegistries {
     public static void registerModStuffs() {

@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity;
+package net.syzygy.rpgmobs.entity.custom;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.*;
@@ -14,6 +14,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -48,6 +49,11 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
 
     public CrystallineMagmiteEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
     }
 
     public static final EntityModelLayer CRYSTALLINE_MAGMITE =
@@ -122,7 +128,7 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        this.limbAnimator.updateLimbs(f, 0.2F, 1.0F);
     }
 
     @Override
@@ -140,11 +146,12 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
-        this.dataTracker.startTracking(SHOOTING, false);
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+
+        builder.add(ATTACKING, false);
+        builder.add(SHOOTING, false);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void setAttacking(boolean attacking) {

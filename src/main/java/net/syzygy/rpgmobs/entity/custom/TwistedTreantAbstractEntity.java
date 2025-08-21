@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity;
+package net.syzygy.rpgmobs.entity.custom;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -9,7 +9,6 @@ import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.entity.ai.TwistedTreantActiveTargetGoal;
 import net.syzygy.rpgmobs.entity.ai.TwistedTreantAttackGoal;

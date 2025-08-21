@@ -4,7 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.util.Hand;
-import net.syzygy.rpgmobs.entity.CrystallineMagmiteEntity;
+import net.syzygy.rpgmobs.entity.custom.CrystallineMagmiteEntity;
 
 public class CrystallineMagmiteAttackGoal extends MeleeAttackGoal {
     private final CrystallineMagmiteEntity entity;

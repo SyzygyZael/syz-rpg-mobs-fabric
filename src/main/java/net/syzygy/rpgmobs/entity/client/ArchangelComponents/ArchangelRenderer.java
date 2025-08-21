@@ -6,7 +6,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
-import net.syzygy.rpgmobs.entity.ArchangelEntity;
+import net.syzygy.rpgmobs.entity.custom.ArchangelEntity;
 
 public class ArchangelRenderer extends MobEntityRenderer<ArchangelEntity, ArchangelRenderState, ArchangelModel> {
     private static final Identifier TEXTURE = Identifier.of(RPGMobs.MOD_ID, "textures/entity/archangel.png");

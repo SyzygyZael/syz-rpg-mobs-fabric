@@ -3,28 +3,42 @@ package net.syzygy.rpgmobs.entity.client.CrystillineMagmiteComponents;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
+import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
-import net.syzygy.rpgmobs.entity.CrystallineMagmiteEntity;
+import net.syzygy.rpgmobs.entity.custom.CrystallineMagmiteEntity;
 
-public class CrystallineMagmiteRenderer extends MobEntityRenderer<CrystallineMagmiteEntity, CrystallineMagmiteModel<CrystallineMagmiteEntity>> {
-    private static final Identifier TEXTURE = new Identifier(RPGMobs.MOD_ID, "textures/entity/crystalline_magmite.png");
+public class CrystallineMagmiteRenderer extends MobEntityRenderer<CrystallineMagmiteEntity, CrystallineMagmiteRenderState, CrystallineMagmiteModel> {
+    private static final Identifier TEXTURE = Identifier.of(RPGMobs.MOD_ID, "textures/entity/crystalline_magmite.png");
 
     public CrystallineMagmiteRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new CrystallineMagmiteModel<>(ctx.getPart(CrystallineMagmiteEntity.CRYSTALLINE_MAGMITE)), 1.0f);
+        super(ctx, new CrystallineMagmiteModel(ctx.getPart(CrystallineMagmiteEntity.CRYSTALLINE_MAGMITE)), 1.0f);
     }
 
     @Override
-    public Identifier getTexture(CrystallineMagmiteEntity entity) {
+    public void render(CrystallineMagmiteRenderState livingEntityRenderState, MatrixStack matrixStack,
+                       VertexConsumerProvider vertexConsumerProvider, int i) {
+        matrixStack.scale(1f, 1f, 1f);
+
+        super.render(livingEntityRenderState, matrixStack, vertexConsumerProvider, i);
+    }
+
+    @Override
+    public CrystallineMagmiteRenderState createRenderState() {
+        return new CrystallineMagmiteRenderState();
+    }
+
+    @Override
+    public Identifier getTexture(CrystallineMagmiteRenderState state) {
         return TEXTURE;
     }
 
     @Override
-    public void render(CrystallineMagmiteEntity mobEntity, float f, float g, MatrixStack matrixStack,
-                       VertexConsumerProvider vertexConsumerProvider, int i) {
-        matrixStack.scale(1f, 1f, 1f);
+    public void updateRenderState(CrystallineMagmiteEntity livingEntity, CrystallineMagmiteRenderState livingEntityRenderState, float f) {
+        super.updateRenderState(livingEntity, livingEntityRenderState, f);
 
-        super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
+        livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
     }
 }

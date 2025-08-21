@@ -7,7 +7,7 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.syzygy.rpgmobs.RPGMobs;
-import net.syzygy.rpgmobs.entity.TwistedTreantEntity;
+import net.syzygy.rpgmobs.entity.custom.TwistedTreantEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

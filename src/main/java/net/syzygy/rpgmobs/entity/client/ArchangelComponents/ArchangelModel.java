@@ -109,6 +109,9 @@ public class ArchangelModel extends EntityModel<ArchangelRenderState> {
         this.setHeadAngles(state.relativeHeadYaw, state.pitch);
 
         this.idleAnimation.apply(state.idleAnimationState, state.age, 1f);
+        this.normal_attack_animation.apply(state.attack1AnimationState, state.age, 1f);
+        this.second_attack_animation.apply(state.attack2AnimationState, state.age, 1f);
+        this.air_attack_animation.apply(state.airAttackAnimationState, state.age, 1f);
 	}
 
 	private void setHeadAngles(float headYaw, float headPitch) {

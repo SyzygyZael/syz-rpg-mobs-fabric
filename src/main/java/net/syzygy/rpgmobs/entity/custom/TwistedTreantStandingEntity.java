@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity;
+package net.syzygy.rpgmobs.entity.custom;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.AnimationState;
@@ -33,16 +33,16 @@ public class TwistedTreantStandingEntity extends TwistedTreantAbstractEntity {
     }
 
     public static final EntityModelLayer TWISTED_TREANT_STANDING =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "twisted_treant_standing"), "main");
+            new EntityModelLayer(Identifier.of(RPGMobs.MOD_ID, "twisted_treant_standing"), "main");
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double) 32.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double) 0.35F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.standingTwistedTreantAttackDamage)
-                .add(EntityAttributes.GENERIC_ARMOR, (double) 3.0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double) 36.0F)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, (double) 2.0F);
+                .add(EntityAttributes.FOLLOW_RANGE, (double) 32.0F)
+                .add(EntityAttributes.MOVEMENT_SPEED, (double) 0.35F)
+                .add(EntityAttributes.ATTACK_DAMAGE, (double) ModConfig.standingTwistedTreantAttackDamage)
+                .add(EntityAttributes.ARMOR, (double) 3.0F)
+                .add(EntityAttributes.MAX_HEALTH, (double) 36.0F)
+                .add(EntityAttributes.KNOCKBACK_RESISTANCE, (double) 2.0F);
     }
 
     private void setupAnimationStates() {
@@ -88,7 +88,7 @@ public class TwistedTreantStandingEntity extends TwistedTreantAbstractEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        this.limbAnimator.updateLimbs(f, 0.2F, 1.0F);
     }
 
     @Override
@@ -106,10 +106,11 @@ public class TwistedTreantStandingEntity extends TwistedTreantAbstractEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+
+        builder.add(ATTACKING, false);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void setAttacking(boolean attacking) {

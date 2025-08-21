@@ -14,7 +14,7 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.syzygy.rpgmobs.entity.ArchangelEntity;
+import net.syzygy.rpgmobs.entity.custom.ArchangelEntity;
 
 public class ArchangelAttackGoal extends MeleeAttackGoal {
     private final ArchangelEntity entity;

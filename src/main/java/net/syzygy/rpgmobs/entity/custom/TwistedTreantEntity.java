@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity;
+package net.syzygy.rpgmobs.entity.custom;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.*;
@@ -12,6 +12,7 @@ import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -21,6 +22,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.config.ModConfig;
+import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.sound.ModSounds;
 
 public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
@@ -48,15 +50,15 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
     }
 
     public static final EntityModelLayer TWISTED_TREANT =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "twisted_treant"), "main");
+            new EntityModelLayer(Identifier.of(RPGMobs.MOD_ID, "twisted_treant"), "main");
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double) 32.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double) 0.30F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.twistedTreantAttackDamage)
-                .add(EntityAttributes.GENERIC_ARMOR, (double) 3.0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double) 36.0F);
+                .add(EntityAttributes.FOLLOW_RANGE, (double) 32.0F)
+                .add(EntityAttributes.MOVEMENT_SPEED, (double) 0.30F)
+                .add(EntityAttributes.ATTACK_DAMAGE, (double) ModConfig.twistedTreantAttackDamage)
+                .add(EntityAttributes.ARMOR, (double) 3.0F)
+                .add(EntityAttributes.MAX_HEALTH, (double) 36.0F);
     }
 
     private void setupAnimationStates() {
@@ -102,7 +104,7 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        this.limbAnimator.updateLimbs(f, 0.2F, 1.0F);
     }
 
     @Override
@@ -164,19 +166,20 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
     }
 
     @Override
-    public boolean damage(DamageSource source, float amount) {
+    public boolean damage(ServerWorld world, DamageSource source, float amount) {
         if (invincibilityTicks > 0) {
             return false;
         }
 
-        return super.damage(source, amount);
+        return super.damage(world, source, amount);
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+
+        builder.add(ATTACKING, false);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void startInvincibility(int durationTicks) {
@@ -198,7 +201,7 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
     public void setStandingPet(PlayerEntity staffOwner) {
         setSpawnedFromStaff(true);
         standingTreant.setOwner(staffOwner);
-        standingTreant.setTamed(true);
+        standingTreant.setTamed(true, false);
     }
 
     public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {

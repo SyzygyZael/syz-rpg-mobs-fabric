@@ -4,7 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.ActiveTargetGoal;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractEntity;
+import net.syzygy.rpgmobs.entity.custom.TwistedTreantAbstractEntity;
 import net.syzygy.rpgmobs.item.custom.StaffOfTheForestMonarchItem;
 
 public class TwistedTreantActiveTargetGoal<T extends LivingEntity> extends ActiveTargetGoal<T> {

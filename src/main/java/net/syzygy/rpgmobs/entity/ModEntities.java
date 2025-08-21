@@ -7,6 +7,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.entity.custom.*;
 
 public class ModEntities {
 

@@ -6,7 +6,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
-import net.syzygy.rpgmobs.entity.TwistedTreantStandingEntity;
+import net.syzygy.rpgmobs.entity.custom.TwistedTreantStandingEntity;
 
 public class TwistedTreantStandingRenderer extends MobEntityRenderer<TwistedTreantStandingEntity, TwistedTreantStandingModel<TwistedTreantStandingEntity>> {
     private static final Identifier TEXTURE = new Identifier(RPGMobs.MOD_ID, "textures/entity/twisted_treant.png");

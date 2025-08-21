@@ -1,10 +1,7 @@
 package net.syzygy.rpgmobs.entity.client.CobbleProjectileComponents;
 
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 
 public class CobbleProjectileModel extends EntityModel<CobbleProjectileRenderState> {
     private final ModelPart bb_main;
