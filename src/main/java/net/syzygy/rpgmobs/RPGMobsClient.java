@@ -3,22 +3,22 @@ package net.syzygy.rpgmobs;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
-import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelModel;
-import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelRenderer;
-import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
-import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileModel;
-import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileRenderer;
-import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteEntity;
-import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteModel;
-import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteRenderer;
+import net.syzygy.rpgmobs.entity.ArchangelEntity;
+import net.syzygy.rpgmobs.entity.client.ArchangelComponents.ArchangelModel;
+import net.syzygy.rpgmobs.entity.client.ArchangelComponents.ArchangelRenderer;
+import net.syzygy.rpgmobs.entity.CobbleProjectileEntity;
+import net.syzygy.rpgmobs.entity.client.CobbleProjectileComponents.CobbleProjectileModel;
+import net.syzygy.rpgmobs.entity.client.CobbleProjectileComponents.CobbleProjectileRenderer;
+import net.syzygy.rpgmobs.entity.CrystallineMagmiteEntity;
+import net.syzygy.rpgmobs.entity.client.CrystillineMagmiteComponents.CrystallineMagmiteModel;
+import net.syzygy.rpgmobs.entity.client.CrystillineMagmiteComponents.CrystallineMagmiteRenderer;
 import net.syzygy.rpgmobs.entity.ModEntities;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantModel;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantRenderer;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingEntity;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingModel;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingRenderer;
+import net.syzygy.rpgmobs.entity.TwistedTreantEntity;
+import net.syzygy.rpgmobs.entity.client.TwistedTreantComponents.TwistedTreant.TwistedTreantModel;
+import net.syzygy.rpgmobs.entity.client.TwistedTreantComponents.TwistedTreant.TwistedTreantRenderer;
+import net.syzygy.rpgmobs.entity.TwistedTreantStandingEntity;
+import net.syzygy.rpgmobs.entity.client.TwistedTreantComponents.TwistedTreantStanding.TwistedTreantStandingModel;
+import net.syzygy.rpgmobs.entity.client.TwistedTreantComponents.TwistedTreantStanding.TwistedTreantStandingRenderer;
 
 public class RPGMobsClient implements ClientModInitializer {
     @Override

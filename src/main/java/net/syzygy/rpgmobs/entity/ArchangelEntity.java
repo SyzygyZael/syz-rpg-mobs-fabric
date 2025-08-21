@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.ArchangelComponents;
+package net.syzygy.rpgmobs.entity;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.*;
@@ -14,6 +14,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -45,7 +46,7 @@ public class ArchangelEntity extends AnimalEntity {
     }
 
     public static final EntityModelLayer ARCHANGEL =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "archangel"), "main");
+            new EntityModelLayer(Identifier.of(RPGMobs.MOD_ID, "archangel"), "main");
 
     @Override
     protected void initGoals() {
@@ -113,7 +114,7 @@ public class ArchangelEntity extends AnimalEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        this.limbAnimator.updateLimbs(f, 0.2F, 1.0F);
     }
 
     @Override
@@ -126,13 +127,15 @@ public class ArchangelEntity extends AnimalEntity {
     }
 
     @Override
-    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+    public boolean handleFallDamage(double fallDistance, float damagePerDistance, DamageSource damageSource) {
+        super.handleFallDamage(fallDistance, damagePerDistance, damageSource);
+
         return false;
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
         this.dataTracker.startTracking(ATTACKING, false);
         this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
     }
@@ -175,5 +178,10 @@ public class ArchangelEntity extends AnimalEntity {
         }
         this.jumping = false;
         super.tickMovement();
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
     }
 }

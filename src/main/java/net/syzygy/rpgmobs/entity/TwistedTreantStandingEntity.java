@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding;
+package net.syzygy.rpgmobs.entity;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.AnimationState;
@@ -15,8 +15,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.config.ModConfig;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantAbstractEntity;
 
 public class TwistedTreantStandingEntity extends TwistedTreantAbstractEntity {
     private static final TrackedData<Boolean> ATTACKING =

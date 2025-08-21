@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.CobbleProjectileComponents;
+package net.syzygy.rpgmobs.entity;
 
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.BlockState;
@@ -23,7 +23,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
-import net.syzygy.rpgmobs.entity.ModEntities;
 
 public class CobbleProjectileEntity extends PersistentProjectileEntity {
     private static final TrackedData<Boolean> HIT =

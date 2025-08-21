@@ -1,10 +1,11 @@
-package net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents;
+package net.syzygy.rpgmobs.entity.client.CrystillineMagmiteComponents;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
+import net.syzygy.rpgmobs.entity.CrystallineMagmiteEntity;
 
 // Made with Blockbench 4.12.3
 // Exported for Minecraft version 1.17+ for Yarn

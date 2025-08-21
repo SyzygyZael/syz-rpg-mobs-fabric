@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant;
+package net.syzygy.rpgmobs.entity;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.*;
@@ -21,9 +21,6 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.config.ModConfig;
-import net.syzygy.rpgmobs.entity.ModEntities;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantAbstractEntity;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingEntity;
 import net.syzygy.rpgmobs.sound.ModSounds;
 
 public class TwistedTreantEntity extends TwistedTreantAbstractEntity {

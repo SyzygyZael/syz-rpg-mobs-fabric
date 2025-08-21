@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents;
+package net.syzygy.rpgmobs.entity;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.*;
@@ -24,7 +24,6 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.config.ModConfig;
-import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
 import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteAttackGoal;
 import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteRevengeGoal;
 import org.jetbrains.annotations.Nullable;

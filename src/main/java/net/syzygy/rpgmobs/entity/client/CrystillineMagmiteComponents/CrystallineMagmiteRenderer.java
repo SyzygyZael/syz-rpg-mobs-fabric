@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents;
+package net.syzygy.rpgmobs.entity.client.CrystillineMagmiteComponents;
 
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
@@ -6,6 +6,7 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.entity.CrystallineMagmiteEntity;
 
 public class CrystallineMagmiteRenderer extends MobEntityRenderer<CrystallineMagmiteEntity, CrystallineMagmiteModel<CrystallineMagmiteEntity>> {
     private static final Identifier TEXTURE = new Identifier(RPGMobs.MOD_ID, "textures/entity/crystalline_magmite.png");

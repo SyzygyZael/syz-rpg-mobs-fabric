@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents;
+package net.syzygy.rpgmobs.entity;
 
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;

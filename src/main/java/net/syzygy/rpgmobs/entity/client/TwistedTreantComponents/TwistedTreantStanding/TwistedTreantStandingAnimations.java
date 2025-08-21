@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding;// Save this class in your mod and generate all required imports
+package net.syzygy.rpgmobs.entity.client.TwistedTreantComponents.TwistedTreantStanding;// Save this class in your mod and generate all required imports
 
 import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.animation.AnimationHelper;

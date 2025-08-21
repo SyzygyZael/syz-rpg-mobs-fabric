@@ -4,7 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.util.Hand;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantAbstractEntity;
+import net.syzygy.rpgmobs.entity.TwistedTreantAbstractEntity;
 
 public class TwistedTreantAttackGoal extends MeleeAttackGoal {
     private final TwistedTreantAbstractEntity entity;

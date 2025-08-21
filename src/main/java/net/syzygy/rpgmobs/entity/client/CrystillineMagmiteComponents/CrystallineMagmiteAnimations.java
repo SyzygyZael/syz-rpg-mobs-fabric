@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents;
+package net.syzygy.rpgmobs.entity.client.CrystillineMagmiteComponents;
 
 import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.animation.AnimationHelper;
