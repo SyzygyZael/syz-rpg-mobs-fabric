@@ -61,11 +61,11 @@ public class ArchangelEntity extends AnimalEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)32.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.30F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.archangelAttackDamage)
-                .add(EntityAttributes.GENERIC_ARMOR, (double)3.0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double)45.0F);
+                .add(EntityAttributes.FOLLOW_RANGE, (double)32.0F)
+                .add(EntityAttributes.MOVEMENT_SPEED, (double)0.30F)
+                .add(EntityAttributes.ATTACK_DAMAGE, (double) ModConfig.archangelAttackDamage)
+                .add(EntityAttributes.ARMOR, (double)3.0F)
+                .add(EntityAttributes.MAX_HEALTH, (double)45.0F);
     }
 
     private void setupAnimationStates() {
@@ -136,8 +136,8 @@ public class ArchangelEntity extends AnimalEntity {
     @Override
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
-        this.dataTracker.startTracking(ATTACKING, false);
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+        builder.add(ATTACKING, false);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void setAttacking(boolean attacking) {
@@ -165,7 +165,7 @@ public class ArchangelEntity extends AnimalEntity {
         if (this.getWorld().isClient) {
             for (int i = 0; i < 2; i++) {
                 this.getWorld()
-                        .addParticle(
+                        .addParticleClient(
                                 ParticleTypes.WHITE_ASH,
                                 this.getParticleX(0.5),
                                 this.getRandomBodyY() - 0.25,

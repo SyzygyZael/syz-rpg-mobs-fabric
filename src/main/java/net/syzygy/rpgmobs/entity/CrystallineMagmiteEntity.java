@@ -51,7 +51,7 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
     }
 
     public static final EntityModelLayer CRYSTALLINE_MAGMITE =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "crystalline_magmite"), "main");
+            new EntityModelLayer(Identifier.of(RPGMobs.MOD_ID, "crystalline_magmite"), "main");
 
     @Override
     protected void initGoals() {
@@ -70,13 +70,13 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)35.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.23F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.crystallineMagmiteAttackDamage)
-                .add(EntityAttributes.GENERIC_ARMOR, (double)4.0F)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, (double)3.0F)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, (double)3.0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double)70.0F);
+                .add(EntityAttributes.FOLLOW_RANGE, (double)35.0F)
+                .add(EntityAttributes.MOVEMENT_SPEED, (double)0.23F)
+                .add(EntityAttributes.ATTACK_DAMAGE, (double) ModConfig.crystallineMagmiteAttackDamage)
+                .add(EntityAttributes.ARMOR, (double)4.0F)
+                .add(EntityAttributes.ATTACK_KNOCKBACK, (double)3.0F)
+                .add(EntityAttributes.KNOCKBACK_RESISTANCE, (double)3.0F)
+                .add(EntityAttributes.MAX_HEALTH, (double)70.0F);
     }
 
     private void setupAnimationStates() {

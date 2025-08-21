@@ -12,6 +12,7 @@ import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.entity.projectile.ProjectileUtil;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -20,7 +21,6 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
-import net.minecraft.world.GameRules;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
 
@@ -30,11 +30,11 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
     private int counter = 0;
 
     public CobbleProjectileEntity(EntityType<CobbleProjectileEntity> type, World world) {
-        super(type, world, ItemStack.EMPTY);
+        super(type, world);
     }
 
     public CobbleProjectileEntity(World world, LivingEntity entity) {
-        super(ModEntities.COBBLE_PROJECTILE, world, ItemStack.EMPTY);
+        super(ModEntities.COBBLE_PROJECTILE, world);
         setOwner(entity);
         BlockPos blockpos = entity.getBlockPos();
         double d0 = (double)blockpos.getX() + 0.5D;
@@ -44,13 +44,13 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
     }
 
     public static final EntityModelLayer COBBLE_PROJECTILE =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "cobble_projectile"), "main");
+            new EntityModelLayer(Identifier.of(RPGMobs.MOD_ID, "cobble_projectile"), "main");
 
 
     @Override
     public void tick() {
         super.tick();
-        if(this.inGround) {
+        if(this.isInGround()) {
             this.discard();
         }
 
@@ -74,13 +74,9 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
         double d2 = this.getZ() + vec3.z;
         this.updateRotation();
 
-        double d5 = vec3.x;
-        double d6 = vec3.y;
-        double d7 = vec3.z;
-
         if (this.getWorld().getStatesInBox(this.getBoundingBox()).noneMatch(AbstractBlock.AbstractBlockState::isAir)) {
             this.discard();
-        } else if (this.isInsideWaterOrBubbleColumn()) {
+        } else if (this.isSubmergedInWater()) {
             this.discard();
         } else {
             this.setVelocity(vec3.multiply(0.99F));
@@ -92,6 +88,7 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
     protected void onEntityHit(EntityHitResult entityHitResult) {
         Entity hitEntity = entityHitResult.getEntity();
         Entity owner = this.getOwner();
+        World world = hitEntity.getWorld();
 
         if(hitEntity == owner && this.getWorld().isClient()) {
             return;
@@ -102,10 +99,9 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
 
         LivingEntity livingentity = owner instanceof LivingEntity ? (LivingEntity)owner : null;
         float damage = 5f;
-        hitEntity.damage(this.getDamageSources().mobProjectile(this, livingentity), damage);
+        hitEntity.damage((ServerWorld) world, this.getDamageSources().mobProjectile(this, livingentity), damage);
 
-        boolean bl = this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-        this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0, bl, World.ExplosionSourceType.MOB);
+        this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0, false, World.ExplosionSourceType.MOB);
         this.discard();
     }
 
@@ -115,12 +111,16 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
     }
 
     @Override
+    protected ItemStack getDefaultItemStack() {
+        return null;
+    }
+
+    @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
         BlockState blockState = this.getWorld().getBlockState(blockHitResult.getBlockPos());
         blockState.onProjectileHit(this.getWorld(), blockState, blockHitResult, this);
 
-        boolean bl = this.getWorld().getGameRules().getBoolean(GameRules.DO_MOB_GRIEFING);
-        this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0, bl, World.ExplosionSourceType.MOB);
+        this.getWorld().createExplosion(this, this.getX(), this.getY(), this.getZ(), 0, false, World.ExplosionSourceType.MOB);
         this.discard();
     }
 
@@ -151,8 +151,8 @@ public class CobbleProjectileEntity extends PersistentProjectileEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(HIT, false);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(HIT, false);
     }
 }
