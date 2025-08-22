@@ -7,7 +7,6 @@ import net.minecraft.item.ItemStack;
 import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.entity.custom.TwistedTreantEntity;
-import net.syzygy.rpgmobs.item.custom.StaffOfTheForestMonarchItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

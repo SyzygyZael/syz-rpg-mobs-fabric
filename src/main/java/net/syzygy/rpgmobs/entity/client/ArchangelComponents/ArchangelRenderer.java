@@ -37,5 +37,8 @@ public class ArchangelRenderer extends MobEntityRenderer<ArchangelEntity, Archan
     public void updateRenderState(ArchangelEntity livingEntity, ArchangelRenderState livingEntityRenderState, float f) {
         super.updateRenderState(livingEntity, livingEntityRenderState, f);
         livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
+        livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.attack1AnimationState);
+        livingEntityRenderState.attack2AnimationState.copyFrom(livingEntity.attack2AnimationState);
+        livingEntityRenderState.airAttackAnimationState.copyFrom(livingEntity.airAttackAnimationState);
     }
 }

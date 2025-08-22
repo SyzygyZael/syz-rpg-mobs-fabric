@@ -3,12 +3,9 @@ package net.syzygy.rpgmobs.entity.client.TwistedTreantComponents.TwistedTreant;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.render.entity.state.EntityRenderState;
-import net.minecraft.client.render.entity.state.LivingEntityRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
-import net.syzygy.rpgmobs.entity.client.CrystillineMagmiteComponents.CrystallineMagmiteRenderState;
 import net.syzygy.rpgmobs.entity.custom.TwistedTreantEntity;
 
 public class TwistedTreantRenderer extends MobEntityRenderer<TwistedTreantEntity, TwistedTreantRenderState, TwistedTreantModel> {
@@ -41,5 +38,8 @@ public class TwistedTreantRenderer extends MobEntityRenderer<TwistedTreantEntity
         super.updateRenderState(livingEntity, livingEntityRenderState, f);
 
         livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
+        livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.attack1AnimationState);
+        livingEntityRenderState.attack2AnimationState.copyFrom(livingEntity.attack2AnimationState);
+        livingEntityRenderState.standUpAnimationState.copyFrom(livingEntity.standingAnimationState);
     }
 }

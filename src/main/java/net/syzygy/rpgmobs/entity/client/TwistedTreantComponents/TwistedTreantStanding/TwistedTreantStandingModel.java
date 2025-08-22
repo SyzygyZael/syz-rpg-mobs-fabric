@@ -2,7 +2,8 @@ package net.syzygy.rpgmobs.entity.client.TwistedTreantComponents.TwistedTreantSt
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
+import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 import net.syzygy.rpgmobs.entity.custom.TwistedTreantStandingEntity;
@@ -10,7 +11,7 @@ import net.syzygy.rpgmobs.entity.custom.TwistedTreantStandingEntity;
 // Made with Blockbench 4.12.5
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
-public class TwistedTreantStandingModel<T extends TwistedTreantStandingEntity> extends SinglePartEntityModel<T> {
+public class TwistedTreantStandingModel extends EntityModel<TwistedTreantStandingRenderState> {
 	private final ModelPart twisted_treant;
 	private final ModelPart main;
 	private final ModelPart head;
@@ -32,10 +33,13 @@ public class TwistedTreantStandingModel<T extends TwistedTreantStandingEntity> e
 	private final ModelPart right_leg;
 	private final ModelPart left_leg;
 
-	public float headPitch;
-	public float headYaw;
+	private final Animation idleAnimation;
+    private final Animation walkingAnimation;
+    private final Animation attack1Animation;
+    private final Animation attack2Animation;
 
 	public TwistedTreantStandingModel(ModelPart root) {
+        super(root);
 		this.twisted_treant = root.getChild("twisted_treant");
 		this.main = this.twisted_treant.getChild("main");
 		this.head = this.main.getChild("head");
@@ -56,31 +60,36 @@ public class TwistedTreantStandingModel<T extends TwistedTreantStandingEntity> e
 		this.waist = this.main.getChild("waist");
 		this.right_leg = this.main.getChild("right_leg");
 		this.left_leg = this.main.getChild("left_leg");
+
+        this.idleAnimation = TwistedTreantStandingAnimations.standing_idle_animation.createAnimation(root);
+        this.walkingAnimation = TwistedTreantStandingAnimations.standing_run_animation.createAnimation(root);
+        this.attack1Animation = TwistedTreantStandingAnimations.standing_attack_animation_1.createAnimation(root);
+        this.attack2Animation = TwistedTreantStandingAnimations.standing_attack_animation_2.createAnimation(root);
 	}
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
-		ModelPartData twisted_treant = modelPartData.addChild("twisted_treant", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+		ModelPartData twisted_treant = modelPartData.addChild("twisted_treant", ModelPartBuilder.create(), ModelTransform.rotation(0.0F, 24.0F, 0.0F));
 
-		ModelPartData main = twisted_treant.addChild("main", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+		ModelPartData main = twisted_treant.addChild("main", ModelPartBuilder.create(), ModelTransform.rotation(0.0F, 0.0F, 0.0F));
 
 		ModelPartData head = main.addChild("head", ModelPartBuilder.create().uv(0, 34).cuboid(-4.0F, -6.0F, -4.0F, 8.0F, 7.0F, 7.0F, new Dilation(0.0F))
-		.uv(50, 68).cuboid(-4.0F, -6.0F, -4.0F, 8.0F, 5.0F, 7.0F, new Dilation(-0.6F)), ModelTransform.pivot(0.0F, -31.0F, -3.0F));
+		.uv(50, 68).cuboid(-4.0F, -6.0F, -4.0F, 8.0F, 5.0F, 7.0F, new Dilation(-0.6F)), ModelTransform.rotation(0.0F, -31.0F, -3.0F));
 
 		ModelPartData jaw = head.addChild("jaw", ModelPartBuilder.create().uv(89, 2).cuboid(-4.0F, -2.0F, -5.0F, 8.0F, 2.0F, 7.0F, new Dilation(-0.29F))
-		.uv(89, 9).cuboid(-4.0F, -3.0F, -5.0F, 8.0F, 3.0F, 7.0F, new Dilation(-0.3F)), ModelTransform.pivot(0.0F, 1.0F, 1.0F));
+		.uv(89, 9).cuboid(-4.0F, -3.0F, -5.0F, 8.0F, 3.0F, 7.0F, new Dilation(-0.3F)), ModelTransform.rotation(0.0F, 1.0F, 1.0F));
 
-		ModelPartData right_arm = main.addChild("right_arm", ModelPartBuilder.create(), ModelTransform.pivot(-6.0F, -28.0F, -3.0F));
+		ModelPartData right_arm = main.addChild("right_arm", ModelPartBuilder.create(), ModelTransform.rotation(-6.0F, -28.0F, -3.0F));
 
-		ModelPartData right_forearm = right_arm.addChild("right_forearm", ModelPartBuilder.create().uv(52, 40).cuboid(-2.0F, 8.9526F, -5.5671F, 5.0F, 2.0F, 6.0F, new Dilation(-0.01F)), ModelTransform.pivot(-3.0F, 11.0F, 0.0F));
+		ModelPartData right_forearm = right_arm.addChild("right_forearm", ModelPartBuilder.create().uv(52, 40).cuboid(-2.0F, 8.9526F, -5.5671F, 5.0F, 2.0F, 6.0F, new Dilation(-0.01F)), ModelTransform.rotation(-3.0F, 11.0F, 0.0F));
 
 		ModelPartData cube_r1 = right_forearm.addChild("cube_r1", ModelPartBuilder.create().uv(48, 16).cuboid(-3.0F, -0.0474F, -2.5671F, 5.0F, 10.0F, 6.0F, new Dilation(0.0F)), ModelTransform.of(1.0F, 0.0F, -1.0F, -0.2182F, 0.0F, 0.0F));
 
-		ModelPartData right_elbow = right_forearm.addChild("right_elbow", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -3.0F, 14.0F));
+		ModelPartData right_elbow = right_forearm.addChild("right_elbow", ModelPartBuilder.create(), ModelTransform.rotation(0.0F, -3.0F, 14.0F));
 
 		ModelPartData cube_r2 = right_elbow.addChild("cube_r2", ModelPartBuilder.create().uv(38, 61).cuboid(-2.0F, -3.0436F, -2.0009F, 3.0F, 5.0F, 5.0F, new Dilation(0.0F)), ModelTransform.of(1.0F, 2.0F, -15.0F, -0.1309F, 0.0F, 0.0F));
 
-		ModelPartData right_spike_in_hand = right_forearm.addChild("right_spike_in_hand", ModelPartBuilder.create(), ModelTransform.pivot(1.0F, 9.0F, 6.0F));
+		ModelPartData right_spike_in_hand = right_forearm.addChild("right_spike_in_hand", ModelPartBuilder.create(), ModelTransform.rotation(1.0F, 9.0F, 6.0F));
 
 		ModelPartData cube_r3 = right_spike_in_hand.addChild("cube_r3", ModelPartBuilder.create().uv(40, 74).cuboid(-1.0F, -0.61F, -2.7515F, 2.0F, 2.0F, 4.0F, new Dilation(-0.001F)), ModelTransform.of(0.0F, 0.0F, -13.0F, -3.0977F, 0.0236F, 0.0303F));
 
@@ -88,7 +97,7 @@ public class TwistedTreantStandingModel<T extends TwistedTreantStandingEntity> e
 
 		ModelPartData cube_r5 = right_spike_in_hand.addChild("cube_r5", ModelPartBuilder.create().uv(12, 65).cuboid(0.0F, 1.5142F, 1.1565F, 1.0F, 1.0F, 4.0F, new Dilation(0.0F)), ModelTransform.of(-1.0F, 0.0F, -13.0F, -2.2686F, 0.0236F, 0.0303F));
 
-		ModelPartData upper_right_arm = right_arm.addChild("upper_right_arm", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+		ModelPartData upper_right_arm = right_arm.addChild("upper_right_arm", ModelPartBuilder.create(), ModelTransform.rotation(0.0F, 0.0F, 0.0F));
 
 		ModelPartData cube_r6 = upper_right_arm.addChild("cube_r6", ModelPartBuilder.create().uv(12, 74).cuboid(0.0F, -2.0F, -1.0F, 1.0F, 3.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(-2.0F, -4.0F, 1.0F, -1.0472F, 0.0F, 0.0F));
 
@@ -104,19 +113,19 @@ public class TwistedTreantStandingModel<T extends TwistedTreantStandingEntity> e
 
 		ModelPartData cube_r12 = upper_right_arm.addChild("cube_r12", ModelPartBuilder.create().uv(0, 48).cuboid(0.0F, -2.0F, -3.0F, 5.0F, 11.0F, 6.0F, new Dilation(0.0F)), ModelTransform.of(-5.0F, -1.0F, 0.0F, -0.0436F, 0.0F, 0.0F));
 
-		ModelPartData right_spike = upper_right_arm.addChild("right_spike", ModelPartBuilder.create(), ModelTransform.pivot(-7.0F, 5.0F, 14.0F));
+		ModelPartData right_spike = upper_right_arm.addChild("right_spike", ModelPartBuilder.create(), ModelTransform.rotation(-7.0F, 5.0F, 14.0F));
 
-		ModelPartData left_arm = main.addChild("left_arm", ModelPartBuilder.create(), ModelTransform.pivot(6.0F, -28.0F, -3.0F));
+		ModelPartData left_arm = main.addChild("left_arm", ModelPartBuilder.create(), ModelTransform.rotation(6.0F, -28.0F, -3.0F));
 
-		ModelPartData left_forearm = left_arm.addChild("left_forearm", ModelPartBuilder.create().uv(52, 32).cuboid(-3.0F, 8.9526F, -5.5671F, 5.0F, 2.0F, 6.0F, new Dilation(-0.01F)), ModelTransform.pivot(3.0F, 11.0F, 0.0F));
+		ModelPartData left_forearm = left_arm.addChild("left_forearm", ModelPartBuilder.create().uv(52, 32).cuboid(-3.0F, 8.9526F, -5.5671F, 5.0F, 2.0F, 6.0F, new Dilation(-0.01F)), ModelTransform.rotation(3.0F, 11.0F, 0.0F));
 
 		ModelPartData cube_r13 = left_forearm.addChild("cube_r13", ModelPartBuilder.create().uv(48, 0).cuboid(-3.0F, -0.0474F, -2.5671F, 5.0F, 10.0F, 6.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, -1.0F, -0.2182F, 0.0F, 0.0F));
 
-		ModelPartData left_elbow = left_forearm.addChild("left_elbow", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -3.0F, 14.0F));
+		ModelPartData left_elbow = left_forearm.addChild("left_elbow", ModelPartBuilder.create(), ModelTransform.rotation(0.0F, -3.0F, 14.0F));
 
 		ModelPartData cube_r14 = left_elbow.addChild("cube_r14", ModelPartBuilder.create().uv(22, 61).cuboid(-2.0F, -3.0436F, -2.0009F, 3.0F, 5.0F, 5.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 2.0F, -15.0F, -0.1309F, 0.0F, 0.0F));
 
-		ModelPartData left_spike_in_hand = left_forearm.addChild("left_spike_in_hand", ModelPartBuilder.create(), ModelTransform.pivot(-1.0F, 9.0F, 8.0F));
+		ModelPartData left_spike_in_hand = left_forearm.addChild("left_spike_in_hand", ModelPartBuilder.create(), ModelTransform.rotation(-1.0F, 9.0F, 8.0F));
 
 		ModelPartData cube_r15 = left_spike_in_hand.addChild("cube_r15", ModelPartBuilder.create().uv(40, 74).cuboid(-1.0F, -0.61F, -2.7515F, 2.0F, 2.0F, 4.0F, new Dilation(-0.001F)), ModelTransform.of(0.0F, 0.0F, -15.0F, -3.0977F, 0.0236F, 0.0303F));
 
@@ -124,7 +133,7 @@ public class TwistedTreantStandingModel<T extends TwistedTreantStandingEntity> e
 
 		ModelPartData cube_r17 = left_spike_in_hand.addChild("cube_r17", ModelPartBuilder.create().uv(12, 65).cuboid(0.0F, 1.5142F, 1.1565F, 1.0F, 1.0F, 4.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, -15.0F, -2.2686F, 0.0236F, 0.0303F));
 
-		ModelPartData left_upper_arm = left_arm.addChild("left_upper_arm", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+		ModelPartData left_upper_arm = left_arm.addChild("left_upper_arm", ModelPartBuilder.create(), ModelTransform.rotation(0.0F, 0.0F, 0.0F));
 
 		ModelPartData cube_r18 = left_upper_arm.addChild("cube_r18", ModelPartBuilder.create().uv(74, 29).cuboid(0.0F, -1.0F, -1.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(1.0F, -3.0F, 1.0F, -0.829F, 0.0F, 0.0F));
 
@@ -140,7 +149,7 @@ public class TwistedTreantStandingModel<T extends TwistedTreantStandingEntity> e
 
 		ModelPartData cube_r24 = left_upper_arm.addChild("cube_r24", ModelPartBuilder.create().uv(30, 34).cuboid(0.0F, -2.0F, -3.0F, 5.0F, 11.0F, 6.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -1.0F, 0.0F, -0.0436F, 0.0F, 0.0F));
 
-		ModelPartData left_spike = left_upper_arm.addChild("left_spike", ModelPartBuilder.create(), ModelTransform.pivot(6.0F, 5.0F, 15.0F));
+		ModelPartData left_spike = left_upper_arm.addChild("left_spike", ModelPartBuilder.create(), ModelTransform.rotation(6.0F, 5.0F, 15.0F));
 
 		ModelPartData torso = main.addChild("torso", ModelPartBuilder.create(), ModelTransform.of(0.0F, -19.0F, 0.0F, -0.7854F, 0.0F, 0.0F));
 
@@ -198,13 +207,13 @@ public class TwistedTreantStandingModel<T extends TwistedTreantStandingEntity> e
 
 		ModelPartData cube_r47 = waist.addChild("cube_r47", ModelPartBuilder.create().uv(0, 20).cuboid(-5.0F, 11.8448F, -5.3336F, 10.0F, 6.0F, 8.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -11.4182F, 10.4645F, -0.3927F, 0.0F, 0.0F));
 
-		ModelPartData right_leg = main.addChild("right_leg", ModelPartBuilder.create().uv(22, 51).cuboid(-2.0F, 9.0F, -3.0F, 5.0F, 5.0F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(-5.0F, -14.0F, 0.0F));
+		ModelPartData right_leg = main.addChild("right_leg", ModelPartBuilder.create().uv(22, 51).cuboid(-2.0F, 9.0F, -3.0F, 5.0F, 5.0F, 5.0F, new Dilation(0.0F)), ModelTransform.rotation(-5.0F, -14.0F, 0.0F));
 
 		ModelPartData cube_r48 = right_leg.addChild("cube_r48", ModelPartBuilder.create().uv(54, 61).cuboid(0.0F, -6.0F, -3.0F, 3.0F, 6.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(-1.0F, 5.0F, 0.0F, -0.3054F, 0.0F, 0.0F));
 
 		ModelPartData cube_r49 = right_leg.addChild("cube_r49", ModelPartBuilder.create().uv(0, 65).cuboid(0.0F, -5.0F, -3.0F, 3.0F, 5.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(-1.0F, 9.0F, 1.0F, 0.1309F, 0.0F, 0.0F));
 
-		ModelPartData left_leg = main.addChild("left_leg", ModelPartBuilder.create().uv(42, 51).cuboid(-3.0F, 9.0F, -3.0F, 5.0F, 5.0F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(5.0F, -14.0F, 0.0F));
+		ModelPartData left_leg = main.addChild("left_leg", ModelPartBuilder.create().uv(42, 51).cuboid(-3.0F, 9.0F, -3.0F, 5.0F, 5.0F, 5.0F, new Dilation(0.0F)), ModelTransform.rotation(5.0F, -14.0F, 0.0F));
 
 		ModelPartData cube_r50 = left_leg.addChild("cube_r50", ModelPartBuilder.create().uv(36, 20).cuboid(0.0F, -6.0F, -3.0F, 3.0F, 6.0F, 3.0F, new Dilation(0.0F)), ModelTransform.of(-2.0F, 5.0F, 0.0F, -0.3054F, 0.0F, 0.0F));
 
@@ -212,50 +221,22 @@ public class TwistedTreantStandingModel<T extends TwistedTreantStandingEntity> e
 		return TexturedModelData.of(modelData, 128, 128);
 	}
 
-	@Override
-	public void setAngles(TwistedTreantStandingEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		this.getPart().traverse().forEach(ModelPart::resetTransform);
-		this.setHeadAngles(entity, netHeadYaw, headPitch, headYaw);
+    @Override
+    public void setAngles(TwistedTreantStandingRenderState state) {
+        super.setAngles(state);
+        this.setHeadAngles(state.relativeHeadYaw, state.pitch);
 
-		this.animateMovement(TwistedTreantStandingAnimations.standing_run_animation, limbSwing, limbSwingAmount, 2f, 2.5f);
-		this.updateAnimation(entity.standingIdleAnimationState, TwistedTreantStandingAnimations.standing_idle_animation, ageInTicks, 1f);
-		this.updateAnimation(entity.standingAttack1AnimationState, TwistedTreantStandingAnimations.standing_attack_animation_1, ageInTicks, 1f);
-		this.updateAnimation(entity.standingAttack2AnimationState, TwistedTreantStandingAnimations.standing_attack_animation_2, ageInTicks, 1f);
-	}
+        this.idleAnimation.apply(state.idleAnimationState, state.age, 1f);
+        this.walkingAnimation.applyWalking(state.limbSwingAnimationProgress, state.limbSwingAmplitude, 2f, 2.5f);
+        this.attack1Animation.apply(state.attack1AnimationState, state.age, 1f);
+        this.attack2Animation.apply(state.attack2AnimationState, state.age, 1f);
+    }
 
-	private void setHeadAngles(TwistedTreantStandingEntity entity, float headYaw, float headPitch, float animationProgress) {
-		headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
-		headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
+    private void setHeadAngles(float headYaw, float headPitch) {
+        headYaw = MathHelper.clamp(headYaw, -30.0F, 30.0F);
+        headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
 
-		this.head.yaw = headYaw * 0.017453292F;
-		this.head.pitch = headPitch * 0.017453292F;
-		setHeadYaw(headYaw);
-		setHeadPitch(headPitch);
-	}
-
-	@Override
-	public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-		twisted_treant.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
-	}
-
-	@Override
-	public ModelPart getPart() {
-		return twisted_treant;
-	}
-
-	public float getHeadPitch() {
-		return this.headPitch;
-	}
-
-	public float getHeadYaw() {
-		return this.headYaw;
-	}
-
-	public void setHeadPitch(float headPitch) {
-		this.headPitch = headPitch;
-	}
-
-	public void setHeadYaw(float headYaw) {
-		this.headYaw = headYaw;
-	}
+        this.head.yaw = headYaw * 0.017453292F;
+        this.head.pitch = headPitch * 0.017453292F;
+    }
 }

@@ -1,9 +1,6 @@
 package net.syzygy.rpgmobs.entity.client.TwistedTreantComponents.TwistedTreantStanding;// Save this class in your mod and generate all required imports
 
-import net.minecraft.client.render.entity.animation.Animation;
-import net.minecraft.client.render.entity.animation.AnimationHelper;
-import net.minecraft.client.render.entity.animation.Keyframe;
-import net.minecraft.client.render.entity.animation.Transformation;
+import net.minecraft.client.render.entity.animation.*;
 
 /**
  * Made with Blockbench 4.12.5
@@ -11,8 +8,8 @@ import net.minecraft.client.render.entity.animation.Transformation;
  * @author Author
  */
 public class TwistedTreantStandingAnimations {
-	public static final Animation standing_idle_animation = Animation.Builder.create(2.0F).looping()
-		.addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE,
+	public static final AnimationDefinition standing_idle_animation = AnimationDefinition.Builder.create(2.0F).looping()
+		.addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN,
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, -1.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(2.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -20,7 +17,7 @@ public class TwistedTreantStandingAnimations {
 		.addBoneAnimation("jaw", new Transformation(Transformation.Targets.ROTATE, 
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(12.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("right_arm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("right_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, -1.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(2.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -28,13 +25,13 @@ public class TwistedTreantStandingAnimations {
 		.addBoneAnimation("right_forearm", new Transformation(Transformation.Targets.ROTATE, 
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("right_forearm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("right_forearm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
 		.addBoneAnimation("right_spike", new Transformation(Transformation.Targets.SCALE, 
 			new Keyframe(0.0F, AnimationHelper.createScalingVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("left_arm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("left_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, -1.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(2.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -42,26 +39,26 @@ public class TwistedTreantStandingAnimations {
 		.addBoneAnimation("left_forearm", new Transformation(Transformation.Targets.ROTATE, 
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("left_forearm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("left_forearm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
 		.addBoneAnimation("left_spike", new Transformation(Transformation.Targets.SCALE, 
 			new Keyframe(0.0F, AnimationHelper.createScalingVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("torso", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("torso", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, -1.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(2.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("waist", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("waist", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, -1.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(2.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
 		.build();
 
-	public static final Animation standing_run_animation = Animation.Builder.create(0.5F).looping()
-		.addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE, 
+	public static final AnimationDefinition standing_run_animation = AnimationDefinition.Builder.create(0.5F).looping()
+		.addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(1.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.25F, AnimationHelper.createTranslationalVector(-2.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(1.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -74,7 +71,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(0.25F, AnimationHelper.createRotationalVector(20.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createRotationalVector(-20.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("right_arm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("right_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(1.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.25F, AnimationHelper.createTranslationalVector(-1.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(1.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -82,7 +79,7 @@ public class TwistedTreantStandingAnimations {
 		.addBoneAnimation("right_forearm", new Transformation(Transformation.Targets.ROTATE, 
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("right_forearm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("right_forearm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
 		.addBoneAnimation("left_arm", new Transformation(Transformation.Targets.ROTATE, 
@@ -90,7 +87,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(0.25F, AnimationHelper.createRotationalVector(-20.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createRotationalVector(20.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("left_arm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("left_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(1.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.25F, AnimationHelper.createTranslationalVector(-1.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(1.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -98,7 +95,7 @@ public class TwistedTreantStandingAnimations {
 		.addBoneAnimation("left_forearm", new Transformation(Transformation.Targets.ROTATE, 
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("left_forearm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("left_forearm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
 		.addBoneAnimation("torso", new Transformation(Transformation.Targets.ROTATE, 
@@ -129,14 +126,14 @@ public class TwistedTreantStandingAnimations {
 		))
 		.build();
 
-	public static final Animation standing_attack_animation_1 = Animation.Builder.create(1.0F)
+	public static final AnimationDefinition standing_attack_animation_1 = AnimationDefinition.Builder.create(1.0F)
 		.addBoneAnimation("head", new Transformation(Transformation.Targets.ROTATE, 
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.2917F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.2917F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, -2.0F, -6.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -151,7 +148,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(0.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("right_arm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("right_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.2917F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, -3.0F, -5.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -162,7 +159,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(0.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("right_forearm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("right_forearm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.2917F, AnimationHelper.createTranslationalVector(0.0F, 1.0F, -2.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -174,7 +171,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(0.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("left_arm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("left_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.2917F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, -3.0F, -5.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -185,7 +182,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(0.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("left_forearm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("left_forearm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.2917F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -197,7 +194,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(0.5F, AnimationHelper.createRotationalVector(22.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("torso", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("torso", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.2917F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, -2.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -208,7 +205,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(0.5F, AnimationHelper.createRotationalVector(22.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("waist", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("waist", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.2917F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, -3.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -221,11 +218,11 @@ public class TwistedTreantStandingAnimations {
 		))
 		.build();
 
-	public static final Animation standing_attack_animation_2 = Animation.Builder.create(2.0F)
+	public static final AnimationDefinition standing_attack_animation_2 = AnimationDefinition.Builder.create(2.0F)
 		.addBoneAnimation("head", new Transformation(Transformation.Targets.ROTATE, 
 			new Keyframe(0.0F, AnimationHelper.createRotationalVector(15.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, -1.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.25F, AnimationHelper.createTranslationalVector(-2.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(2.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -249,7 +246,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(1.5F, AnimationHelper.createRotationalVector(-48.0734F, -42.8282F, 12.0377F), Transformation.Interpolations.LINEAR),
 			new Keyframe(2.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("right_arm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("right_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.25F, AnimationHelper.createTranslationalVector(-1.0F, -1.0F, -2.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(1.31F, 1.31F, 1.93F), Transformation.Interpolations.LINEAR),
@@ -265,7 +262,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(1.5F, AnimationHelper.createRotationalVector(-142.5F, 82.5F, -180.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(2.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("right_forearm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("right_forearm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(1.25F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -283,7 +280,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(1.5F, AnimationHelper.createRotationalVector(20.0F, 0.0F, -10.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(2.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("left_arm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("left_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.25F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(1.31F, -2.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -299,7 +296,7 @@ public class TwistedTreantStandingAnimations {
 			new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(2.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
 		))
-		.addBoneAnimation("left_forearm", new Transformation(Transformation.Targets.TRANSLATE, 
+		.addBoneAnimation("left_forearm", new Transformation(Transformation.Targets.MOVE_ORIGIN, 
 			new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.25F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
 			new Keyframe(0.5F, AnimationHelper.createTranslationalVector(-2.0F, 1.0F, 2.0F), Transformation.Interpolations.LINEAR),

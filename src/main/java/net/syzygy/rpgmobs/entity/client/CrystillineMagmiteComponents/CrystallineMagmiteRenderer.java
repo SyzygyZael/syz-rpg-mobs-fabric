@@ -40,5 +40,7 @@ public class CrystallineMagmiteRenderer extends MobEntityRenderer<CrystallineMag
         super.updateRenderState(livingEntity, livingEntityRenderState, f);
 
         livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
+        livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.attack1AnimationState);
+        livingEntityRenderState.attack2AnimationState.copyFrom(livingEntity.attack2AnimationState);
     }
 }
