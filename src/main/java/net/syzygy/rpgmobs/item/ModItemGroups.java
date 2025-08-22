@@ -11,7 +11,7 @@ import net.syzygy.rpgmobs.RPGMobs;
 
 public class ModItemGroups {
     public static final ItemGroup RPG_MOBS_GROUP = Registry.register(Registries.ITEM_GROUP,
-            new Identifier(RPGMobs.MOD_ID, "rpg_mobs_group"),
+            Identifier.of(RPGMobs.MOD_ID, "rpg_mobs_group"),
             FabricItemGroup.builder().displayName(Text.translatable("itemgroup.rpg_mobs_group"))
                     .icon(() -> new ItemStack(ModItems.CRYSTALLINE_MAGMITE_HELMET)).entries((displayContext, entries) -> {
                         entries.add(ModItems.KANDRA_CORE);

@@ -3,6 +3,8 @@ package net.syzygy.rpgmobs.world.gen;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.entity.SpawnLocation;
+import net.minecraft.entity.SpawnLocationTypes;
 import net.minecraft.entity.SpawnRestriction;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.BiomeKeys;
@@ -38,7 +40,7 @@ public class ModEntitySpawns {
                     BiomeKeys.SNOWY_PLAINS,
                     BiomeKeys.SUNFLOWER_PLAINS
             ), SpawnGroup.MONSTER, ModEntities.CRYSTALLINE_MAGMITE, ModConfig.crystallineMagmiteSpawnWeight, 1, 1);
-            SpawnRestriction.register(ModEntities.CRYSTALLINE_MAGMITE, SpawnRestriction.Location.ON_GROUND,
+            SpawnRestriction.register(ModEntities.CRYSTALLINE_MAGMITE, SpawnLocationTypes.ON_GROUND,
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CrystallineMagmiteEntity::canSpawn);
         }
 
@@ -63,7 +65,7 @@ public class ModEntitySpawns {
                     BiomeKeys.SNOWY_PLAINS,
                     BiomeKeys.SUNFLOWER_PLAINS
             ), SpawnGroup.MONSTER, ModEntities.ARCHANGEL, ModConfig.archangelSpawnWeight, 1, 1);
-            SpawnRestriction.register(ModEntities.ARCHANGEL, SpawnRestriction.Location.ON_GROUND,
+            SpawnRestriction.register(ModEntities.ARCHANGEL, SpawnLocationTypes.ON_GROUND,
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ArchangelEntity::canSpawn);
         }
 
@@ -86,7 +88,7 @@ public class ModEntitySpawns {
                     BiomeKeys.BAMBOO_JUNGLE,
                     BiomeKeys.FOREST
             ), SpawnGroup.MONSTER, ModEntities.TWISTED_TREANT, ModConfig.twistedTreantSpawnWeight, 1, 2);
-            SpawnRestriction.register(ModEntities.TWISTED_TREANT, SpawnRestriction.Location.ON_GROUND,
+            SpawnRestriction.register(ModEntities.TWISTED_TREANT, SpawnLocationTypes.ON_GROUND,
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, TwistedTreantEntity::canSpawn);
         }
     }

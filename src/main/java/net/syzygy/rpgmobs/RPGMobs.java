@@ -2,14 +2,10 @@ package net.syzygy.rpgmobs;
 
 import net.fabricmc.api.ModInitializer;
 
-import net.fabricmc.fabric.api.item.v1.ComponentTooltipAppenderRegistry;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.item.ModItemGroups;
 import net.syzygy.rpgmobs.item.ModItems;
-import net.syzygy.rpgmobs.particle.ModParticles;
 import net.syzygy.rpgmobs.sound.ModSounds;
 import net.syzygy.rpgmobs.util.ModRegistries;
 import net.syzygy.rpgmobs.world.gen.ModEntitySpawns;
@@ -31,7 +27,6 @@ public class RPGMobs implements ModInitializer {
 		ModRegistries.registerModStuffs();
 		ModEntities.registerModEntites();
 		ModEntitySpawns.addSpawns();
-		ModParticles.registerParticles();
 		ModSounds.registerSounds();
 	}
 }

@@ -4,9 +4,11 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.entity.custom.TwistedTreantEntity;
+import net.syzygy.rpgmobs.item.custom.StaffOfTheForestMonarchItem;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -16,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class OnPlayerWasHitMixin {
 
     @Inject(method = "damage", at = @At("HEAD"))
-	private void onPlayerDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+	private void onPlayerDamage(ServerWorld serverWorld, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 
 		if (entity instanceof PlayerEntity player && source.getAttacker() != null && !player.getWorld().isClient) {
@@ -36,7 +38,7 @@ public class OnPlayerWasHitMixin {
 					treant.refreshPositionAndAngles(spawnX, spawnY, spawnZ, spawnYaw, spawnPitch);
 
 					treant.setOwner(player);
-					treant.setTamed(true);
+					treant.setTamed(true, false);
 					player.getWorld().spawnEntity(treant);
 					treant.setStandingPet(player);
 

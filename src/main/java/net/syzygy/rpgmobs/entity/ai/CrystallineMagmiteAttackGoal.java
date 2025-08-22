@@ -64,7 +64,7 @@ public class CrystallineMagmiteAttackGoal extends MeleeAttackGoal {
     protected void performAttack(LivingEntity pEnemy) {
         this.resetAttackCooldown();
         this.mob.swingHand(Hand.MAIN_HAND);
-        this.mob.tryAttack(pEnemy);
+        this.mob.tryAttack(getServerWorld(this.mob), pEnemy);
     }
 
     @Override
