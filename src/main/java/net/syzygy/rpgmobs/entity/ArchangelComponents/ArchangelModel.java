@@ -124,14 +124,6 @@ public class ArchangelModel<T extends ArchangelEntity> extends SinglePartEntityM
 		return archangel;
 	}
 
-	public float getHeadYaw() {
-		return this.headYaw;
-	}
-
-	public float getHeadPitch() {
-		return this.headPitch;
-	}
-
 	public void setHeadYaw(float headYaw) {
 		this.headYaw = headYaw;
 	}

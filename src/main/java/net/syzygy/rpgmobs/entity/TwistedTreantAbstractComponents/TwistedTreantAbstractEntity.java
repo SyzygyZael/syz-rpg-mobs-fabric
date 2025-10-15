@@ -12,7 +12,6 @@ import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.entity.ai.TwistedTreantActiveTargetGoal;
 import net.syzygy.rpgmobs.entity.ai.TwistedTreantAttackGoal;
-import org.jetbrains.annotations.Nullable;
 
 public class TwistedTreantAbstractEntity extends TameableEntity {
     public int attackAnimationTimeout = 0;
@@ -67,7 +66,7 @@ public class TwistedTreantAbstractEntity extends TameableEntity {
     }
 
     @Override
-    public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
     }
 

@@ -34,7 +34,6 @@ import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
 import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteAttackGoal;
 import net.syzygy.rpgmobs.entity.ai.CrystallineMagmiteRevengeGoal;
-import org.jetbrains.annotations.Nullable;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteModel;
 
 public class CrystallineMagmiteEntity extends AnimalEntity {
@@ -148,7 +147,7 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
     }
 
     @Override
-    public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
     }
 
@@ -244,7 +243,7 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
     }
 
     @Override
-    protected @Nullable SoundEvent getAmbientSound() {
+    protected SoundEvent getAmbientSound() {
         return SoundEvents.ENTITY_WARDEN_AMBIENT;
     }
 

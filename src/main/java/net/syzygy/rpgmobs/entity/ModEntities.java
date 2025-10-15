@@ -9,6 +9,7 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
+import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraEntity;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
@@ -40,6 +41,11 @@ public class ModEntities {
             new Identifier(RPGMobs.MOD_ID, "twisted_treant_standing"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, TwistedTreantStandingEntity::new)
                     .dimensions(EntityDimensions.fixed(1.4f, 2.4f)).build());
+
+    public static final EntityType<ChimeraEntity> CHIMERA = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(RPGMobs.MOD_ID, "chimera"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ChimeraEntity::new)
+                    .dimensions(EntityDimensions.fixed(3.0f, 4.0f)).build());
 
     public static void registerModEntites() {
         RPGMobs.LOGGER.info("Registering ModEntities for " + RPGMobs.MOD_ID);

@@ -1,4 +1,4 @@
-package net.syzygy.rpgmobs.entity.ArchangelComponents;
+package net.syzygy.rpgmobs.entity.ChimeraComponents;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
 import net.minecraft.entity.*;
@@ -11,27 +11,23 @@ import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.config.ModConfig;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
-import net.syzygy.rpgmobs.entity.ai.ArchangelAttackGoal;
-import net.syzygy.rpgmobs.particle.ModParticles;
+import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
+import net.syzygy.rpgmobs.entity.ai.ChimeraAttackGoal;
 
-public class ArchangelEntity extends AnimalEntity {
+public class ChimeraEntity extends AnimalEntity {
     private static final TrackedData<Boolean> ATTACKING =
-            DataTracker.registerData(ArchangelEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+            DataTracker.registerData(ChimeraEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
             DataTracker.registerData(ArchangelEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
@@ -40,33 +36,35 @@ public class ArchangelEntity extends AnimalEntity {
     public final AnimationState attack1AnimationState = new AnimationState();
     public final AnimationState attack2AnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
-    public final AnimationState airAttackAnimationState = new AnimationState();
+    public final AnimationState flyingAnimationState = new AnimationState();
+    public final AnimationState slamAnimationState = new AnimationState();
+    public final AnimationState fireBreathAnimationState = new AnimationState();
 
-    public ArchangelEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+    public ChimeraEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
 
-    public static final EntityModelLayer ARCHANGEL =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "archangel"), "main");
+    public static final EntityModelLayer CHIMERA =
+            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "chimera"), "main");
 
     @Override
     protected void initGoals() {
-        this.goalSelector.add(2, new ArchangelAttackGoal(this, 1f, true));
+        this.targetSelector.add(2, new ChimeraAttackGoal(this, 1f, true));
         this.targetSelector.add(2, new ActiveTargetGoal<>(this, PlayerEntity.class, true));
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAtEntityGoal(this, LivingEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAroundGoal(this));
-        this.goalSelector.add(7, new WanderAroundFarGoal(this, (double) 1.0F));
+        this.goalSelector.add(5, new FlyGoal(this, 1.0));
     }
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
                 .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)32.0F)
                 .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.30F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.archangelAttackDamage)
+                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.chimeraAttackDamage)
                 .add(EntityAttributes.GENERIC_ARMOR, (double)3.0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double)45.0F);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double)65.0F);
     }
 
     private void setupAnimationStates() {
@@ -79,11 +77,7 @@ public class ArchangelEntity extends AnimalEntity {
 
         if(this.isAttacking() && attackAnimationTimeout <= 0) {
             int attackTypeChooser = (int) (Math.random() * 2) + 1;
-            if (this.hasNoGravity()) {
-                attackAnimationTimeout = 17;
-                airAttackAnimationState.start(this.age);
-            }
-            else if (attackTypeChooser == 1) {
+            if (attackTypeChooser == 1) {
                 attackAnimationTimeout = 20; // THIS IS LENGTH OF ANIMATION IN TICKS
                 attack1AnimationState.start(this.age);
             }
@@ -98,13 +92,7 @@ public class ArchangelEntity extends AnimalEntity {
         if (!this.isAttacking()) {
             attack1AnimationState.stop();
             attack2AnimationState.stop();
-            airAttackAnimationState.stop();
         }
-    }
-
-    @Override
-    public boolean shouldRenderName() {
-        return false;
     }
 
     protected void updateLimbs(float v) {
@@ -156,25 +144,5 @@ public class ArchangelEntity extends AnimalEntity {
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
-    }
-
-    @Override
-    public void tickMovement() {
-        if (this.getWorld().isClient) {
-            for (int i = 0; i < 2; i++) {
-                this.getWorld()
-                        .addParticle(
-                                ParticleTypes.WHITE_ASH,
-                                this.getParticleX(0.5),
-                                this.getRandomBodyY() - 0.25,
-                                this.getParticleZ(0.5),
-                                (this.random.nextDouble() - 0.5) * 2.0,
-                                -this.random.nextDouble(),
-                                (this.random.nextDouble() - 0.5) * 2.0
-                        );
-            }
-        }
-        this.jumping = false;
-        super.tickMovement();
     }
 }
