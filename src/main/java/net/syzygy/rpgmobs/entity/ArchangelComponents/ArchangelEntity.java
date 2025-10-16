@@ -46,6 +46,11 @@ public class ArchangelEntity extends AnimalEntity {
         super(entityType, world);
     }
 
+    @Override
+    protected boolean isDisallowedInPeaceful() {
+        return true;
+    }
+
     public static final EntityModelLayer ARCHANGEL =
             new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "archangel"), "main");
 

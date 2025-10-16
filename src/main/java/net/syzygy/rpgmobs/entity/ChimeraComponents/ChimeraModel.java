@@ -212,11 +212,12 @@ public class ChimeraModel<T extends ChimeraEntity> extends SinglePartEntityModel
         this.getPart().traverse().forEach(ModelPart::resetTransform);
         this.setHeadAngles(entity, netHeadYaw, headPitch, ageInTicks);
 
-        this.animateMovement(ChimeraAnimations.idle_animation, limbSwing, limbSwingAmount, 2f, 2.5f);
+
+        this.animateMovement(ChimeraAnimations.walking_animation, limbSwing, limbSwingAmount, 2f, 2.5f);
+        this.updateAnimation(entity.flyingAnimationState, ChimeraAnimations.flying_animation, ageInTicks, 1f);
         this.updateAnimation(entity.idleAnimationState, ChimeraAnimations.idle_animation, ageInTicks, 1f);
         this.updateAnimation(entity.attack1AnimationState, ChimeraAnimations.attack1_animation, ageInTicks, 1f);
         this.updateAnimation(entity.attack2AnimationState, ChimeraAnimations.attack2_animation, ageInTicks, 1f);
-        this.updateAnimation(entity.flyingAnimationState, ChimeraAnimations.flying_animation, ageInTicks, 1f);
         this.updateAnimation(entity.fireBreathAnimationState, ChimeraAnimations.fire_breath_animation, ageInTicks, 1f);
         this.updateAnimation(entity.slamAnimationState, ChimeraAnimations.slam_animation, ageInTicks, 1f);
     }
@@ -247,5 +248,13 @@ public class ChimeraModel<T extends ChimeraEntity> extends SinglePartEntityModel
 
     public void setHeadPitch(float headPitch) {
         this.headPitch = headPitch;
+    }
+
+    public float getHeadYaw() {
+        return this.headYaw;
+    }
+
+    public float getHeadPitch() {
+        return this.headPitch;
     }
 }

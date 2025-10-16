@@ -8,24 +8,27 @@ import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraEntity;
 
 public class ChimeraAttackGoal extends MeleeAttackGoal {
     private final ChimeraEntity entity;
-    private int attackDelay = 10;
+    private LivingEntity pEnemy;
+    private double attackDelay = 12.6;
     private int ticksUntilNextAttack = 20;
     private boolean shouldCountTillNextAttack = false;
 
     public ChimeraAttackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
         super(mob, speed, pauseWhenMobIdle);
         entity = ((ChimeraEntity) mob);
+        pEnemy = this.entity.getTarget();
     }
 
     @Override
     public void start() {
         super.start();
-        attackDelay = 10;
+        attackDelay = 12.6;
         ticksUntilNextAttack = 20;
     }
 
     @Override
     protected void attack(LivingEntity pEnemy, double squaredDistance ) {
+
         if (isEnemyWithinAttackDistance(pEnemy, squaredDistance)) {
             shouldCountTillNextAttack = true;
 
@@ -34,7 +37,7 @@ public class ChimeraAttackGoal extends MeleeAttackGoal {
             }
 
             if(isTimeToAttack()) {
-                this.mob.getLookControl().lookAt(pEnemy.getX(), pEnemy.getEyeY(), pEnemy.getZ());
+                this.entity.getLookControl().lookAt(pEnemy.getX(), pEnemy.getEyeY(), pEnemy.getZ());
                 performAttack(pEnemy);
             }
         } else {
@@ -50,7 +53,7 @@ public class ChimeraAttackGoal extends MeleeAttackGoal {
     }
 
     protected void resetAttackCooldown() {
-        this.ticksUntilNextAttack = 31;
+        this.ticksUntilNextAttack = 20;
     }
 
     protected boolean isTimeToStartAttackAnimation() {
@@ -63,14 +66,18 @@ public class ChimeraAttackGoal extends MeleeAttackGoal {
 
     protected void performAttack(LivingEntity pEnemy) {
         this.resetAttackCooldown();
-        this.mob.swingHand(Hand.MAIN_HAND);
-        this.mob.tryAttack(pEnemy);
+        this.entity.swingHand(Hand.MAIN_HAND);
+        this.entity.tryAttack(pEnemy);
+    }
+
+    public LivingEntity getpEnemy() {
+        return this.pEnemy;
     }
 
     @Override
     public void tick() {
         super.tick();
-        if(shouldCountTillNextAttack) {
+        if (shouldCountTillNextAttack) {
             this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
         }
     }

@@ -3,6 +3,7 @@ package net.syzygy.rpgmobs.util;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
+import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraEntity;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteEntity;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
@@ -22,6 +23,7 @@ public class ModRegistries {
         FabricDefaultAttributeRegistry.register(ModEntities.ARCHANGEL, ArchangelEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.TWISTED_TREANT, TwistedTreantEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.TWISTED_TREANT_STANDING, TwistedTreantStandingEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.CHIMERA, ChimeraEntity.createAttributes());
     }
 
     private static void registerEvents() {

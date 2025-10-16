@@ -24,6 +24,11 @@ public class TwistedTreantAbstractEntity extends TameableEntity {
     }
 
     @Override
+    protected boolean isDisallowedInPeaceful() {
+        return true;
+    }
+
+    @Override
     protected void initGoals() {
         this.goalSelector.add(2, new TwistedTreantAttackGoal(this, 1f, true));
         this.goalSelector.add(2, new AttackWithOwnerGoal(this));

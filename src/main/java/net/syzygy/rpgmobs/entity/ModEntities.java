@@ -45,7 +45,7 @@ public class ModEntities {
     public static final EntityType<ChimeraEntity> CHIMERA = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(RPGMobs.MOD_ID, "chimera"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, ChimeraEntity::new)
-                    .dimensions(EntityDimensions.fixed(3.0f, 4.0f)).build());
+                    .dimensions(EntityDimensions.fixed(2.3f, 3.5f)).build());
 
     public static void registerModEntites() {
         RPGMobs.LOGGER.info("Registering ModEntities for " + RPGMobs.MOD_ID);
