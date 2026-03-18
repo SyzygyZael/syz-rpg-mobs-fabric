@@ -23,6 +23,10 @@ public class ModItemGroups {
                         entries.add(ModItems.SHARD_BLADE);
                         entries.add(ModItems.STAFF_OF_THE_FOREST_MONARCH);
                         entries.add(ModItems.TREANT_ESSENCE_GEM);
+                        entries.add(ModItems.CHIMERA_HEART);
+                        entries.add(ModItems.DARK_IRON_FRAGMENT);
+                        entries.add(ModItems.DARK_IRON_INGOT);
+                        entries.add(ModItems.DEMONIC_BLADE);
                     }).build());
 
     public static void registerItemGroups() {

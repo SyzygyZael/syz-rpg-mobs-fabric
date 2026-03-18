@@ -75,5 +75,15 @@ public class ModRecipeGenerator extends FabricRecipeProvider {
                 .criterion(hasItem(Items.STICK), conditionsFromItem(Items.STICK))
                 .criterion(hasItem(ModItems.TREANT_ESSENCE_GEM), conditionsFromItem(ModItems.TREANT_ESSENCE_GEM))
                 .offerTo(exporter, new Identifier(getRecipeName(ModItems.STAFF_OF_THE_FOREST_MONARCH)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, ModItems.DEMONIC_BLADE, 1)
+                .pattern(" S ")
+                .pattern("SSS")
+                .pattern("SPS")
+                .input('S', ModItems.DARK_IRON_INGOT)
+                .input('P', ModItems.CHIMERA_HEART)
+                .criterion(hasItem(ModItems.DARK_IRON_INGOT), conditionsFromItem(ModItems.DARK_IRON_INGOT))
+                .criterion(hasItem(ModItems.CHIMERA_HEART), conditionsFromItem(ModItems.CHIMERA_HEART))
+                .offerTo(exporter, new Identifier(getRecipeName(ModItems.DEMONIC_BLADE)));
     }
 }

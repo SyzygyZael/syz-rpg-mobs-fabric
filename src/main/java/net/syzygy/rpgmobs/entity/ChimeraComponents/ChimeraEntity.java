@@ -16,8 +16,11 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
@@ -25,6 +28,7 @@ import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
 import net.syzygy.rpgmobs.entity.ai.ChimeraAttackGoal;
+import org.jetbrains.annotations.Nullable;
 
 public class ChimeraEntity extends AnimalEntity {
     private static final TrackedData<Boolean> ATTACKING =
@@ -43,6 +47,10 @@ public class ChimeraEntity extends AnimalEntity {
     public final AnimationState slamAnimationState = new AnimationState();
     public final AnimationState fireBreathAnimationState = new AnimationState();
     public int fireBreathAnimationTimeout = 0;
+    public int grabTick;
+    public float grabYOffset;
+
+    protected boolean slamming = false;
 
     public ChimeraEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
@@ -87,7 +95,12 @@ public class ChimeraEntity extends AnimalEntity {
 
         if(this.isAttacking() && attackAnimationTimeout <= 0) {
             int attackTypeChooser = (int) (Math.random() * 2) + 1;
-            if (attackTypeChooser == 1) {
+
+            if (this.hasNoGravity()) {
+                attackAnimationTimeout = 35; // THIS IS LENGTH OF ANIMATION IN TICKS
+                slamAnimationState.start(this.age);
+            }
+            else if (attackTypeChooser == 1) {
                 attackAnimationTimeout = 20; // THIS IS LENGTH OF ANIMATION IN TICKS
                 attack1AnimationState.start(this.age);
             }
@@ -102,6 +115,7 @@ public class ChimeraEntity extends AnimalEntity {
         if (!this.isAttacking()) {
             attack1AnimationState.stop();
             attack2AnimationState.stop();
+            slamAnimationState.stop();
         }
 
         if (this.isShooting() && fireBreathAnimationTimeout <= 0) {
@@ -136,6 +150,14 @@ public class ChimeraEntity extends AnimalEntity {
         }
     }
 
+    public void setSlamming(boolean slam) {
+        this.slamming = slam;
+    }
+
+    public boolean isSlamming() {
+        return this.slamming;
+    }
+
     @Override
     public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
         return false;
@@ -144,6 +166,28 @@ public class ChimeraEntity extends AnimalEntity {
     @Override
     public boolean isFireImmune() {
         return true;
+    }
+
+    @Override
+    protected void updatePassengerPosition(Entity passenger, PositionUpdater positionUpdater) {
+        if (this.hasPassenger(passenger)) {
+            float bodyYaw = this.getBodyYaw();
+            double x = -Math.sin(Math.toRadians(bodyYaw));
+            double z = Math.cos(Math.toRadians(bodyYaw));
+
+            this.grabTick++;
+            this.grabYOffset = calculateYOffset(grabTick);
+
+            positionUpdater.accept(passenger, this.getX() + x, this.getY() + passenger.getHeightOffset() + this.grabYOffset + 1, this.getZ() + z);
+        } else {
+            this.grabTick = 0;
+            this.grabYOffset = 0;
+        }
+    }
+
+    private float calculateYOffset(int tick) {
+        float progress = (float) tick / 20f;
+        return (float) Math.sin(progress * Math.PI) * 2f; // peaks at 2 blocks
     }
 
     @Override
@@ -179,6 +223,21 @@ public class ChimeraEntity extends AnimalEntity {
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
         return null;
+    }
+
+    @Override
+    protected @Nullable SoundEvent getAmbientSound() {
+        return SoundEvents.ENTITY_POLAR_BEAR_AMBIENT;
+    }
+
+    @Override
+    protected @Nullable SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_ENDER_DRAGON_GROWL;
+    }
+
+    @Override
+    protected @Nullable SoundEvent getDeathSound() {
+        return SoundEvents.ENTITY_POLAR_BEAR_DEATH;
     }
 
     public static class ShootFireballGoal extends Goal {

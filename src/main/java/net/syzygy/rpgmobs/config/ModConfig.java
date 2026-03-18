@@ -29,6 +29,8 @@ public class ModConfig extends MidnightConfig{
 
     @Entry(category = ITEMS) public static int staffOfTheForestMonarchSpawnLimit = 2;
 
+    @Entry(category = ITEMS) public static int demonicBladeDamage = 12;
+
     public static void registerConfigs() {
         RPGMobs.LOGGER.info("Enable configs for " + RPGMobs.MOD_ID);
 

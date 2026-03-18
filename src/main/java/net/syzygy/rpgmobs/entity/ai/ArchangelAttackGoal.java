@@ -122,7 +122,7 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
         }
 
         // teleport to enemy and deal damage if not blocking
-        if (this.wait <= 13 && entity.hasNoGravity() && pEnemy != null) {
+        if (this.wait <= 13 && entity.hasNoGravity()) {
             if (teleCount == 0) {
                 entity.teleport(pEnemy.getX(), pEnemy.getY() + 2, pEnemy.getZ());
                 entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);

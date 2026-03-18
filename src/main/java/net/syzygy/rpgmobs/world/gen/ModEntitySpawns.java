@@ -103,7 +103,9 @@ public class ModEntitySpawns {
                     BiomeKeys.WINDSWEPT_HILLS,
                     BiomeKeys.GROVE,
                     BiomeKeys.MEADOW,
-                    BiomeKeys.SUNFLOWER_PLAINS
+                    BiomeKeys.SUNFLOWER_PLAINS,
+                    BiomeKeys.NETHER_WASTES,
+                    BiomeKeys.SOUL_SAND_VALLEY
             ), SpawnGroup.MONSTER, ModEntities.CHIMERA, ModConfig.chimeraSpawnWeight, 1, 1);
             SpawnRestriction.register(ModEntities.CHIMERA, SpawnRestriction.Location.ON_GROUND,
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ChimeraEntity::canSpawn);
