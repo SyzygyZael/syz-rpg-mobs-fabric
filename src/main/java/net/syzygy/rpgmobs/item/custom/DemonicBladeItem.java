@@ -9,6 +9,7 @@ import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
 import java.util.List;
 
 public class DemonicBladeItem extends SwordItem {
@@ -17,8 +18,14 @@ public class DemonicBladeItem extends SwordItem {
     }
 
     @Override
+    public boolean hasGlint(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable("item.rpgmobs.demonic_blade.tooltip_line1").formatted(Formatting.GRAY));
         tooltip.add(Text.translatable("item.rpgmobs.demonic_blade.tooltip_line2").formatted(Formatting.GRAY));
+        tooltip.add(Text.translatable("item.rpgmobs.demonic_blade.tooltip_line3").formatted(Formatting.GRAY));
     }
 }

@@ -16,6 +16,11 @@ public class ChimeraHeartItem extends Item {
     }
 
     @Override
+    public boolean hasGlint(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
         tooltip.add(Text.translatable("item.rpgmobs.chimera_heart.tooltip_line1").formatted(Formatting.GRAY));
         tooltip.add(Text.translatable("item.rpgmobs.chimera_heart.tooltip_line2").formatted(Formatting.GRAY));

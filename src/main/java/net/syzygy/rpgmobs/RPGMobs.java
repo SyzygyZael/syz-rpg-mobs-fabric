@@ -3,6 +3,7 @@ package net.syzygy.rpgmobs;
 import net.fabricmc.api.ModInitializer;
 
 import net.syzygy.rpgmobs.config.ModConfig;
+import net.syzygy.rpgmobs.enchantment.ModEnchantments;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.item.ModItemGroups;
 import net.syzygy.rpgmobs.item.ModItems;
@@ -29,5 +30,6 @@ public class RPGMobs implements ModInitializer {
 		ModEntitySpawns.addSpawns();
 		ModParticles.registerParticles();
 		ModSounds.registerSounds();
+		ModEnchantments.registerModEnchantments();
 	}
 }

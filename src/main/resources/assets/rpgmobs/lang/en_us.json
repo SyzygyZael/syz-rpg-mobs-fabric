@@ -25,6 +25,8 @@
 
   "item.rpgmobs.demonic_blade": "Demonic Blade",
 
+  "enchantment.rpgmobs.withering_1": "Withering I",
+
   "item.rpgmobs.kandra_core.tooltip_line1": "The life force of the inanimate ",
   "item.rpgmobs.kandra_core.tooltip_line2": "made animate",
 
@@ -51,7 +53,8 @@
   "item.rpgmobs.dark_iron_fragment.tooltip_line3": "Perhaps it can be reforged.",
 
   "item.rpgmobs.demonic_blade.tooltip_line1": "A powerful blade forged from the heart ",
-  "item.rpgmobs.demonic_blade.tooltip_line2": "of a Chimera.",
+  "item.rpgmobs.demonic_blade.tooltip_line2": "of a Chimera. Those struck become corrupted.",
+  "item.rpgmobs.demonic_blade.tooltip_line3": "Withering I",
 
   "rpgmobs.midnightconfig.category.entities": "Entites",
   "rpgmobs.midnightconfig.category.items": "Items",

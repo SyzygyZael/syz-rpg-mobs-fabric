@@ -14,10 +14,4 @@ public class DarkIronIngotItem extends Item {
     public DarkIronIngotItem(Settings settings) {
         super(settings);
     }
-
-    @Override
-    public void appendTooltip(ItemStack stack, @Nullable World world, List<Text> tooltip, TooltipContext context) {
-        tooltip.add(Text.translatable("item.rpgmobs.dark_iron_ingot.tooltip_line1").formatted(Formatting.GRAY));
-        tooltip.add(Text.translatable("item.rpgmobs.dark_iron_ingot.tooltip_line2").formatted(Formatting.GRAY));
-    }
 }
