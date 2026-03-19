@@ -18,11 +18,19 @@ public class ModItems {
             new ShardPieceItem(new FabricItemSettings()));
     public static final Item TREANT_ESSENCE_GEM = registerItem("treant_essence_gem",
             new TreantEssenceGemItem(new FabricItemSettings()));
+    public static final Item CHIMERA_HEART = registerItem("chimera_heart",
+            new ChimeraHeartItem(new FabricItemSettings()));
+    public static final Item DARK_IRON_FRAGMENT = registerItem("dark_iron_fragment",
+            new DarkIronFragmentItem(new FabricItemSettings()));
+    public static final Item DARK_IRON_INGOT = registerItem("dark_iron_ingot",
+            new DarkIronIngotItem(new FabricItemSettings()));
 
     public static final Item SHARD_BLADE = registerItem("shard_blade",
-            new ShardBladeItem(ModToolMaterial.SHARD, ModConfig.shardBladeDamage - 6, -2.2f, new FabricItemSettings()));
+            new ShardBladeItem(ShardToolMaterial.SHARD, ModConfig.shardBladeDamage - 6, -2.2f, new FabricItemSettings()));
     public static final Item STAFF_OF_THE_FOREST_MONARCH = registerItem("staff_of_the_forest_monarch",
             new StaffOfTheForestMonarchItem(ToolMaterials.STONE, 1, 1.0f, new FabricItemSettings()));
+    public static final Item DEMONIC_BLADE = registerItem("demonic_blade",
+            new DemonicBladeItem(DemonicToolMaterial.DEMONIC, ModConfig.demonicBladeDamage - 6, -2.6f, new FabricItemSettings()));
 
     public static final Item CRYSTALLINE_MAGMITE_HELMET = registerItem("crystalline_magmite_helmet",
             new KandraArmorItem(ModArmorMaterials.CRYSTALLINE_MAGMITE, ArmorItem.Type.HELMET, new FabricItemSettings()));

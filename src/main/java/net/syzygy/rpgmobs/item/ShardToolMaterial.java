@@ -6,7 +6,7 @@ import net.minecraft.util.Lazy;
 
 import java.util.function.Supplier;
 
-public enum ModToolMaterial implements ToolMaterial {
+public enum ShardToolMaterial implements ToolMaterial {
     SHARD(5, 5038, 9.0F, 5.0F, 15, () -> Ingredient.ofItems(ModItems.SHARD_PIECE));
 
     private final int miningLevel;
@@ -16,8 +16,8 @@ public enum ModToolMaterial implements ToolMaterial {
     private final int enchantability;
     private final Lazy<Ingredient> repairIngredient;
 
-    private ModToolMaterial(int miningLevel, int itemDurability, float miningSpeed, float attackDamage,
-                            int enchantability, Supplier<Ingredient> repairIngredient) {
+    private ShardToolMaterial(int miningLevel, int itemDurability, float miningSpeed, float attackDamage,
+                              int enchantability, Supplier<Ingredient> repairIngredient) {
         this.miningLevel = miningLevel;
         this.itemDurability = itemDurability;
         this.miningSpeed = miningSpeed;

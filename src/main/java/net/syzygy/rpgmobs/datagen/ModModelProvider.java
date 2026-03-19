@@ -23,6 +23,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.KANDRA_CORE, Models.GENERATED);
         itemModelGenerator.register(ModItems.SHARD_PIECE, Models.GENERATED);
         itemModelGenerator.register(ModItems.TREANT_ESSENCE_GEM, Models.GENERATED);
+        itemModelGenerator.register(ModItems.CHIMERA_HEART, Models.GENERATED);
+        itemModelGenerator.register(ModItems.DARK_IRON_FRAGMENT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.DARK_IRON_INGOT, Models.GENERATED);
 
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.CRYSTALLINE_MAGMITE_HELMET));
         itemModelGenerator.registerArmor(((ArmorItem) ModItems.CRYSTALLINE_MAGMITE_CHESTPLATE));
