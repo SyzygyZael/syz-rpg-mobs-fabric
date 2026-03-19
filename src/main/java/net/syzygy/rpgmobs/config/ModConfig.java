@@ -26,10 +26,9 @@ public class ModConfig extends MidnightConfig{
     @Entry(category = ENTITIES) public static double chimeraAttackDamage = 8.5F;
 
     @Entry(category = ITEMS) public static int shardBladeDamage = 11;
+    @Entry(category = ITEMS) public static int demonicBladeDamage = 12;
 
     @Entry(category = ITEMS) public static int staffOfTheForestMonarchSpawnLimit = 2;
-
-    @Entry(category = ITEMS) public static int demonicBladeDamage = 12;
 
     public static void registerConfigs() {
         RPGMobs.LOGGER.info("Enable configs for " + RPGMobs.MOD_ID);
