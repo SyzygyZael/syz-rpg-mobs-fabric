@@ -22,7 +22,7 @@ public class ModConfig {
     @MidnightConfig.Entry public static double chimeraAttackDamage = 8.5F;
 
     @MidnightConfig.Entry public static int shardBladeDamage = 11;
-    @MidnightConfig.Entry public static int demonicBladeDamage = 13;
+    @MidnightConfig.Entry public static int demonicBladeDamage = 12;
 
     @MidnightConfig.Entry public static int staffOfTheForestMonarchSpawnLimit = 2;
 
