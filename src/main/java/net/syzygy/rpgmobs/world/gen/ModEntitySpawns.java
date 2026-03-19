@@ -16,6 +16,7 @@ import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.biome.BiomeKeys;
 import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
+import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraEntity;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteEntity;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
@@ -95,6 +96,27 @@ public class ModEntitySpawns {
             ), SpawnGroup.MONSTER, ModEntities.TWISTED_TREANT, ModConfig.twistedTreantSpawnWeight, 1, 2);
             SpawnRestriction.register(ModEntities.TWISTED_TREANT, SpawnRestriction.Location.ON_GROUND,
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, TwistedTreantEntity::canSpawn);
+        }
+
+        if (ModConfig.chimeraDoSpawn) {
+            BiomeModifications.addSpawn(BiomeSelectors.includeByKey(
+                    BiomeKeys.PLAINS,
+                    BiomeKeys.WINDSWEPT_FOREST,
+                    BiomeKeys.STONY_SHORE,
+                    BiomeKeys.STONY_PEAKS,
+                    BiomeKeys.DESERT,
+                    BiomeKeys.WINDSWEPT_SAVANNA,
+                    BiomeKeys.SAVANNA,
+                    BiomeKeys.SAVANNA_PLATEAU,
+                    BiomeKeys.WINDSWEPT_HILLS,
+                    BiomeKeys.GROVE,
+                    BiomeKeys.MEADOW,
+                    BiomeKeys.SUNFLOWER_PLAINS,
+                    BiomeKeys.NETHER_WASTES,
+                    BiomeKeys.SOUL_SAND_VALLEY
+            ), SpawnGroup.MONSTER, ModEntities.CHIMERA, ModConfig.chimeraSpawnWeight, 1, 1);
+            SpawnRestriction.register(ModEntities.CHIMERA, SpawnRestriction.Location.ON_GROUND,
+                    Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ChimeraEntity::canSpawn);
         }
     }
 }

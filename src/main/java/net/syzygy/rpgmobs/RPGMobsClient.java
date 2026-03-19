@@ -6,6 +6,9 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelModel;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelRenderer;
+import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraEntity;
+import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraModel;
+import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraRenderer;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileModel;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileRenderer;
@@ -37,5 +40,8 @@ public class RPGMobsClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(TwistedTreantStandingEntity.TWISTED_TREANT_STANDING, TwistedTreantStandingModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.TWISTED_TREANT_STANDING, TwistedTreantStandingRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(ChimeraEntity.CHIMERA, ChimeraModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.CHIMERA, ChimeraRenderer::new);
     }
 }

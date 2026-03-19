@@ -1,14 +1,18 @@
 {
-  "itemgroup.rpg_mobs_group": "Syz's RPG Mobs",
+  "itemGroup.rpgmobs.rpg_mobs_group": "Syz's RPG Mobs",
 
   "entity.rpgmobs.crystalline_magmite": "Crystalline Magmite",
   "entity.rpgmobs.archangel": "Archangel",
   "entity.rpgmobs.twisted_treant": "Twisted Treant",
   "entity.rpgmobs.twisted_treant_standing": "Twisted Treant",
+  "entity.rpgmobs.chimera": "Chimera",
 
   "item.rpgmobs.kandra_core": "Kandra Core",
   "item.rpgmobs.shard_piece": "Shard Piece",
   "item.rpgmobs.treant_essence_gem": "Treant Essence Gem",
+  "item.rpgmobs.chimera_heart": "Chimera Heart",
+  "item.rpgmobs.dark_iron_fragment": "Dark Iron Fragment",
+  "item.rpgmobs.dark_iron_ingot": "Dark Iron Ingot",
 
   "item.rpgmobs.crystalline_magmite_helmet": "Crystalline Magmite Helmet",
   "item.rpgmobs.crystalline_magmite_chestplate": "Crystalline Magmite Chestplate",
@@ -18,6 +22,10 @@
   "item.rpgmobs.shard_blade": "Shard Blade",
 
   "item.rpgmobs.staff_of_the_forest_monarch": "Staff of the Forest Monarch",
+
+  "item.rpgmobs.demonic_blade": "Demonic Blade",
+
+  "enchantment.rpgmobs.withering_1": "Withering I",
 
   "item.rpgmobs.kandra_core.tooltip_line1": "The life force of the inanimate ",
   "item.rpgmobs.kandra_core.tooltip_line2": "made animate",
@@ -37,6 +45,17 @@
   "item.rpgmobs.treant_essence_gem.tooltip_line1": "The life force of strange, twisted, forest ",
   "item.rpgmobs.treant_essence_gem.tooltip_line2": "creatures lies within this gem.",
 
+  "item.rpgmobs.chimera_heart.tooltip_line1": "Dropped from a twisted Chimera. Holding one for ",
+  "item.rpgmobs.chimera_heart.tooltip_line2": "too long can corrupt even the most pure of souls.",
+
+  "item.rpgmobs.dark_iron_fragment.tooltip_line1": "A fragment of the powerful material ",
+  "item.rpgmobs.dark_iron_fragment.tooltip_line2": "that makes up the bracers a Chimera wears. ",
+  "item.rpgmobs.dark_iron_fragment.tooltip_line3": "Perhaps it can be reforged.",
+
+  "item.rpgmobs.demonic_blade.tooltip_line1": "A powerful blade forged from the heart ",
+  "item.rpgmobs.demonic_blade.tooltip_line2": "of a Chimera. Those struck become corrupted.",
+  "item.rpgmobs.demonic_blade.tooltip_line3": "Withering I",
+
   "rpgmobs.midnightconfig.category.entities": "Entites",
   "rpgmobs.midnightconfig.category.items": "Items",
 
@@ -55,6 +74,5 @@
 
   "rpgmobs.midnightconfig.shardBladeDamage": "Shard Blade Damage",
   "rpgmobs.midnightconfig.staffOfTheForestMonarchSpawnLimit": "Staff of the Forest Monarch Spawn Limit",
-
-  "rpgmobs.midnightconfig.title": "RPG Mobs Config"
+  "rpgmobs.midnightconfig.demonicBladeDamage": "Demonic Blade Damage"
 }

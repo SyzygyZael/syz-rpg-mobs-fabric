@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 1.0,
+  "group": "dark_iron_fragment",
+  "ingredient": {
+    "item": "rpgmobs:dark_iron_fragment"
+  },
+  "result": "rpgmobs:dark_iron_ingot"
+}

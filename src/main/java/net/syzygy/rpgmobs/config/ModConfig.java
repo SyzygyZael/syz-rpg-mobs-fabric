@@ -8,17 +8,21 @@ public class ModConfig {
     @MidnightConfig.Entry public static int archangelSpawnWeight = 7;
     @MidnightConfig.Entry public static int crystallineMagmiteSpawnWeight = 10;
     @MidnightConfig.Entry public static int twistedTreantSpawnWeight = 9;
+    @MidnightConfig.Entry public static int chimeraSpawnWeight = 4;
 
     @MidnightConfig.Entry public static boolean archangelDoSpawn = true;
     @MidnightConfig.Entry public static boolean crystallineMagmiteDoSpawn = true;
     @MidnightConfig.Entry public static boolean twistedTreantDoSpawn = true;
+    @MidnightConfig.Entry public static boolean chimeraDoSpawn = true;
 
     @MidnightConfig.Entry public static double archangelAttackDamage = 6.8F;
     @MidnightConfig.Entry public static double crystallineMagmiteAttackDamage = 6.0F;
     @MidnightConfig.Entry public static double twistedTreantAttackDamage = 5.8F;
     @MidnightConfig.Entry public static double standingTwistedTreantAttackDamage = 6.8F;
+    @MidnightConfig.Entry public static double chimeraAttackDamage = 8.5F;
 
     @MidnightConfig.Entry public static int shardBladeDamage = 11;
+    @MidnightConfig.Entry public static int demonicBladeDamage = 13;
 
     @MidnightConfig.Entry public static int staffOfTheForestMonarchSpawnLimit = 2;
 

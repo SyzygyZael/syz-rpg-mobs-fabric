@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "P": {
+      "item": "rpgmobs:chimera_heart"
+    },
+    "S": {
+      "item": "rpgmobs:dark_iron_ingot"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SSS",
+    "SPS"
+  ],
+  "result": {
+    "item": "rpgmobs:demonic_blade"
+  }
+}
