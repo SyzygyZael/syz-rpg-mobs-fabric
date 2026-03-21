@@ -5,7 +5,6 @@ import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.util.Hand;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteEntity;
-import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteModel;
 
 public class CrystallineMagmiteAttackGoal extends MeleeAttackGoal {
     private final CrystallineMagmiteEntity entity;
