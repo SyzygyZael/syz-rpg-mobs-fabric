@@ -5,7 +5,7 @@ import net.syzygy.rpgmobs.RPGMobs;
 
 public class ModConfig {
 
-    @MidnightConfig.Entry public static int archangelSpawnWeight = 3;
+    @MidnightConfig.Entry public static int archangelSpawnWeight = 4;
     @MidnightConfig.Entry public static int crystallineMagmiteSpawnWeight = 7;
     @MidnightConfig.Entry public static int twistedTreantSpawnWeight = 7;
     @MidnightConfig.Entry public static int chimeraSpawnWeight = 2;
