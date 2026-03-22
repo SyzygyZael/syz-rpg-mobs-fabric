@@ -9,7 +9,7 @@ public class ModConfig extends MidnightConfig{
     public static final String ITEMS = "items";
 
 
-    @Entry(category = ENTITIES) public static int archangelSpawnWeight = 3;
+    @Entry(category = ENTITIES) public static int archangelSpawnWeight = 4;
     @Entry(category = ENTITIES) public static int crystallineMagmiteSpawnWeight = 7;
     @Entry(category = ENTITIES) public static int twistedTreantSpawnWeight = 7;
     @Entry(category = ENTITIES) public static int chimeraSpawnWeight = 2;
