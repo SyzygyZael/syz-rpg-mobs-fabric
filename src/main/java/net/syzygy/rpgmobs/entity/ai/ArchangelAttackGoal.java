@@ -85,103 +85,101 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
     public void tick() {
         super.tick();
         LivingEntity pEnemy = this.entity.getTarget();
-        World world = pEnemy.getWorld();
-        DamageSources sources = world.getDamageSources();
-        DamageSource magicDamage = sources.mobAttack(entity);
+
         if(shouldCountTillNextAttack) {
             this.ticksUntilNextAttack = Math.max(this.ticksUntilNextAttack - 1, 0);
         }
 
-        int randNum = (int) (Math.random() * 18) + 1;
+        if (pEnemy != null) {
+            World world = pEnemy.getWorld();
+            DamageSources sources = world.getDamageSources();
+            DamageSource magicDamage = sources.mobAttack(entity);
 
-        // initial teleport wind up
-        if (randNum == 5 && cooldown <= 0 && entity.isAttacking()) {
-            if (ArchangelCompassDirection(entity).equals("NORTH")) {
-                entity.teleport(entity.getX(), entity.getY() + 7, entity.getZ() + 10);
-            }
-            else if (ArchangelCompassDirection(entity).equals("EAST")) {
-                entity.teleport(entity.getX() - 10, entity.getY() + 7, entity.getZ());
-            }
-            else if (ArchangelCompassDirection(entity).equals("SOUTH")) {
-                entity.teleport(entity.getX(), entity.getY() + 7, entity.getZ() - 10);
-            }
-            else {
-                entity.teleport(entity.getX() + 10, entity.getY() + 7, entity.getZ());
-            }
-            entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
+            int randNum = (int) (Math.random() * 18) + 1;
 
-            entity.setAttacking(false);
-            entity.setVelocity(0, 0, 0);
-            entity.velocityDirty = true;
-            entity.setNoGravity(true);
-            this.wait = 60;
-            this.cooldown = 120;
-            this.damageDelay = 5;
-        } else {
-            --this.cooldown;
-        }
-
-        // teleport to enemy and deal damage if not blocking
-        if (this.wait <= 13 && entity.hasNoGravity() && pEnemy != null) {
-            if (teleCount == 0) {
-                entity.teleport(pEnemy.getX(), pEnemy.getY() + 2, pEnemy.getZ());
+            // initial teleport wind up
+            if (randNum == 5 && cooldown <= 0 && entity.isAttacking()) {
+                if (ArchangelCompassDirection(entity).equals("NORTH")) {
+                    entity.teleport(entity.getX(), entity.getY() + 7, entity.getZ() + 10);
+                } else if (ArchangelCompassDirection(entity).equals("EAST")) {
+                    entity.teleport(entity.getX() - 10, entity.getY() + 7, entity.getZ());
+                } else if (ArchangelCompassDirection(entity).equals("SOUTH")) {
+                    entity.teleport(entity.getX(), entity.getY() + 7, entity.getZ() - 10);
+                } else {
+                    entity.teleport(entity.getX() + 10, entity.getY() + 7, entity.getZ());
+                }
                 entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
-                teleCount = 1;
+
+                entity.setAttacking(false);
+                entity.setVelocity(0, 0, 0);
+                entity.velocityDirty = true;
+                entity.setNoGravity(true);
+                this.wait = 60;
+                this.cooldown = 120;
+                this.damageDelay = 5;
+            } else {
+                --this.cooldown;
             }
 
-            entity.setAttacking(true);
-
-            // forge damage upon enemy
-            if (this.damageDelay <= 0 && !pEnemy.isBlocking()) {
-                pEnemy.damage(magicDamage, 6.5F);
-                // RPGMobs.LOGGER.info(String.valueOf(this.damageDelay));
-                this.damageDelay = 5;
-            } else if (this.damageDelay <= 0) {
-
-                // animate shield block, damage the shield, and call the sound
-                PlayerEntity player = ((PlayerEntity) pEnemy);
-                ItemStack shield = player.getOffHandStack();
-                if (shield.isOf(Items.SHIELD)) {
-                    player.setCurrentHand(Hand.OFF_HAND);
-                    player.getItemCooldownManager().set(shield.getItem(), 5);
-
-                    // damage the shield
-                    shield.damage(1, player, (p) -> {
-                        p.sendToolBreakStatus(Hand.OFF_HAND);
-                    });
-
-                    player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(),
-                            SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+            // teleport to enemy and deal damage if not blocking
+            if (this.wait <= 13 && entity.hasNoGravity()) {
+                if (teleCount == 0) {
+                    entity.teleport(pEnemy.getX(), pEnemy.getY() + 2, pEnemy.getZ());
+                    entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
+                    teleCount = 1;
                 }
 
-                // set delay to 10 so shield is not damaged every tick
-                this.damageDelay = 10;
-            }
-            --this.damageDelay;
-        }
+                entity.setAttacking(true);
 
-        // teleport away short distance
-        if (this.wait <= 0 && entity.hasNoGravity()) {
-            entity.airAttackAnimationState.stop();
+                // forge damage upon enemy
+                if (this.damageDelay <= 0 && !pEnemy.isBlocking()) {
+                    pEnemy.damage(magicDamage, 6.5F);
+                    // RPGMobs.LOGGER.info(String.valueOf(this.damageDelay));
+                    this.damageDelay = 5;
+                } else if (this.damageDelay <= 0) {
 
-            if (ArchangelCompassDirection(entity).equals("NORTH")) {
-                entity.teleport(entity.getX(), entity.getY(), entity.getZ() + 5);
-            }
-            else if (ArchangelCompassDirection(entity).equals("EAST")) {
-                entity.teleport(entity.getX() - 5, entity.getY(), entity.getZ());
-            }
-            else if (ArchangelCompassDirection(entity).equals("SOUTH")) {
-                entity.teleport(entity.getX(), entity.getY(), entity.getZ() - 5);
-            }
-            else {
-                entity.teleport(entity.getX() + 5, entity.getY(), entity.getZ());
+                    // animate shield block, damage the shield, and call the sound
+                    PlayerEntity player = ((PlayerEntity) pEnemy);
+                    ItemStack shield = player.getOffHandStack();
+                    if (shield.isOf(Items.SHIELD)) {
+                        player.setCurrentHand(Hand.OFF_HAND);
+                        player.getItemCooldownManager().set(shield.getItem(), 5);
+
+                        // damage the shield
+                        shield.damage(1, player, (p) -> {
+                            p.sendToolBreakStatus(Hand.OFF_HAND);
+                        });
+
+                        player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(),
+                                SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 1.0F, 1.0F);
+                    }
+
+                    // set delay to 10 so shield is not damaged every tick
+                    this.damageDelay = 10;
+                }
+                --this.damageDelay;
             }
 
-            entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
-            entity.setNoGravity(false);
-            this.teleCount = 0;
-        } else {
-            --this.wait;
+            // teleport away short distance
+            if (this.wait <= 0 && entity.hasNoGravity()) {
+                entity.airAttackAnimationState.stop();
+
+                if (ArchangelCompassDirection(entity).equals("NORTH")) {
+                    entity.teleport(entity.getX(), entity.getY(), entity.getZ() + 5);
+                } else if (ArchangelCompassDirection(entity).equals("EAST")) {
+                    entity.teleport(entity.getX() - 5, entity.getY(), entity.getZ());
+                } else if (ArchangelCompassDirection(entity).equals("SOUTH")) {
+                    entity.teleport(entity.getX(), entity.getY(), entity.getZ() - 5);
+                } else {
+                    entity.teleport(entity.getX() + 5, entity.getY(), entity.getZ());
+                }
+
+                entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
+                entity.setNoGravity(false);
+                this.teleCount = 0;
+            } else {
+                --this.wait;
+            }
         }
     }
 
