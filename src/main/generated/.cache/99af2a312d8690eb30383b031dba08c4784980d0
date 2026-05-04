@@ -1,4 +1,4 @@
-// 1.20.1	2026-03-18T22:07:03.0873469	Syz's RPG Mobs/Recipes
+// 1.20.1	2026-05-03T12:18:47.0433068	Syz's RPG Mobs/Recipes
 bcb833103e59f4a0ad757b5ba7fd75203c78a480 data\rpgmobs\recipes\staff_of_the_forest_monarch.json
 0e2b51137639caff3b4efbac63a6a50879f21e21 data\rpgmobs\advancements\recipes\misc\crystalline_magmite_chestplate.json
 1123a795acef575053087e6a899c1ed045282fc6 data\rpgmobs\recipes\crystalline_magmite_leggings.json
@@ -7,8 +7,8 @@ b51e1f0d248b51fb17cbcfd1df178014e28165f2 data\rpgmobs\advancements\recipes\misc\
 cfb75fbed9d79ab44ab84501d3f55e8893fe90e1 data\rpgmobs\advancements\recipes\misc\crystalline_magmite_helmet.json
 744849895671f08c3083445e1b96e64ac0ba31a7 data\rpgmobs\advancements\recipes\combat\demonic_blade.json
 3e4fb3e42ef447930cd37633347d63ce624500b3 data\rpgmobs\recipes\shard_blade.json
-4ff888fd40ab38f59f01dcb6306ef3b7003f35d8 data\rpgmobs\recipes\crystalline_magmite_boots.json
 46299b3eb1bc0350a016e85a3016bfcc901d7a68 data\rpgmobs\advancements\recipes\combat\shard_blade.json
+4ff888fd40ab38f59f01dcb6306ef3b7003f35d8 data\rpgmobs\recipes\crystalline_magmite_boots.json
 9aa43ba2edb843dc9f3464f809b0f963e413f4c9 data\rpgmobs\recipes\demonic_blade.json
 3787879ee230f4873e7bbd329da108f3a7d37098 data\rpgmobs\advancements\recipes\combat\staff_of_the_forest_monarch.json
 c4f2b3063df5d73b39292c664c65bb71628ab31f data\rpgmobs\recipes\crystalline_magmite_helmet.json

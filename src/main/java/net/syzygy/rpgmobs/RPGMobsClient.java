@@ -16,6 +16,12 @@ import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmite
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteModel;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteRenderer;
 import net.syzygy.rpgmobs.entity.ModEntities;
+import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater.OrchidManeaterEntity;
+import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater.OrchidManeaterModel;
+import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater.OrchidManeaterRenderer;
+import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeaterFlower.OrchidManeaterFlowerEntity;
+import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeaterFlower.OrchidManeaterFlowerModel;
+import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeaterFlower.OrchidManeaterFlowerRenderer;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantModel;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantRenderer;
@@ -43,5 +49,11 @@ public class RPGMobsClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(ChimeraEntity.CHIMERA, ChimeraModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.CHIMERA, ChimeraRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(OrchidManeaterEntity.ORCHID_MANEATER, OrchidManeaterModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.ORCHID_MANEATER, OrchidManeaterRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(OrchidManeaterFlowerEntity.ORCHID_MANEATER_FLOWER, OrchidManeaterFlowerModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.ORCHID_MANEATER_FLOWER, OrchidManeaterFlowerRenderer::new);
     }
 }

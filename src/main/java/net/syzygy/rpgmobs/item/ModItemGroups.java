@@ -27,6 +27,8 @@ public class ModItemGroups {
                         entries.add(ModItems.DARK_IRON_FRAGMENT);
                         entries.add(ModItems.DARK_IRON_INGOT);
                         entries.add(ModItems.DEMONIC_BLADE);
+                        entries.add(ModItems.ORCHID_BULB);
+                        entries.add(ModItems.COOKED_ORCHID_BULB);
                     }).build());
 
     public static void registerItemGroups() {

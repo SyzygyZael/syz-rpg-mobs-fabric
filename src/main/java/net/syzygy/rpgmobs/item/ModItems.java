@@ -25,6 +25,11 @@ public class ModItems {
     public static final Item DARK_IRON_INGOT = registerItem("dark_iron_ingot",
             new DarkIronIngotItem(new FabricItemSettings()));
 
+    public static final Item ORCHID_BULB = registerItem("orchid_bulb",
+            new Item(new FabricItemSettings().food(ModFoodComponents.ORCHID_BULB)));
+    public static final Item COOKED_ORCHID_BULB = registerItem("cooked_orchid_bulb",
+            new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_ORCHID_BULB)));
+
     public static final Item SHARD_BLADE = registerItem("shard_blade",
             new ShardBladeItem(ShardToolMaterial.SHARD, ModConfig.shardBladeDamage - 6, -2.2f, new FabricItemSettings()));
     public static final Item STAFF_OF_THE_FOREST_MONARCH = registerItem("staff_of_the_forest_monarch",

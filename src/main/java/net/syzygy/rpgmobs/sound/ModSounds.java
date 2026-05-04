@@ -9,6 +9,7 @@ import net.syzygy.rpgmobs.RPGMobs;
 public class ModSounds {
     public static final SoundEvent TWISTED_TREANT_ROAR = registerSoundEvent("twisted_treant_roar");
     public static final SoundEvent TWISTED_TREANT_AMBIENT = registerSoundEvent("twisted_treant_ambient");
+    public static final SoundEvent ORCHID_DEATH = registerSoundEvent("orchid_maneater_death");
 
     private static SoundEvent registerSoundEvent(String name) {
         Identifier identifier = new Identifier(RPGMobs.MOD_ID, name);

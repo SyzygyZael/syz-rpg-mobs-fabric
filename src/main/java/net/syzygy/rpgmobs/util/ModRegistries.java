@@ -7,6 +7,8 @@ import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
 import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraEntity;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteEntity;
 import net.syzygy.rpgmobs.entity.ModEntities;
+import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater.OrchidManeaterEntity;
+import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeaterFlower.OrchidManeaterFlowerEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingEntity;
 import net.syzygy.rpgmobs.event.DemonicBladeApplyWitherHandler;
@@ -26,6 +28,8 @@ public class ModRegistries {
         FabricDefaultAttributeRegistry.register(ModEntities.TWISTED_TREANT, TwistedTreantEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.TWISTED_TREANT_STANDING, TwistedTreantStandingEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.CHIMERA, ChimeraEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.ORCHID_MANEATER,  OrchidManeaterEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.ORCHID_MANEATER_FLOWER, OrchidManeaterFlowerEntity.createAttributes());
     }
 
     private static void registerEvents() {
