@@ -26,7 +26,7 @@ public class ModItems {
             new DarkIronIngotItem(new FabricItemSettings()));
 
     public static final Item ORCHID_BULB = registerItem("orchid_bulb",
-            new Item(new FabricItemSettings().food(ModFoodComponents.ORCHID_BULB)));
+            new OrchidBulbItem(new FabricItemSettings().food(ModFoodComponents.ORCHID_BULB)));
     public static final Item COOKED_ORCHID_BULB = registerItem("cooked_orchid_bulb",
             new Item(new FabricItemSettings().food(ModFoodComponents.COOKED_ORCHID_BULB)));
 

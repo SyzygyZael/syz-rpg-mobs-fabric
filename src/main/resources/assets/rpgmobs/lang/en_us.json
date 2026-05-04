@@ -60,6 +60,9 @@
   "item.rpgmobs.demonic_blade.tooltip_line2": "of a Chimera. Those struck become corrupted.",
   "item.rpgmobs.demonic_blade.tooltip_line3": "Withering I",
 
+  "item.rpgmobs.orchid_bulb.tooltip_line1": "I wouldn't eat that if I were you...but",
+  "item.rpgmobs.orchid_bulb.tooltip_line2": "maybe if it was cooked I would.",
+
   "rpgmobs.midnightconfig.category.entities": "Entites",
   "rpgmobs.midnightconfig.category.items": "Items",
 
