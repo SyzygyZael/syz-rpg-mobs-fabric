@@ -6,6 +6,8 @@
   "entity.rpgmobs.twisted_treant": "Twisted Treant",
   "entity.rpgmobs.twisted_treant_standing": "Twisted Treant",
   "entity.rpgmobs.chimera": "Chimera",
+  "entity.rpgmobs.orchid_maneater_flower": "Orchid Maneater",
+  "entity.rpgmobs.orchid_maneater": "Orchid Maneater",
 
   "item.rpgmobs.kandra_core": "Kandra Core",
   "item.rpgmobs.shard_piece": "Shard Piece",
@@ -13,6 +15,8 @@
   "item.rpgmobs.chimera_heart": "Chimera Heart",
   "item.rpgmobs.dark_iron_fragment": "Dark Iron Fragment",
   "item.rpgmobs.dark_iron_ingot": "Dark Iron Ingot",
+  "item.rpgmobs.orchid_bulb": "Orchid Bulb",
+  "item.rpgmobs.cooked_orchid_bulb": "Cooked Orchid Bulb",
 
   "item.rpgmobs.crystalline_magmite_helmet": "Crystalline Magmite Helmet",
   "item.rpgmobs.crystalline_magmite_chestplate": "Crystalline Magmite Chestplate",
@@ -55,6 +59,9 @@
   "item.rpgmobs.demonic_blade.tooltip_line1": "A powerful blade forged from the heart ",
   "item.rpgmobs.demonic_blade.tooltip_line2": "of a Chimera. Those struck become corrupted.",
   "item.rpgmobs.demonic_blade.tooltip_line3": "Withering I",
+
+  "item.rpgmobs.orchid_bulb.tooltip_line1": "I wouldn't eat that if I were you...but",
+  "item.rpgmobs.orchid_bulb.tooltip_line2": "maybe if it was cooked I would.",
 
   "rpgmobs.midnightconfig.category.entities": "Entites",
   "rpgmobs.midnightconfig.category.items": "Items",

@@ -25,5 +25,7 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.CHIMERA_HEART, Models.GENERATED);
         itemModelGenerator.register(ModItems.DARK_IRON_FRAGMENT, Models.GENERATED);
         itemModelGenerator.register(ModItems.DARK_IRON_INGOT, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ORCHID_BULB, Models.GENERATED);
+        itemModelGenerator.register(ModItems.COOKED_ORCHID_BULB, Models.GENERATED);
     }
 }

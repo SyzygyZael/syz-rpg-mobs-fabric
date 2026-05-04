@@ -1,6 +1,7 @@
 package net.syzygy.rpgmobs.item;
 
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.loader.api.metadata.ModOrigin;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ToolMaterials;
@@ -24,6 +25,15 @@ public class ModItems {
             new DarkIronFragmentItem(new FabricItemSettings().group(ModItemGroups.RPG_MOBS_GROUP)));
     public static final Item DARK_IRON_INGOT = registerItem("dark_iron_ingot",
             new DarkIronIngotItem(new FabricItemSettings().group(ModItemGroups.RPG_MOBS_GROUP)));
+
+    public static final Item ORCHID_BULB = registerItem("orchid_bulb",
+            new OrchidBulbItem(new FabricItemSettings()
+                    .food(ModFoodComponents.ORCHID_BULB)
+                    .group(ModItemGroups.RPG_MOBS_GROUP)));
+    public static final Item COOKED_ORCHID_BULB = registerItem("cooked_orchid_bulb",
+            new Item(new FabricItemSettings()
+                    .food(ModFoodComponents.COOKED_ORCHID_BULB)
+                    .group(ModItemGroups.RPG_MOBS_GROUP)));
 
     public static final Item SHARD_BLADE = registerItem("shard_blade",
             new ShardBladeItem(ShardToolMaterial.SHARD, ModConfig.shardBladeDamage - 6, -2.2f, new FabricItemSettings().group(ModItemGroups.RPG_MOBS_GROUP)));
