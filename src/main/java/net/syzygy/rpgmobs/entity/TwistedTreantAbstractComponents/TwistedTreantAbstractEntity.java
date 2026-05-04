@@ -8,10 +8,13 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.entity.ai.TwistedTreantActiveTargetGoal;
 import net.syzygy.rpgmobs.entity.ai.TwistedTreantAttackGoal;
+import net.syzygy.rpgmobs.sound.ModSounds;
 import org.jetbrains.annotations.Nullable;
 
 public class TwistedTreantAbstractEntity extends TameableEntity {
@@ -74,5 +77,15 @@ public class TwistedTreantAbstractEntity extends TameableEntity {
     @Override
     public EntityView method_48926() {
         return getWorld();
+    }
+
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return ModSounds.TWISTED_TREANT_AMBIENT;
+    }
+
+    @Override
+    protected SoundEvent getHurtSound(DamageSource source) {
+        return SoundEvents.ENTITY_POLAR_BEAR_HURT;
     }
 }

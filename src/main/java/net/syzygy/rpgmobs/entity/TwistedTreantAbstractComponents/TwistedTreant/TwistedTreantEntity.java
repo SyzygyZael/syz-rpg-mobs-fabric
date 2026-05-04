@@ -209,14 +209,4 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
                 world.getFluidState(pos).isEmpty() &&
                 world.getLightLevel(pos) >= 0;
     }
-
-    @Override
-    protected SoundEvent getAmbientSound() {
-        return ModSounds.TWISTED_TREANT_AMBIENT;
-    }
-
-    @Override
-    protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_POLAR_BEAR_HURT;
-    }
 }

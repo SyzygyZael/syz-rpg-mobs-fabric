@@ -11,6 +11,8 @@ import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
 import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraEntity;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteEntity;
+import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater.OrchidManeaterEntity;
+import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeaterFlower.OrchidManeaterFlowerEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingEntity;
 
@@ -46,6 +48,16 @@ public class ModEntities {
             new Identifier(RPGMobs.MOD_ID, "chimera"),
             EntityType.Builder.create(ChimeraEntity::new, SpawnGroup.MONSTER)
                     .setDimensions(1.4f, 2.4f).build());
+
+    public static final EntityType<OrchidManeaterEntity> ORCHID_MANEATER = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(RPGMobs.MOD_ID, "orchid_maneater"),
+            EntityType.Builder.create(OrchidManeaterEntity::new, SpawnGroup.MONSTER)
+                    .setDimensions(2.3f, 2.8f).build());
+
+    public static final EntityType<OrchidManeaterFlowerEntity> ORCHID_MANEATER_FLOWER = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(RPGMobs.MOD_ID, "orchid_maneater_flower"),
+            EntityType.Builder.create(OrchidManeaterFlowerEntity::new, SpawnGroup.MONSTER)
+                    .setDimensions(0.3f, 0.3f).build());
 
     public static void registerModEntites() {
         RPGMobs.LOGGER.info("Registering ModEntities for " + RPGMobs.MOD_ID);

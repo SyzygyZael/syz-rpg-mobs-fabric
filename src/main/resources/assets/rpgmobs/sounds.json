@@ -10,5 +10,11 @@
     "sounds": [
       "rpgmobs:tree_creaking"
     ]
+  },
+  "orchid_maneater_death": {
+    "subtitle": "sounds.rpgmobs.orchid_maneater_death",
+    "sounds": [
+      "rpgmobs:orchid_death"
+    ]
   }
 }
