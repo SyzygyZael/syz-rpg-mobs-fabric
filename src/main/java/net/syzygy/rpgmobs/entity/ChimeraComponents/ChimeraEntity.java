@@ -15,6 +15,7 @@ import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.projectile.FireballEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -22,8 +23,10 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
@@ -56,12 +59,23 @@ public class ChimeraEntity extends AnimalEntity {
         super(entityType, world);
     }
 
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
+    }
+
     public static final EntityModelLayer CHIMERA =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "chimera"), "main");
+            new EntityModelLayer(Identifier.of(RPGMobs.MOD_ID, "chimera"), "main");
 
     @Override
-    protected boolean isDisallowedInPeaceful() {
-        return true;
+    public boolean canSpawn(WorldView world) {
+        if (world instanceof ServerWorld serverWorld) {
+            if (serverWorld.getDifficulty() ==  Difficulty.PEACEFUL) {
+                return false;
+            }
+        }
+
+        return super.canSpawn(world);
     }
 
     @Override
@@ -78,11 +92,11 @@ public class ChimeraEntity extends AnimalEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)32.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.30F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.chimeraAttackDamage)
-                .add(EntityAttributes.GENERIC_ARMOR, (double)3.0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double)65.0F);
+                .add(EntityAttributes.FOLLOW_RANGE, 32.0F)
+                .add(EntityAttributes.MOVEMENT_SPEED, 0.30F)
+                .add(EntityAttributes.ATTACK_DAMAGE, ModConfig.chimeraAttackDamage)
+                .add(EntityAttributes.ARMOR, 3.0F)
+                .add(EntityAttributes.MAX_HEALTH, 65.0F);
     }
 
     private void setupAnimationStates() {
@@ -138,14 +152,14 @@ public class ChimeraEntity extends AnimalEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        this.limbAnimator.updateLimbs(f, 0.2F, 1.0F);
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (this.getWorld().isClient()) {
+        if (this.getEntityWorld().isClient()) {
             this.setupAnimationStates();
         }
     }
@@ -159,7 +173,7 @@ public class ChimeraEntity extends AnimalEntity {
     }
 
     @Override
-    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+    public boolean handleFallDamage(double fallDistance, float damagePerDistance, DamageSource damageSource) {
         return false;
     }
 
@@ -178,7 +192,11 @@ public class ChimeraEntity extends AnimalEntity {
             this.grabTick++;
             this.grabYOffset = calculateYOffset(grabTick);
 
-            positionUpdater.accept(passenger, this.getX() + x, this.getY() + passenger.getRidingOffset(this) + this.grabYOffset + 1, this.getZ() + z);
+            Vec3d offset = this.getPassengerAttachmentPos(passenger, this.getDimensions(this.getPose()), 1.0F);
+            positionUpdater.accept(passenger,
+                    this.getX() + x + offset.x,
+                    this.getY() + offset.y + 1,
+                    this.getZ() + z + offset.z);
         } else {
             this.grabTick = 0;
             this.grabYOffset = 0;
@@ -191,11 +209,12 @@ public class ChimeraEntity extends AnimalEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
-        this.dataTracker.startTracking(SHOOTING, false);
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+
+        builder.add(ATTACKING, false);
+        builder.add(SHOOTING, false);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void setAttacking(boolean attacking) {
@@ -274,7 +293,7 @@ public class ChimeraEntity extends AnimalEntity {
             LivingEntity livingEntity = this.entity.getTarget();
             if (livingEntity != null) {
                 if (livingEntity.squaredDistanceTo(this.entity) < 4096.0 && this.entity.canSee(livingEntity)) {
-                    World world = this.entity.getWorld();
+                    World world = this.entity.getEntityWorld();
                     this.cooldown++;
 
                     if (this.cooldown == 30) {
@@ -282,7 +301,9 @@ public class ChimeraEntity extends AnimalEntity {
                         double g = -Math.sin(Math.toRadians(this.entity.getPitch()));
                         double h = Math.cos(Math.toRadians(this.entity.getHeadYaw())) * Math.cos(Math.toRadians(this.entity.getPitch()));
 
-                        FireballEntity fireBallEntity = new FireballEntity(world, this.entity, f, g, h, 1);
+                        Vec3d velocity = new Vec3d(f, g, h);
+
+                        FireballEntity fireBallEntity = new FireballEntity(world, this.entity, velocity, 1);
                         fireBallEntity.setPosition(this.entity.getX(), this.entity.getEyeY(), this.entity.getZ());
                         world.spawnEntity(fireBallEntity);
                         this.cooldown = -40;

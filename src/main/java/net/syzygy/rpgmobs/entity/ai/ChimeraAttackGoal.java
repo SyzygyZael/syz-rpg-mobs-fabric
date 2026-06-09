@@ -3,11 +3,13 @@ package net.syzygy.rpgmobs.entity.ai;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraEntity;
 
 public class ChimeraAttackGoal extends MeleeAttackGoal {
     protected final ChimeraEntity entity;
+    private static ServerWorld serverWorld;
     private LivingEntity pEnemy;
     private double attackDelay = 12.6;
     private int ticksUntilNextAttack = 20;
@@ -74,7 +76,7 @@ public class ChimeraAttackGoal extends MeleeAttackGoal {
     protected void performAttack(LivingEntity pEnemy) {
         this.resetAttackCooldown();
         this.entity.swingHand(Hand.MAIN_HAND);
-        this.entity.tryAttack(pEnemy);
+        this.entity.tryAttack(serverWorld, pEnemy);
     }
 
     @Override
@@ -111,11 +113,11 @@ public class ChimeraAttackGoal extends MeleeAttackGoal {
                 }
 
             } else if (entity.isSlamming() && this.slamDelay <= 0 && entity.hasPassenger(pEnemy) && !this.slamDamageDone) {
-                pEnemy.damage(entity.getWorld().getDamageSources().mobAttack(entity), 5.0f);
+                pEnemy.damage(serverWorld, entity.getEntityWorld().getDamageSources().mobAttack(entity), 5.0f);
                 this.slamDamageDone = true;
 
             } else if (entity.isSlamming() && this.grabDelay <= 0 && entity.squaredDistanceTo(pEnemy) < 30f) {
-                pEnemy.startRiding(this.entity, true);
+                pEnemy.startRiding(this.entity, true, true);
 
             }
             if (this.slamCooldown > 0) {

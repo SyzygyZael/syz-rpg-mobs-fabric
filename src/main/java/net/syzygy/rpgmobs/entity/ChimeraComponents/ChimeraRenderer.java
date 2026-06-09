@@ -6,23 +6,35 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.client.RPGMobsEntityModelLayers;
+import org.lwjgl.opengl.GLXEXTVisualInfo;
 
-public class ChimeraRenderer extends MobEntityRenderer<ChimeraEntity, ChimeraModel<ChimeraEntity>> {
-    private static final Identifier TEXTURE = new Identifier(RPGMobs.MOD_ID, "textures/entity/chimera.png");
+public class ChimeraRenderer extends MobEntityRenderer<ChimeraEntity, ChimeraRenderState, ChimeraModel> {
+    private static final Identifier TEXTURE = Identifier.of(RPGMobs.MOD_ID, "chimera");
 
-    public ChimeraRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new ChimeraModel<>(ctx.getPart(ChimeraEntity.CHIMERA)), 0.7f);
+    public ChimeraRenderer(EntityRendererFactory.Context context) {
+        super(context, new ChimeraModel(context.getPart(RPGMobsEntityModelLayers.CHIMERA)), 0.0F);
     }
 
     @Override
-    public Identifier getTexture(ChimeraEntity entity) {
+    public Identifier getTexture(ChimeraRenderState state) {
         return TEXTURE;
     }
 
     @Override
-    public void render(ChimeraEntity mobEntity, float f, float g, MatrixStack matrixStack,
-                       VertexConsumerProvider vertexConsumerProvider, int i) {
-        matrixStack.scale(1f, 1f, 1f);
-        super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
+    public ChimeraRenderState createRenderState() {
+        return new ChimeraRenderState();
+    }
+
+    @Override
+    public void updateRenderState(ChimeraEntity livingEntity, ChimeraRenderState livingEntityRenderState, float f) {
+        super.updateRenderState(livingEntity, livingEntityRenderState, f);
+
+        livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
+        livingEntityRenderState.fireBreathAnimationState.copyFrom(livingEntity.fireBreathAnimationState);
+        livingEntityRenderState.flyingAnimationState.copyFrom(livingEntity.flyingAnimationState);
+        livingEntityRenderState.slamAnimationState.copyFrom(livingEntity.slamAnimationState);
+        livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.attack1AnimationState);
+        livingEntityRenderState.attack2AnimationState.copyFrom(livingEntity.attack2AnimationState);
     }
 }

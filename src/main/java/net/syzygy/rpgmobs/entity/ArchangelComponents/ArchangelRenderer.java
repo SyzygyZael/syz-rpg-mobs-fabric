@@ -6,7 +6,6 @@ import net.minecraft.client.render.entity.MobEntityRenderer;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.client.RPGMobsEntityModelLayers;
-import org.lwjgl.opengl.GLXEXTVisualInfo;
 
 @Environment(net.fabricmc.api.EnvType.CLIENT)
 public class ArchangelRenderer extends MobEntityRenderer<ArchangelEntity, ArchangelRenderState, ArchangelModel> {

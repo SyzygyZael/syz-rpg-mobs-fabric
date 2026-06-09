@@ -2,14 +2,15 @@ package net.syzygy.rpgmobs.entity.ChimeraComponents;
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
+import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.model.EntityModel;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
 
 // Made with Blockbench 5.0.1
 // Exported for Minecraft version 1.17+ for Yarn
 // Paste this class into your mod and generate all required imports
-public class ChimeraModel<T extends ChimeraEntity> extends SinglePartEntityModel<T> {
+public class ChimeraModel extends EntityModel<ChimeraRenderState> {
     private final ModelPart chimera;
     private final ModelPart main;
     private final ModelPart left_leg;
@@ -32,10 +33,20 @@ public class ChimeraModel<T extends ChimeraEntity> extends SinglePartEntityModel
     private final ModelPart upper_jaw2;
     private final ModelPart air;
 
+    private final Animation idleAnimation;
+    private final Animation walkingAnimation;
+    private final Animation attack1Animation;
+    private final Animation attack2Animation;
+    private final Animation flyingAnimation;
+    private final Animation fireBreathAnimation;
+    private final Animation slamAnimation;
+
     public float headPitch;
     public float headYaw;
 
     public ChimeraModel(ModelPart root) {
+        super(root);
+
         this.chimera = root.getChild("chimera");
         this.main = this.chimera.getChild("main");
         this.left_leg = this.main.getChild("left_leg");
@@ -57,20 +68,28 @@ public class ChimeraModel<T extends ChimeraEntity> extends SinglePartEntityModel
         this.upper_jaw = this.head.getChild("upper_jaw");
         this.upper_jaw2 = this.head.getChild("upper_jaw2");
         this.air = this.chimera.getChild("air");
+
+        this.idleAnimation = ChimeraAnimations.idle_animation.createAnimation(root);
+        this.walkingAnimation = ChimeraAnimations.walking_animation.createAnimation(root);
+        this.attack1Animation = ChimeraAnimations.attack1_animation.createAnimation(root);
+        this.attack2Animation = ChimeraAnimations.attack2_animation.createAnimation(root);
+        this.flyingAnimation = ChimeraAnimations.flying_animation.createAnimation(root);
+        this.fireBreathAnimation = ChimeraAnimations.fire_breath_animation.createAnimation(root);
+        this.slamAnimation = ChimeraAnimations.slam_animation.createAnimation(root);
     }
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData chimera = modelPartData.addChild("chimera", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData chimera = modelPartData.addChild("chimera", ModelPartBuilder.create(), ModelTransform.of(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 
-        ModelPartData main = chimera.addChild("main", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData main = chimera.addChild("main", ModelPartBuilder.create(), ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 
-        ModelPartData left_leg = main.addChild("left_leg", ModelPartBuilder.create(), ModelTransform.pivot(4.0F, -19.0F, 1.0F));
+        ModelPartData left_leg = main.addChild("left_leg", ModelPartBuilder.create(), ModelTransform.of(4.0F, -19.0F, 1.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData left_knee = left_leg.addChild("left_knee", ModelPartBuilder.create().uv(26, 83).cuboid(-4.0F, 7.0F, -6.0F, 8.0F, 2.0F, 9.0F, new Dilation(0.0F))
                 .uv(0, 103).cuboid(-2.0F, 5.0F, -5.0F, 4.0F, 2.0F, 2.0F, new Dilation(0.0F))
                 .uv(110, 90).cuboid(2.0F, 5.0F, -5.0F, 1.0F, 2.0F, 7.0F, new Dilation(0.0F))
-                .uv(110, 81).cuboid(-3.0F, 5.0F, -5.0F, 1.0F, 2.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(3.0F, 10.0F, 1.0F));
+                .uv(110, 81).cuboid(-3.0F, 5.0F, -5.0F, 1.0F, 2.0F, 7.0F, new Dilation(0.0F)), ModelTransform.of(3.0F, 10.0F, 1.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r1 = left_knee.addChild("cube_r1", ModelPartBuilder.create().uv(112, 40).cuboid(-3.0F, -2.0F, -3.0F, 6.0F, 2.0F, 3.0F, new Dilation(-0.001F)), ModelTransform.of(0.0F, -2.0F, 1.0F, -0.3054F, 0.0F, 0.0F));
 
@@ -85,12 +104,12 @@ public class ChimeraModel<T extends ChimeraEntity> extends SinglePartEntityModel
                 .uv(110, 73).cuboid(0.0F, -1.0F, -3.0F, 3.0F, 2.0F, 6.0F, new Dilation(0.0F))
                 .uv(110, 67).cuboid(-2.0F, 2.0F, -3.0F, 5.0F, 1.0F, 5.0F, new Dilation(0.0F)), ModelTransform.of(3.0F, 0.0F, 0.0F, 0.0F, 3.1416F, 0.0F));
 
-        ModelPartData right_leg = main.addChild("right_leg", ModelPartBuilder.create(), ModelTransform.pivot(-4.0F, -19.0F, 1.0F));
+        ModelPartData right_leg = main.addChild("right_leg", ModelPartBuilder.create(), ModelTransform.of(-4.0F, -19.0F, 1.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData right_knee = right_leg.addChild("right_knee", ModelPartBuilder.create().uv(26, 83).cuboid(-4.0F, 7.0F, -6.0F, 8.0F, 2.0F, 9.0F, new Dilation(0.0F))
                 .uv(0, 103).cuboid(-2.0F, 5.0F, -5.0F, 4.0F, 2.0F, 2.0F, new Dilation(0.0F))
                 .uv(110, 90).cuboid(-3.0F, 5.0F, -5.0F, 1.0F, 2.0F, 7.0F, new Dilation(0.0F))
-                .uv(112, 31).cuboid(2.0F, 5.0F, -5.0F, 1.0F, 2.0F, 7.0F, new Dilation(0.0F)), ModelTransform.pivot(-3.0F, 10.0F, 1.0F));
+                .uv(112, 31).cuboid(2.0F, 5.0F, -5.0F, 1.0F, 2.0F, 7.0F, new Dilation(0.0F)), ModelTransform.of(-3.0F, 10.0F, 1.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r5 = right_knee.addChild("cube_r5", ModelPartBuilder.create().uv(112, 40).cuboid(-3.0F, -2.0F, -3.0F, 6.0F, 2.0F, 3.0F, new Dilation(-0.001F)), ModelTransform.of(0.0F, -2.0F, 1.0F, -0.3054F, 0.0F, 0.0F));
 
@@ -107,7 +126,7 @@ public class ChimeraModel<T extends ChimeraEntity> extends SinglePartEntityModel
 
         ModelPartData waist = main.addChild("waist", ModelPartBuilder.create().uv(0, 107).cuboid(-4.0F, 0.0F, -3.0F, 8.0F, 2.0F, 6.0F, new Dilation(-0.001F))
                 .uv(78, 109).cuboid(-4.0F, 0.0F, -3.0F, 8.0F, 13.0F, 0.0F, new Dilation(0.0F))
-                .uv(78, 113).cuboid(-4.0F, 0.0F, 3.0F, 8.0F, 9.0F, 0.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -20.0F, 1.0F));
+                .uv(78, 113).cuboid(-4.0F, 0.0F, 3.0F, 8.0F, 9.0F, 0.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -20.0F, 1.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r9 = waist.addChild("cube_r9", ModelPartBuilder.create().uv(36, 120).cuboid(-1.0F, -2.0F, -4.0F, 2.0F, 2.0F, 3.0F, new Dilation(0.25F)), ModelTransform.of(0.0F, 6.0F, 21.0F, 0.2618F, 0.0F, 0.0F));
 
@@ -142,25 +161,25 @@ public class ChimeraModel<T extends ChimeraEntity> extends SinglePartEntityModel
         ModelPartData cube_r19 = right_wing.addChild("cube_r19", ModelPartBuilder.create().uv(129, 181).cuboid(-8.0F, -23.0F, 0.0F, 9.0F, 50.0F, 0.0F, new Dilation(0.0F))
                 .uv(74, 60).cuboid(1.0F, -4.0F, -1.0F, 2.0F, 5.0F, 1.0F, new Dilation(-0.001F)), ModelTransform.of(-2.0F, 1.0F, 1.0F, 0.3054F, 0.0F, 0.0F));
 
-        ModelPartData left_arm = main.addChild("left_arm", ModelPartBuilder.create(), ModelTransform.pivot(11.0F, -36.0F, -5.0F));
+        ModelPartData left_arm = main.addChild("left_arm", ModelPartBuilder.create(), ModelTransform.of(11.0F, -36.0F, -5.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r20 = left_arm.addChild("cube_r20", ModelPartBuilder.create().uv(44, 66).mirrored().cuboid(3.0F, -7.0F, -6.0F, 8.0F, 7.0F, 10.0F, new Dilation(0.0F)).mirrored(false)
                 .uv(80, 80).mirrored().cuboid(4.0F, 0.0F, -5.0F, 7.0F, 12.0F, 8.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.of(11.0F, 4.0F, -1.0F, 0.0F, -3.1416F, 0.0F));
 
-        ModelPartData left_wrist = left_arm.addChild("left_wrist", ModelPartBuilder.create().uv(26, 94).cuboid(-4.0F, 4.0F, -4.0F, 7.0F, 5.0F, 8.0F, new Dilation(0.0F)), ModelTransform.pivot(4.0F, 16.0F, 0.0F));
+        ModelPartData left_wrist = left_arm.addChild("left_wrist", ModelPartBuilder.create().uv(26, 94).cuboid(-4.0F, 4.0F, -4.0F, 7.0F, 5.0F, 8.0F, new Dilation(0.0F)), ModelTransform.of(4.0F, 16.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r21 = left_wrist.addChild("cube_r21", ModelPartBuilder.create().uv(74, 46).mirrored().cuboid(3.0F, -4.0F, -6.0F, 9.0F, 4.0F, 10.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.of(7.0F, 4.0F, -1.0F, 0.0F, -3.1416F, 0.0F));
 
-        ModelPartData right_arm = main.addChild("right_arm", ModelPartBuilder.create(), ModelTransform.pivot(-11.0F, -36.0F, -5.0F));
+        ModelPartData right_arm = main.addChild("right_arm", ModelPartBuilder.create(), ModelTransform.of(-11.0F, -36.0F, -5.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r22 = right_arm.addChild("cube_r22", ModelPartBuilder.create().uv(80, 80).cuboid(-3.0F, -7.0F, -4.0F, 7.0F, 12.0F, 8.0F, new Dilation(0.0F)), ModelTransform.of(-3.0F, 11.0F, 0.0F, 0.0F, 3.1416F, 0.0F));
 
         ModelPartData cube_r23 = right_arm.addChild("cube_r23", ModelPartBuilder.create().uv(44, 66).cuboid(-4.0F, -4.0F, -5.0F, 8.0F, 7.0F, 10.0F, new Dilation(0.0F)), ModelTransform.of(-4.0F, 1.0F, 0.0F, 0.0F, 3.1416F, 0.0F));
 
         ModelPartData right_wrist = right_arm.addChild("right_wrist", ModelPartBuilder.create().uv(74, 46).cuboid(-4.0F, 0.0F, -5.0F, 9.0F, 4.0F, 10.0F, new Dilation(0.0F))
-                .uv(26, 94).mirrored().cuboid(-3.0F, 4.0F, -4.0F, 7.0F, 5.0F, 8.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(-4.0F, 16.0F, 0.0F));
+                .uv(26, 94).mirrored().cuboid(-3.0F, 4.0F, -4.0F, 7.0F, 5.0F, 8.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.of(-4.0F, 16.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 
-        ModelPartData head = main.addChild("head", ModelPartBuilder.create().uv(0, 40).cuboid(-6.0F, -9.0F, -6.0F, 12.0F, 11.0F, 12.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -38.0F, -6.0F));
+        ModelPartData head = main.addChild("head", ModelPartBuilder.create().uv(0, 40).cuboid(-6.0F, -9.0F, -6.0F, 12.0F, 11.0F, 12.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -38.0F, -6.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r24 = head.addChild("cube_r24", ModelPartBuilder.create().uv(0, 5).cuboid(-2.0F, -2.0F, 0.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(5.0F, 0.0F, -12.0F, -0.0436F, 0.0F, 0.0F));
 
@@ -190,39 +209,38 @@ public class ChimeraModel<T extends ChimeraEntity> extends SinglePartEntityModel
 
         ModelPartData cube_r36 = head.addChild("cube_r36", ModelPartBuilder.create().uv(58, 116).cuboid(-1.0F, -1.0F, -1.0F, 3.0F, 4.0F, 3.0F, new Dilation(-0.1F)), ModelTransform.of(-5.0F, -11.0F, -10.0F, 0.7298F, 0.1536F, -0.1555F));
 
-        ModelPartData lower_jaw = head.addChild("lower_jaw", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -1.0F, -6.0F));
+        ModelPartData lower_jaw = head.addChild("lower_jaw", ModelPartBuilder.create(), ModelTransform.of(0.0F, -1.0F, -6.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r37 = lower_jaw.addChild("cube_r37", ModelPartBuilder.create().uv(78, 100).cuboid(-4.0F, -3.0F, -6.0F, 8.0F, 3.0F, 6.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 3.0F, 0.0F, 0.0873F, 0.0F, 0.0F));
 
-        ModelPartData upper_jaw = head.addChild("upper_jaw", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -4.0F, -6.0F));
+        ModelPartData upper_jaw = head.addChild("upper_jaw", ModelPartBuilder.create(), ModelTransform.of(0.0F, -4.0F, -6.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r38 = upper_jaw.addChild("cube_r38", ModelPartBuilder.create().uv(0, 1).mirrored().cuboid(1.0F, -2.0F, 0.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.001F)).mirrored(false)
                 .uv(5, 5).cuboid(8.0F, -2.0F, 0.0F, 1.0F, 2.0F, 1.0F, new Dilation(0.001F)), ModelTransform.of(-5.0F, 4.0F, -6.0F, -0.0436F, 0.0F, 0.0F));
 
         ModelPartData cube_r39 = upper_jaw.addChild("cube_r39", ModelPartBuilder.create().uv(102, 13).cuboid(-4.0F, 0.0F, -7.0F, 8.0F, 3.0F, 6.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 1.0F, -0.0436F, 0.0F, 0.0F));
 
-        ModelPartData upper_jaw2 = head.addChild("upper_jaw2", ModelPartBuilder.create(), ModelTransform.pivot(5.0F, -4.0F, -5.0F));
+        ModelPartData upper_jaw2 = head.addChild("upper_jaw2", ModelPartBuilder.create(), ModelTransform.of(5.0F, -4.0F, -5.0F, 0.0F, 0.0F, 0.0F));
 
-        ModelPartData air = chimera.addChild("air", ModelPartBuilder.create().uv(29, 146).cuboid(-8.0F, -2.0F, -1.0F, 16.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData air = chimera.addChild("air", ModelPartBuilder.create().uv(29, 146).cuboid(-8.0F, -2.0F, -1.0F, 16.0F, 2.0F, 2.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
         return TexturedModelData.of(modelData, 256, 256);
     }
 
     @Override
-    public void setAngles(ChimeraEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.getPart().traverse().forEach(ModelPart::resetTransform);
-        this.setHeadAngles(entity, netHeadYaw, headPitch, ageInTicks);
+    public void setAngles(ChimeraRenderState state) {
+        super.setAngles(state);
+        this.setHeadAngles(state.netHeadYaw, state.headPitch);
 
-
-        this.animateMovement(ChimeraAnimations.walking_animation, limbSwing, limbSwingAmount, 2f, 2.5f);
-        this.updateAnimation(entity.flyingAnimationState, ChimeraAnimations.flying_animation, ageInTicks, 1f);
-        this.updateAnimation(entity.idleAnimationState, ChimeraAnimations.idle_animation, ageInTicks, 1f);
-        this.updateAnimation(entity.attack1AnimationState, ChimeraAnimations.attack1_animation, ageInTicks, 1f);
-        this.updateAnimation(entity.attack2AnimationState, ChimeraAnimations.attack2_animation, ageInTicks, 1f);
-        this.updateAnimation(entity.fireBreathAnimationState, ChimeraAnimations.fire_breath_animation, ageInTicks, 1f);
-        this.updateAnimation(entity.slamAnimationState, ChimeraAnimations.slam_animation, ageInTicks, 1f);
+        this.idleAnimation.apply(state.idleAnimationState, state.age);
+        this.walkingAnimation.apply(state.walkingAnimationState, state.age);
+        this.fireBreathAnimation.apply(state.fireBreathAnimationState, state.age);
+        this.flyingAnimation.apply(state.flyingAnimationState, state.age);
+        this.attack1Animation.apply(state.attack1AnimationState, state.age);
+        this.attack2Animation.apply(state.attack2AnimationState, state.age);
+        this.slamAnimation.apply(state.slamAnimationState, state.age);
     }
 
-    private void setHeadAngles(ChimeraEntity entity, float headYaw, float headPitch, float animationProgress){
+    private void setHeadAngles(float headYaw, float headPitch){
         headYaw	= MathHelper.clamp(headYaw, -30.0F, 30.0F);
         headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
 
@@ -232,29 +250,11 @@ public class ChimeraModel<T extends ChimeraEntity> extends SinglePartEntityModel
         setHeadPitch(headPitch);
     }
 
-    @Override
-    public void render(MatrixStack matrices, VertexConsumer vertices, int light, int overlay, float red, float green, float blue, float alpha) {
-        chimera.render(matrices, vertices, light, overlay, red, green, blue, alpha);
-    }
-
-    @Override
-    public ModelPart getPart() {
-        return chimera;
-    }
-
     public void setHeadYaw(float headYaw) {
         this.headYaw = headYaw;
     }
 
     public void setHeadPitch(float headPitch) {
         this.headPitch = headPitch;
-    }
-
-    public float getHeadYaw() {
-        return this.headYaw;
-    }
-
-    public float getHeadPitch() {
-        return this.headPitch;
     }
 }

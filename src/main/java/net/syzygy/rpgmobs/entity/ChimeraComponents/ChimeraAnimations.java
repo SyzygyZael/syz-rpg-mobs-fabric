@@ -1,9 +1,6 @@
 package net.syzygy.rpgmobs.entity.ChimeraComponents;// Save this class in your mod and generate all required imports
 
-import net.minecraft.client.render.entity.animation.Animation;
-import net.minecraft.client.render.entity.animation.AnimationHelper;
-import net.minecraft.client.render.entity.animation.Keyframe;
-import net.minecraft.client.render.entity.animation.Transformation;
+import net.minecraft.client.render.entity.animation.*;
 
 /**
  * Made with Blockbench 5.0.1
@@ -11,7 +8,7 @@ import net.minecraft.client.render.entity.animation.Transformation;
  * @author Author
  */
 public class ChimeraAnimations {
-    public static final Animation attack1_animation = Animation.Builder.create(1.0F)
+    public static final AnimationDefinition attack1_animation = AnimationDefinition.Builder.create(1.0F)
             .addBoneAnimation("left_leg", new Transformation(Transformation.Targets.ROTATE,
                     new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.25F, AnimationHelper.createRotationalVector(-25.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -36,7 +33,7 @@ public class ChimeraAnimations {
                     new Keyframe(0.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("left_arm", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("left_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.25F, AnimationHelper.createTranslationalVector(-6.0F, -1.0F, -3.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.5F, AnimationHelper.createTranslationalVector(1.0F, -1.0F, 5.0F), Transformation.Interpolations.LINEAR),
@@ -48,7 +45,7 @@ public class ChimeraAnimations {
                     new Keyframe(0.5F, AnimationHelper.createRotationalVector(-47.9898F, -42.9065F, -0.2673F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("right_arm", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("right_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.25F, AnimationHelper.createTranslationalVector(0.0F, -2.0F, 6.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.5F, AnimationHelper.createTranslationalVector(2.0F, 0.0F, -3.0F), Transformation.Interpolations.LINEAR),
@@ -60,7 +57,7 @@ public class ChimeraAnimations {
                     new Keyframe(0.7083F, AnimationHelper.createRotationalVector(35.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.25F, AnimationHelper.createTranslationalVector(-3.0F, 0.0F, 1.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.5F, AnimationHelper.createTranslationalVector(3.0F, 0.0F, 1.0F), Transformation.Interpolations.LINEAR),
@@ -80,14 +77,14 @@ public class ChimeraAnimations {
             ))
             .build();
 
-    public static final Animation attack2_animation = Animation.Builder.create(1.0F)
+    public static final AnimationDefinition attack2_animation = AnimationDefinition.Builder.create(1.0F)
             .addBoneAnimation("main", new Transformation(Transformation.Targets.ROTATE,
                     new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.25F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.5F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("main", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("main", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.25F, AnimationHelper.createTranslationalVector(0.0F, 38.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.375F, AnimationHelper.createTranslationalVector(0.0F, 43.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -123,7 +120,7 @@ public class ChimeraAnimations {
                     new Keyframe(0.6667F, AnimationHelper.createRotationalVector(-23.4069F, 10.5893F, 17.0649F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("left_arm", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("left_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.25F, AnimationHelper.createTranslationalVector(0.0F, -2.0F, 9.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, -2.0F, 9.0F), Transformation.Interpolations.LINEAR),
@@ -137,7 +134,7 @@ public class ChimeraAnimations {
                     new Keyframe(0.6667F, AnimationHelper.createRotationalVector(-23.307F, -9.3073F, -20.5764F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("right_arm", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("right_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.25F, AnimationHelper.createTranslationalVector(0.0F, -2.0F, 8.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, -2.0F, 8.0F), Transformation.Interpolations.LINEAR),
@@ -151,7 +148,7 @@ public class ChimeraAnimations {
                     new Keyframe(0.6667F, AnimationHelper.createRotationalVector(60.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.25F, AnimationHelper.createTranslationalVector(0.0F, 2.0F, 10.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, 2.0F, 10.0F), Transformation.Interpolations.LINEAR),
@@ -190,23 +187,23 @@ public class ChimeraAnimations {
             ))
             .build();
 
-    public static final Animation idle_animation = Animation.Builder.create(1.5F).looping()
-            .addBoneAnimation("torso", new Transformation(Transformation.Targets.TRANSLATE,
+    public static final AnimationDefinition idle_animation = AnimationDefinition.Builder.create(1.5F).looping()
+            .addBoneAnimation("torso", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.75F, AnimationHelper.createTranslationalVector(0.0F, -1.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("left_arm", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("left_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.75F, AnimationHelper.createTranslationalVector(0.0F, -2.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("right_arm", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("right_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.75F, AnimationHelper.createTranslationalVector(0.0F, -2.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.75F, AnimationHelper.createTranslationalVector(0.0F, -2.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -218,7 +215,7 @@ public class ChimeraAnimations {
             ))
             .build();
 
-    public static final Animation walking_animation = Animation.Builder.create(0.75F).looping()
+    public static final AnimationDefinition walking_animation = AnimationDefinition.Builder.create(0.75F).looping()
             .addBoneAnimation("left_leg", new Transformation(Transformation.Targets.ROTATE,
                     new Keyframe(0.0F, AnimationHelper.createRotationalVector(-25.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.375F, AnimationHelper.createRotationalVector(17.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -241,8 +238,8 @@ public class ChimeraAnimations {
             ))
             .build();
 
-    public static final Animation flying_animation = Animation.Builder.create(1.0F).looping()
-            .addBoneAnimation("main", new Transformation(Transformation.Targets.TRANSLATE,
+    public static final AnimationDefinition flying_animation = AnimationDefinition.Builder.create(1.0F).looping()
+            .addBoneAnimation("main", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, 5.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
@@ -274,7 +271,7 @@ public class ChimeraAnimations {
             ))
             .build();
 
-    public static final Animation fire_breath_animation = Animation.Builder.create(0.6667F)
+    public static final AnimationDefinition fire_breath_animation = AnimationDefinition.Builder.create(0.6667F)
             .addBoneAnimation("torso", new Transformation(Transformation.Targets.ROTATE,
                     new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.375F, AnimationHelper.createRotationalVector(-27.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -285,7 +282,7 @@ public class ChimeraAnimations {
                     new Keyframe(0.375F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.6667F, AnimationHelper.createRotationalVector(27.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("left_arm", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("left_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.375F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 8.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.6667F, AnimationHelper.createTranslationalVector(0.0F, -5.0F, -6.0F), Transformation.Interpolations.LINEAR)
@@ -295,12 +292,12 @@ public class ChimeraAnimations {
                     new Keyframe(0.375F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.6667F, AnimationHelper.createRotationalVector(25.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("right_arm", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("right_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.375F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 8.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.6667F, AnimationHelper.createTranslationalVector(0.0F, -5.0F, -6.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.375F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 9.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.6667F, AnimationHelper.createTranslationalVector(0.0F, -7.0F, -9.0F), Transformation.Interpolations.LINEAR)
@@ -317,8 +314,8 @@ public class ChimeraAnimations {
             ))
             .build();
 
-    public static final Animation slam_animation = Animation.Builder.create(1.75F)
-            .addBoneAnimation("main", new Transformation(Transformation.Targets.TRANSLATE,
+    public static final AnimationDefinition slam_animation = AnimationDefinition.Builder.create(1.75F)
+            .addBoneAnimation("main", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.5F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.9583F, AnimationHelper.createTranslationalVector(0.0F, 67.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -358,7 +355,7 @@ public class ChimeraAnimations {
                     new Keyframe(0.9583F, AnimationHelper.createRotationalVector(15.0F, 0.0F, -17.5F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.75F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("left_arm", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("left_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.25F, AnimationHelper.createTranslationalVector(1.0F, 0.0F, 3.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.6667F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -377,7 +374,7 @@ public class ChimeraAnimations {
                     new Keyframe(1.5F, AnimationHelper.createRotationalVector(-17.2304F, -15.9094F, 1.542F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.75F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("right_arm", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("right_arm", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.25F, AnimationHelper.createTranslationalVector(1.0F, 0.0F, -1.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.375F, AnimationHelper.createTranslationalVector(1.0F, 0.0F, -1.0F), Transformation.Interpolations.LINEAR),
@@ -394,7 +391,7 @@ public class ChimeraAnimations {
                     new Keyframe(1.5F, AnimationHelper.createRotationalVector(50.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.75F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
-            .addBoneAnimation("head", new Transformation(Transformation.Targets.TRANSLATE,
+            .addBoneAnimation("head", new Transformation(Transformation.Targets.MOVE_ORIGIN,
                     new Keyframe(0.0F, AnimationHelper.createTranslationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.9583F, AnimationHelper.createTranslationalVector(1.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.25F, AnimationHelper.createTranslationalVector(9.0F, -10.0F, -9.0F), Transformation.Interpolations.LINEAR),

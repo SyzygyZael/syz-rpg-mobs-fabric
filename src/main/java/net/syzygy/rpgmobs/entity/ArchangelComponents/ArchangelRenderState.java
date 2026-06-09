@@ -6,9 +6,6 @@ import net.minecraft.entity.AnimationState;
 
 @Environment(net.fabricmc.api.EnvType.CLIENT)
 public class ArchangelRenderState extends LivingEntityRenderState {
-    public float limbSwing;
-    public float limbSwingAmount;
-    public float ageInTicks;
     public float netHeadYaw;
     public float headPitch;
 
