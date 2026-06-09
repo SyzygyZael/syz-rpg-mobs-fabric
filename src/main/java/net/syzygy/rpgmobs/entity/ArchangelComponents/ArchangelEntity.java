@@ -14,6 +14,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
@@ -33,11 +34,11 @@ public class ArchangelEntity extends AnimalEntity {
             DataTracker.registerData(ArchangelEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     public final AnimationState idleAnimationState = new AnimationState();
-    private int idleAnimationTimeout = 0;
     public final AnimationState attack1AnimationState = new AnimationState();
     public final AnimationState attack2AnimationState = new AnimationState();
-    public int attackAnimationTimeout = 0;
     public final AnimationState airAttackAnimationState = new AnimationState();
+    private int idleAnimationTimeout = 0;
+    public int attackAnimationTimeout = 0;
     public int airAttackAnimationTimeout = 0;
 
     public ArchangelEntity(EntityType<? extends AnimalEntity> entityType, World world) {
@@ -45,7 +46,7 @@ public class ArchangelEntity extends AnimalEntity {
     }
 
     public static final EntityModelLayer ARCHANGEL =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "archangel"), "main");
+            new EntityModelLayer(Identifier.of(RPGMobs.MOD_ID, "archangel"), "main");
 
     @Override
     protected void initGoals() {
@@ -60,11 +61,11 @@ public class ArchangelEntity extends AnimalEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)32.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.30F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.archangelAttackDamage)
-                .add(EntityAttributes.GENERIC_ARMOR, (double)3.0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double)45.0F);
+                .add(EntityAttributes.FOLLOW_RANGE, (double)32.0F)
+                .add(EntityAttributes.MOVEMENT_SPEED, (double)0.30F)
+                .add(EntityAttributes.ATTACK_DAMAGE, (double) ModConfig.archangelAttackDamage)
+                .add(EntityAttributes.ARMOR, (double)3.0F)
+                .add(EntityAttributes.MAX_HEALTH, (double)45.0F);
     }
 
     private void setupAnimationStates() {
@@ -113,28 +114,28 @@ public class ArchangelEntity extends AnimalEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        this.limbAnimator.updateLimbs(f, 0.2F, 1.0F);
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (this.getWorld().isClient()) {
+        if (this.getEntityWorld().isClient()) {
             this.setupAnimationStates();
         }
     }
 
     @Override
-    public boolean handleFallDamage(float fallDistance, float damageMultiplier, DamageSource damageSource) {
+    public boolean handleFallDamage(double fallDistance, float damagePerDistance, DamageSource damageSource) {
         return false;
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ATTACKING, false);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void setAttacking(boolean attacking) {
@@ -159,10 +160,10 @@ public class ArchangelEntity extends AnimalEntity {
 
     @Override
     public void tickMovement() {
-        if (this.getWorld().isClient) {
+        if (this.getEntityWorld().isClient()) {
             for (int i = 0; i < 2; i++) {
-                this.getWorld()
-                        .addParticle(
+                this.getEntityWorld()
+                        .addParticleClient(
                                 ParticleTypes.WHITE_ASH,
                                 this.getParticleX(0.5),
                                 this.getRandomBodyY() - 0.25,
@@ -175,5 +176,10 @@ public class ArchangelEntity extends AnimalEntity {
         }
         this.jumping = false;
         super.tickMovement();
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
     }
 }

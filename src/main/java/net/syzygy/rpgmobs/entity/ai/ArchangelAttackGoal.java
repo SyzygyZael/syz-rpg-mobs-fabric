@@ -1,5 +1,6 @@
 package net.syzygy.rpgmobs.entity.ai;
 
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.damage.DamageSource;
@@ -9,6 +10,7 @@ import net.minecraft.entity.mob.PathAwareEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Hand;
@@ -18,6 +20,7 @@ import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
 
 public class ArchangelAttackGoal extends MeleeAttackGoal {
     private final ArchangelEntity entity;
+    private static ServerWorld serverWorld;
     private int attackDelay = 10;
     private int ticksUntilNextAttack = 20;
     private boolean shouldCountTillNextAttack = false;
@@ -29,6 +32,7 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
     public ArchangelAttackGoal(PathAwareEntity mob, double speed, boolean pauseWhenMobIdle) {
         super(mob, speed, pauseWhenMobIdle);
         entity = ((ArchangelEntity) mob);
+        serverWorld = (ServerWorld) mob.getEntityWorld();
     }
 
     @Override
@@ -78,7 +82,7 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
     protected void performAttack(LivingEntity pEnemy) {
         this.resetAttackCooldown();
         this.mob.swingHand(Hand.MAIN_HAND);
-        this.mob.tryAttack(pEnemy);
+        this.mob.tryAttack(serverWorld, pEnemy);
     }
 
     @Override
@@ -91,7 +95,7 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
         }
 
         if (pEnemy != null) {
-            World world = pEnemy.getWorld();
+            World world = pEnemy.getEntityWorld();
             DamageSources sources = world.getDamageSources();
             DamageSource magicDamage = sources.mobAttack(entity);
 
@@ -100,13 +104,13 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
             // initial teleport wind up
             if (randNum == 5 && cooldown <= 0 && entity.isAttacking()) {
                 if (ArchangelCompassDirection(entity).equals("NORTH")) {
-                    entity.teleport(entity.getX(), entity.getY() + 7, entity.getZ() + 10);
+                    entity.teleport(entity.getX(), entity.getY() + 7, entity.getZ() + 10, false);
                 } else if (ArchangelCompassDirection(entity).equals("EAST")) {
-                    entity.teleport(entity.getX() - 10, entity.getY() + 7, entity.getZ());
+                    entity.teleport(entity.getX() - 10, entity.getY() + 7, entity.getZ(), false);
                 } else if (ArchangelCompassDirection(entity).equals("SOUTH")) {
-                    entity.teleport(entity.getX(), entity.getY() + 7, entity.getZ() - 10);
+                    entity.teleport(entity.getX(), entity.getY() + 7, entity.getZ() - 10, false);
                 } else {
-                    entity.teleport(entity.getX() + 10, entity.getY() + 7, entity.getZ());
+                    entity.teleport(entity.getX() + 10, entity.getY() + 7, entity.getZ(), false);
                 }
                 entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
 
@@ -124,7 +128,7 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
             // teleport to enemy and deal damage if not blocking
             if (this.wait <= 13 && entity.hasNoGravity()) {
                 if (teleCount == 0) {
-                    entity.teleport(pEnemy.getX(), pEnemy.getY() + 2, pEnemy.getZ());
+                    entity.teleport(pEnemy.getX(), pEnemy.getY() + 2, pEnemy.getZ(), false);
                     entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);
                     teleCount = 1;
                 }
@@ -133,7 +137,7 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
 
                 // forge damage upon enemy
                 if (this.damageDelay <= 0 && !pEnemy.isBlocking()) {
-                    pEnemy.damage(magicDamage, 6.5F);
+                    pEnemy.damage(serverWorld, magicDamage, 6.5F);
                     // RPGMobs.LOGGER.info(String.valueOf(this.damageDelay));
                     this.damageDelay = 5;
                 } else if (this.damageDelay <= 0) {
@@ -143,14 +147,12 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
                     ItemStack shield = player.getOffHandStack();
                     if (shield.isOf(Items.SHIELD)) {
                         player.setCurrentHand(Hand.OFF_HAND);
-                        player.getItemCooldownManager().set(shield.getItem(), 5);
+                        player.getItemCooldownManager().set(shield, 5);
 
                         // damage the shield
-                        shield.damage(1, player, (p) -> {
-                            p.sendToolBreakStatus(Hand.OFF_HAND);
-                        });
+                        shield.damage(1, player, EquipmentSlot.MAINHAND);
 
-                        player.getWorld().playSound(null, player.getX(), player.getY(), player.getZ(),
+                        player.getEntityWorld().playSound(null, player.getX(), player.getY(), player.getZ(),
                                 SoundEvents.ITEM_SHIELD_BLOCK, SoundCategory.PLAYERS, 1.0F, 1.0F);
                     }
 
@@ -165,13 +167,13 @@ public class ArchangelAttackGoal extends MeleeAttackGoal {
                 entity.airAttackAnimationState.stop();
 
                 if (ArchangelCompassDirection(entity).equals("NORTH")) {
-                    entity.teleport(entity.getX(), entity.getY(), entity.getZ() + 5);
+                    entity.teleport(entity.getX(), entity.getY(), entity.getZ() + 5, false);
                 } else if (ArchangelCompassDirection(entity).equals("EAST")) {
-                    entity.teleport(entity.getX() - 5, entity.getY(), entity.getZ());
+                    entity.teleport(entity.getX() - 5, entity.getY(), entity.getZ(), false);
                 } else if (ArchangelCompassDirection(entity).equals("SOUTH")) {
-                    entity.teleport(entity.getX(), entity.getY(), entity.getZ() - 5);
+                    entity.teleport(entity.getX(), entity.getY(), entity.getZ() - 5, false);
                 } else {
-                    entity.teleport(entity.getX() + 5, entity.getY(), entity.getZ());
+                    entity.teleport(entity.getX() + 5, entity.getY(), entity.getZ(), false);
                 }
 
                 entity.playSound(SoundEvents.ENTITY_ENDERMAN_TELEPORT, 1.0F, 1.0F);

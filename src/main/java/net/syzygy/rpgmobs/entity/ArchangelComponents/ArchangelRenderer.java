@@ -1,28 +1,38 @@
 package net.syzygy.rpgmobs.entity.ArchangelComponents;
 
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.client.RPGMobsEntityModelLayers;
+import org.lwjgl.opengl.GLXEXTVisualInfo;
 
-public class ArchangelRenderer extends MobEntityRenderer<ArchangelEntity, ArchangelModel<ArchangelEntity>> {
-    private static final Identifier TEXTURE = new Identifier(RPGMobs.MOD_ID, "textures/entity/archangel.png");
+@Environment(net.fabricmc.api.EnvType.CLIENT)
+public class ArchangelRenderer extends MobEntityRenderer<ArchangelEntity, ArchangelRenderState, ArchangelModel> {
+    private static final Identifier TEXTURE = Identifier.of(RPGMobs.MOD_ID, "main");
 
-    public ArchangelRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new ArchangelModel<>(ctx.getPart(ArchangelEntity.ARCHANGEL)), 0.7f);
+    public ArchangelRenderer(EntityRendererFactory.Context context) {
+        super(context, new ArchangelModel(context.getPart(RPGMobsEntityModelLayers.ARCHANGEL)), 0.0F);
     }
 
     @Override
-    public Identifier getTexture(ArchangelEntity entity) {
+    public Identifier getTexture(ArchangelRenderState state) {
         return TEXTURE;
     }
 
     @Override
-    public void render(ArchangelEntity mobEntity, float f, float g, MatrixStack matrixStack,
-                       VertexConsumerProvider vertexConsumerProvider, int i) {
-        matrixStack.scale(1f, 1f, 1f);
-        super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
+    public ArchangelRenderState createRenderState() {
+        return new ArchangelRenderState();
+    }
+
+    @Override
+    public void updateRenderState(ArchangelEntity livingEntity, ArchangelRenderState livingEntityRenderState, float f) {
+        super.updateRenderState(livingEntity, livingEntityRenderState, f);
+
+        livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
+        livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.attack1AnimationState);
+        livingEntityRenderState.attack2AnimationState.copyFrom(livingEntity.attack2AnimationState);
+        livingEntityRenderState.airAttackAnimationState.copyFrom(livingEntity.airAttackAnimationState);
     }
 }
