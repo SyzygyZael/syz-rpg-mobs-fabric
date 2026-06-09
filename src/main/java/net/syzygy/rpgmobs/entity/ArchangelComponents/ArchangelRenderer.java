@@ -9,7 +9,7 @@ import net.syzygy.rpgmobs.client.RPGMobsEntityModelLayers;
 
 @Environment(net.fabricmc.api.EnvType.CLIENT)
 public class ArchangelRenderer extends MobEntityRenderer<ArchangelEntity, ArchangelRenderState, ArchangelModel> {
-    private static final Identifier TEXTURE = Identifier.of(RPGMobs.MOD_ID, "main");
+    private static final Identifier TEXTURE = Identifier.of(RPGMobs.MOD_ID, "textures/entity/archangel.png");
 
     public ArchangelRenderer(EntityRendererFactory.Context context) {
         super(context, new ArchangelModel(context.getPart(RPGMobsEntityModelLayers.ARCHANGEL)), 0.0F);

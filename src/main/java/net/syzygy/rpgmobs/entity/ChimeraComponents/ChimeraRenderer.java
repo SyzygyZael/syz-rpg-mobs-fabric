@@ -10,7 +10,7 @@ import net.syzygy.rpgmobs.client.RPGMobsEntityModelLayers;
 import org.lwjgl.opengl.GLXEXTVisualInfo;
 
 public class ChimeraRenderer extends MobEntityRenderer<ChimeraEntity, ChimeraRenderState, ChimeraModel> {
-    private static final Identifier TEXTURE = Identifier.of(RPGMobs.MOD_ID, "chimera");
+    private static final Identifier TEXTURE = Identifier.of(RPGMobs.MOD_ID, "textures/entity/chimera.png");
 
     public ChimeraRenderer(EntityRendererFactory.Context context) {
         super(context, new ChimeraModel(context.getPart(RPGMobsEntityModelLayers.CHIMERA)), 0.0F);

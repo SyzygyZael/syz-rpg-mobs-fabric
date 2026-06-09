@@ -14,6 +14,7 @@ import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -51,8 +52,13 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
         super(entityType, world);
     }
 
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
+    }
+
     public static final EntityModelLayer CRYSTALLINE_MAGMITE =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "crystalline_magmite"), "main");
+            new EntityModelLayer(Identifier.of(RPGMobs.MOD_ID, "crystalline_magmite"), "main");
 
     @Override
     protected void initGoals() {
@@ -71,13 +77,13 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)35.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.23F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.crystallineMagmiteAttackDamage)
-                .add(EntityAttributes.GENERIC_ARMOR, (double)4.0F)
-                .add(EntityAttributes.GENERIC_ATTACK_KNOCKBACK, (double)3.0F)
-                .add(EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, (double)3.0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double)70.0F);
+                .add(EntityAttributes.FOLLOW_RANGE, (double)35.0F)
+                .add(EntityAttributes.MOVEMENT_SPEED, (double)0.23F)
+                .add(EntityAttributes.ATTACK_DAMAGE, (double) ModConfig.crystallineMagmiteAttackDamage)
+                .add(EntityAttributes.ARMOR, (double)4.0F)
+                .add(EntityAttributes.ATTACK_KNOCKBACK, (double)3.0F)
+                .add(EntityAttributes.KNOCKBACK_RESISTANCE, (double)3.0F)
+                .add(EntityAttributes.MAX_HEALTH, (double)70.0F);
     }
 
     private void setupAnimationStates() {
@@ -123,14 +129,14 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        this.limbAnimator.updateLimbs(f, 0.2F, 1.0F);
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (this.getWorld().isClient()) {
+        if (this.getEntityWorld().isClient()) {
             this.setupAnimationStates();
         }
     }
@@ -141,11 +147,11 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
-        this.dataTracker.startTracking(SHOOTING, false);
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ATTACKING, false);
+        builder.add(SHOOTING, false);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void setAttacking(boolean attacking) {
@@ -196,7 +202,7 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
             LivingEntity livingEntity = this.entity.getTarget();
             if (livingEntity != null) {
                 if (livingEntity.squaredDistanceTo(this.entity) < 4096.0 && this.entity.canSee(livingEntity)) {
-                    World world = this.entity.getWorld();
+                    World world = this.entity.getEntityWorld();
                     this.cooldown++;
 
                     if (this.cooldown == 30) {

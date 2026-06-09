@@ -1,29 +1,34 @@
 package net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents;
 
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.client.RPGMobsEntityModelLayers;
 
-public class CrystallineMagmiteRenderer extends MobEntityRenderer<CrystallineMagmiteEntity, CrystallineMagmiteModel<CrystallineMagmiteEntity>> {
-    private static final Identifier TEXTURE = new Identifier(RPGMobs.MOD_ID, "textures/entity/crystalline_magmite.png");
+public class CrystallineMagmiteRenderer extends MobEntityRenderer<CrystallineMagmiteEntity, CrystallineMagmiteRenderState, CrystallineMagmiteModel> {
+    private static final Identifier TEXTURE = Identifier.of(RPGMobs.MOD_ID, "textures/entity/crystalline_magmite.png");
 
-    public CrystallineMagmiteRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new CrystallineMagmiteModel<>(ctx.getPart(CrystallineMagmiteEntity.CRYSTALLINE_MAGMITE)), 1.0f);
+    public CrystallineMagmiteRenderer(EntityRendererFactory.Context context) {
+        super(context, new CrystallineMagmiteModel(context.getPart(RPGMobsEntityModelLayers.CRYSTALLINE_MAGMITE)), 0.0F);
     }
 
     @Override
-    public Identifier getTexture(CrystallineMagmiteEntity entity) {
+    public Identifier getTexture(CrystallineMagmiteRenderState state) {
         return TEXTURE;
     }
 
     @Override
-    public void render(CrystallineMagmiteEntity mobEntity, float f, float g, MatrixStack matrixStack,
-                       VertexConsumerProvider vertexConsumerProvider, int i) {
-        matrixStack.scale(1f, 1f, 1f);
+    public CrystallineMagmiteRenderState createRenderState() {
+        return new CrystallineMagmiteRenderState();
+    }
 
-        super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
+    @Override
+    public void updateRenderState(CrystallineMagmiteEntity livingEntity, CrystallineMagmiteRenderState livingEntityRenderState, float f) {
+        super.updateRenderState(livingEntity, livingEntityRenderState, f);
+
+        livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
+        livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.attack1AnimationState);
+        livingEntityRenderState.attack2AnimationState.copyFrom(livingEntity.attack2AnimationState);
     }
 }

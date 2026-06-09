@@ -1,41 +1,32 @@
 package net.syzygy.rpgmobs.entity.CobbleProjectileComponents;
 
-import net.minecraft.client.render.OverlayTexture;
-import net.minecraft.client.render.VertexConsumer;
-import net.minecraft.client.render.VertexConsumerProvider;
+import net.minecraft.client.render.command.OrderedRenderCommandQueue;
 import net.minecraft.client.render.entity.EntityRenderer;
 import net.minecraft.client.render.entity.EntityRendererFactory;
-import net.minecraft.client.render.item.ItemRenderer;
+import net.minecraft.client.render.state.CameraRenderState;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RotationAxis;
 import net.syzygy.rpgmobs.RPGMobs;
 
-public class CobbleProjectileRenderer extends EntityRenderer<CobbleProjectileEntity> {
-    public static final Identifier TEXTURE = new Identifier(RPGMobs.MOD_ID, "textures/entity/cobble_projectile.png");
-    protected CobbleProjectileModel model;
+public class CobbleProjectileRenderer extends EntityRenderer<CobbleProjectileEntity, CobbleProjectileRenderState> {
+    public static final Identifier TEXTURE = Identifier.of(RPGMobs.MOD_ID, "textures/entity/cobble_projectile.png");
 
-    public CobbleProjectileRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx);
-        model = new CobbleProjectileModel(ctx.getPart(CobbleProjectileEntity.COBBLE_PROJECTILE));
+    public CobbleProjectileRenderer(EntityRendererFactory.Context context) {
+        super(context);
     }
 
     @Override
-    public void render(CobbleProjectileEntity entity, float yaw, float tickDelta, MatrixStack matrices,
-                       VertexConsumerProvider vertexConsumers, int light) {
-        matrices.push();
-        matrices.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevYaw, entity.getYaw()) - 90.0F));
-        matrices.multiply(RotationAxis.POSITIVE_Z.rotationDegrees(MathHelper.lerp(tickDelta, entity.prevPitch, entity.getPitch()) + 90.0F));
-        VertexConsumer vertexconsumer = ItemRenderer.getDirectItemGlintConsumer(vertexConsumers, this.model.getLayer(TEXTURE), false, false);
-        this.model.render(matrices, vertexconsumer, light, OverlayTexture.DEFAULT_UV, 1.0F, 0.0F, 0.0F, 1.0F);
-
-        matrices.pop();
-        super.render(entity, yaw, tickDelta, matrices, vertexConsumers, light);
+    public CobbleProjectileRenderState createRenderState() {
+        return new CobbleProjectileRenderState();
     }
 
     @Override
-    public Identifier getTexture(CobbleProjectileEntity entity) {
-        return TEXTURE;
+    public void updateRenderState(CobbleProjectileEntity entity, CobbleProjectileRenderState state, float tickProgress) {
+        super.updateRenderState(entity, state, tickProgress);
+    }
+
+    @Override
+    public void render(CobbleProjectileRenderState renderState, MatrixStack matrices, OrderedRenderCommandQueue queue, CameraRenderState cameraState) {
+        super.render(renderState, matrices, queue, cameraState);
     }
 }
