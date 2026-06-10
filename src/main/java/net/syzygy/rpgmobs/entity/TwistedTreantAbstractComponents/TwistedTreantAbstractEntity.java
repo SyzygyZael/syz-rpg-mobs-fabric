@@ -7,10 +7,10 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.world.EntityView;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.entity.ai.TwistedTreantActiveTargetGoal;
 import net.syzygy.rpgmobs.entity.ai.TwistedTreantAttackGoal;
@@ -31,7 +31,7 @@ public class TwistedTreantAbstractEntity extends TameableEntity {
     protected void initGoals() {
         this.goalSelector.add(2, new TwistedTreantAttackGoal(this, 1f, true));
         this.goalSelector.add(2, new AttackWithOwnerGoal(this));
-        this.goalSelector.add(6, new FollowOwnerGoal(this, 1.5f, 5f, 50f, true));
+        this.goalSelector.add(6, new FollowOwnerGoal(this, 1.5f, 5f, 50f));
         this.goalSelector.add(0, new SwimGoal(this));
         this.goalSelector.add(7, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
         this.goalSelector.add(8, new LookAtEntityGoal(this, LivingEntity.class, 8.0f));
@@ -46,7 +46,7 @@ public class TwistedTreantAbstractEntity extends TameableEntity {
     public void onDeath(DamageSource damageSource) {
         super.onDeath(damageSource);
 
-        if (spawnedFromStaff && !this.getWorld().isClient()) {
+        if (spawnedFromStaff && !this.getEntityWorld().isClient()) {
             decrementTreantCounter();
         }
     }
@@ -75,11 +75,6 @@ public class TwistedTreantAbstractEntity extends TameableEntity {
     }
 
     @Override
-    public EntityView method_48926() {
-        return getWorld();
-    }
-
-    @Override
     protected SoundEvent getAmbientSound() {
         return ModSounds.TWISTED_TREANT_AMBIENT;
     }
@@ -87,5 +82,10 @@ public class TwistedTreantAbstractEntity extends TameableEntity {
     @Override
     protected SoundEvent getHurtSound(DamageSource source) {
         return SoundEvents.ENTITY_POLAR_BEAR_HURT;
+    }
+
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
     }
 }

@@ -204,6 +204,10 @@ public class OrchidManeaterModel extends EntityModel<OrchidManeaterRenderState> 
     public void setAngles(OrchidManeaterRenderState state) {
         super.setAngles(state);
         this.setHeadAngles(state.headYaw, state.headPitch);
+
+        this.idleAnimation.apply(state.idleAnimationState, state.age);
+        this.walkingAnimation.apply(state.walkingAnimationState, state.age);
+        this.attack1Animation.apply(state.attack1AnimationState, state.age);
     }
 
     private void setHeadAngles(float headYaw, float headPitch) {

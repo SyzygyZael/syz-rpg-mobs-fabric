@@ -9,16 +9,14 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.ModEntities;
@@ -38,28 +36,29 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
     public final AnimationState attack2AnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
     public final AnimationState standingAnimationState = new AnimationState();
+    public final AnimationState walkingAnimationState = new AnimationState();
 
     private int invincibilityTicks = 0;
     private int treantCounter = 0;
     private int timesInvincible = 0;
     private int standingAnimationCounter = 0;
     private final TwistedTreantStandingEntity standingTreant =
-            new TwistedTreantStandingEntity(ModEntities.TWISTED_TREANT_STANDING, getWorld());
+            new TwistedTreantStandingEntity(ModEntities.TWISTED_TREANT_STANDING, getEntityWorld());
 
     public TwistedTreantEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
     }
 
     public static final EntityModelLayer TWISTED_TREANT =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "twisted_treant"), "main");
+            new EntityModelLayer(Identifier.of(RPGMobs.MOD_ID, "twisted_treant"), "main");
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createHostileAttributes()
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double) 32.0F)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double) 0.30F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, (double) ModConfig.twistedTreantAttackDamage)
-                .add(EntityAttributes.GENERIC_ARMOR, (double) 3.0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double) 36.0F);
+                .add(EntityAttributes.FOLLOW_RANGE, (double) 32.0F)
+                .add(EntityAttributes.MOVEMENT_SPEED, (double) 0.30F)
+                .add(EntityAttributes.ATTACK_DAMAGE, (double) ModConfig.twistedTreantAttackDamage)
+                .add(EntityAttributes.ARMOR, (double) 3.0F)
+                .add(EntityAttributes.MAX_HEALTH, (double) 36.0F);
     }
 
     private void setupAnimationStates() {
@@ -105,14 +104,14 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        this.limbAnimator.updateLimbs(f, 0.2F, 1.0F);
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (this.getWorld().isClient()) {
+        if (this.getEntityWorld().isClient()) {
             this.setupAnimationStates();
         }
 
@@ -120,20 +119,20 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
             invincibilityTicks--;
         }
 
-        if (spawnedFromStaff && this.age >= 600 && !this.getWorld().isClient()) {
+        if (spawnedFromStaff && this.age >= 600 && !this.getEntityWorld().isClient()) {
             this.remove(RemovalReason.DISCARDED);
             decrementTreantCounter();
         }
 
         if (this.getHealth() <= 18f && this.treantCounter == 0) {
-            if (this.timesInvincible == 0 && !this.getWorld().isClient()) {
+            if (this.timesInvincible == 0 && !this.getEntityWorld().isClient()) {
                 this.startInvincibility(70);
                 this.setAiDisabled(true);
 
                 this.timesInvincible = 1;
             }
 
-            if (this.standingAnimationCounter == 0 && this.getWorld().isClient()) {
+            if (this.standingAnimationCounter == 0 && this.getEntityWorld().isClient()) {
                 this.standingAnimationState.start(this.age);
 
                 this.standingAnimationCounter = 1;
@@ -146,7 +145,7 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
                 this.playSound(ModSounds.TWISTED_TREANT_ROAR, 1.0F, 1.0F);
             }
 
-            if (this.getInvincibilityTicks() == 0 && this.treantCounter == 0 && this.timesInvincible == 1 && !this.getWorld().isClient()) {
+            if (this.getInvincibilityTicks() == 0 && this.treantCounter == 0 && this.timesInvincible == 1 && !this.getEntityWorld().isClient()) {
                 standingTreant.refreshPositionAndAngles(
                         this.getX(),
                         this.getY(),
@@ -158,7 +157,7 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
                     standingTreant.age = this.age;
                 }
 
-                this.getWorld().spawnEntity(standingTreant);
+                this.getEntityWorld().spawnEntity(standingTreant);
                 standingTreant.setHealth(18f);
                 this.standingAnimationState.stop();
                 this.remove(Entity.RemovalReason.DISCARDED);
@@ -167,19 +166,19 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
     }
 
     @Override
-    public boolean damage(DamageSource source, float amount) {
+    public boolean damage(ServerWorld world, DamageSource source, float amount) {
         if (invincibilityTicks > 0) {
             return false;
         }
 
-        return super.damage(source, amount);
+        return super.damage(world, source, amount);
     }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ATTACKING, false);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void startInvincibility(int durationTicks) {
@@ -201,12 +200,23 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
     public void setStandingPet(PlayerEntity staffOwner) {
         setSpawnedFromStaff(true);
         standingTreant.setOwner(staffOwner);
-        standingTreant.setTamed(true);
+        standingTreant.setTamed(true, true);
     }
 
-    public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
-                world.getFluidState(pos).isEmpty() &&
-                world.getLightLevel(pos) >= 0;
+    @Override
+    public boolean canSpawn(WorldView world) {
+        if (world instanceof ServerWorld serverWorld) {
+            if (serverWorld.getDifficulty() ==  Difficulty.PEACEFUL) {
+                return false;
+            }
+        }
+
+        return super.canSpawn(world);
     }
+
+    // public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+    //     return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
+    //             world.getFluidState(pos).isEmpty() &&
+    //             world.getLightLevel(pos) >= 0;
+    // }
 }

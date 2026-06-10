@@ -1,10 +1,13 @@
 package net.syzygy.rpgmobs.entity;
 
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
+import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
@@ -19,47 +22,53 @@ import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantSt
 public class ModEntities {
 
     public static final EntityType<CrystallineMagmiteEntity> CRYSTALLINE_MAGMITE = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(RPGMobs.MOD_ID, "crystalline_magmite"),
+            Identifier.of(RPGMobs.MOD_ID, "crystalline_magmite"),
             EntityType.Builder.create(CrystallineMagmiteEntity::new, SpawnGroup.MONSTER)
-                    .setDimensions(1.5f, 3f).build());
+                    .dimensions(1.5f, 3f).build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(RPGMobs.MOD_ID, "crystalline_magmite"))));
 
     public static final EntityType<CobbleProjectileEntity> COBBLE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(RPGMobs.MOD_ID, "cobble_projectile"),
+            Identifier.of(RPGMobs.MOD_ID, "cobble_projectile"),
             EntityType.Builder.<CobbleProjectileEntity>create(CobbleProjectileEntity::new, SpawnGroup.MISC)
-                    .setDimensions(1f, 1f)
-                    .build());
+                    .dimensions(1f, 1f)
+                    .build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(RPGMobs.MOD_ID, "cobble_projectile"))));
 
     public static final EntityType<ArchangelEntity> ARCHANGEL = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(RPGMobs.MOD_ID, "archangel"),
+            Identifier.of(RPGMobs.MOD_ID, "archangel"),
             EntityType.Builder.create(ArchangelEntity::new, SpawnGroup.MONSTER)
-                    .setDimensions(0.8f, 2.0f).build());
+                    .dimensions(0.8f, 2.0f).build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(RPGMobs.MOD_ID, "archangel"))));
 
     public static final EntityType<TwistedTreantEntity> TWISTED_TREANT = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(RPGMobs.MOD_ID, "twisted_treant"),
+            Identifier.of(RPGMobs.MOD_ID, "twisted_treant"),
             EntityType.Builder.create(TwistedTreantEntity::new, SpawnGroup.MONSTER)
-                    .setDimensions(1.4f, 2.4f).build());
+                    .dimensions(1.4f, 2.4f).build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(RPGMobs.MOD_ID, "twisted_treant"))));
 
     public static final EntityType<TwistedTreantStandingEntity> TWISTED_TREANT_STANDING = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(RPGMobs.MOD_ID, "twisted_treant_standing"),
+            Identifier.of(RPGMobs.MOD_ID, "twisted_treant_standing"),
             EntityType.Builder.create(TwistedTreantStandingEntity::new, SpawnGroup.MONSTER)
-                    .setDimensions(1.4f, 2.4f).build());
+                    .dimensions(1.4f, 2.4f).build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(RPGMobs.MOD_ID, "twisted_treant_standing"))));
 
     public static final EntityType<ChimeraEntity> CHIMERA = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(RPGMobs.MOD_ID, "chimera"),
+            Identifier.of(RPGMobs.MOD_ID, "chimera"),
             EntityType.Builder.create(ChimeraEntity::new, SpawnGroup.MONSTER)
-                    .setDimensions(1.4f, 2.4f).build());
+                    .dimensions(1.4f, 2.4f).build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(RPGMobs.MOD_ID, "chimera"))));
 
     public static final EntityType<OrchidManeaterEntity> ORCHID_MANEATER = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(RPGMobs.MOD_ID, "orchid_maneater"),
+            Identifier.of(RPGMobs.MOD_ID, "orchid_maneater"),
             EntityType.Builder.create(OrchidManeaterEntity::new, SpawnGroup.MONSTER)
-                    .setDimensions(2.3f, 2.8f).build());
+                    .dimensions(2.3f, 2.8f).build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(RPGMobs.MOD_ID, "orchid_maneater"))));
 
     public static final EntityType<OrchidManeaterFlowerEntity> ORCHID_MANEATER_FLOWER = Registry.register(Registries.ENTITY_TYPE,
-            new Identifier(RPGMobs.MOD_ID, "orchid_maneater_flower"),
+            Identifier.of(RPGMobs.MOD_ID, "orchid_maneater_flower"),
             EntityType.Builder.create(OrchidManeaterFlowerEntity::new, SpawnGroup.MONSTER)
-                    .setDimensions(0.3f, 0.3f).build());
+                    .dimensions(0.3f, 0.3f).build(RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(RPGMobs.MOD_ID, "orchid_maneater_flower"))));
 
     public static void registerModEntites() {
         RPGMobs.LOGGER.info("Registering ModEntities for " + RPGMobs.MOD_ID);
+    }
+
+    private static <T extends Entity> EntityType<T> register(String name, EntityType.Builder<T> builder) {
+        RegistryKey<EntityType<?>> key = RegistryKey.of(RegistryKeys.ENTITY_TYPE, Identifier.of(RPGMobs.MOD_ID, name));
+
+        return Registry.register(Registries.ENTITY_TYPE, key, builder.build(key));
     }
 }

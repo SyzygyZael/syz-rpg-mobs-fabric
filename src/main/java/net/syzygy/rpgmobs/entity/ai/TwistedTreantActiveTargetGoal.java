@@ -14,11 +14,11 @@ public class TwistedTreantActiveTargetGoal<T extends LivingEntity> extends Activ
     }
 
     public boolean hasStaff() {
-        if (this.targetEntity instanceof PlayerEntity player && !player.getWorld().isClient()) {
-            ItemStack mainhandItem = player.getMainHandStack();
+        if (this.targetEntity instanceof PlayerEntity player && !player.getEntityWorld().isClient()) {
+            ItemStack mainHandItem = player.getMainHandStack();
             ItemStack offhandItem = player.getOffHandStack();
 
-            if (mainhandItem.getItem() instanceof StaffOfTheForestMonarchItem || offhandItem.getItem() instanceof StaffOfTheForestMonarchItem) {
+            if (mainHandItem.getItem() instanceof StaffOfTheForestMonarchItem || offhandItem.getItem() instanceof StaffOfTheForestMonarchItem) {
                 return true;
             } else {
                 return false;

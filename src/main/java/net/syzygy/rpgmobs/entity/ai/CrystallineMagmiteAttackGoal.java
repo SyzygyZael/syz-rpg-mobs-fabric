@@ -3,6 +3,7 @@ package net.syzygy.rpgmobs.entity.ai;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.entity.mob.PathAwareEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Hand;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteEntity;
 
@@ -62,9 +63,11 @@ public class CrystallineMagmiteAttackGoal extends MeleeAttackGoal {
     }
 
     protected void performAttack(LivingEntity pEnemy) {
+        ServerWorld serverWorld = (ServerWorld) this.entity.getEntityWorld();
+
         this.resetAttackCooldown();
         this.mob.swingHand(Hand.MAIN_HAND);
-        this.mob.tryAttack(pEnemy);
+        this.mob.tryAttack(serverWorld, pEnemy);
     }
 
     @Override
