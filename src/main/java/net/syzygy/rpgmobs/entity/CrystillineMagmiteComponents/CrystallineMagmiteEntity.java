@@ -21,8 +21,10 @@ import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
@@ -224,11 +226,22 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
         this.attacker = targetMob;
     }
 
-    public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
-                world.getFluidState(pos).isEmpty() &&
-                world.getLightLevel(pos) >= 0;
+    @Override
+    public boolean canSpawn(WorldView world) {
+        if (world instanceof ServerWorld serverWorld) {
+            if (serverWorld.getDifficulty() ==  Difficulty.PEACEFUL) {
+                return false;
+            }
+        }
+
+        return super.canSpawn(world);
     }
+
+    // public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+    //     return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
+    //             world.getFluidState(pos).isEmpty() &&
+    //             world.getLightLevel(pos) >= 0;
+    // }
 
     @Override
     protected @Nullable SoundEvent getAmbientSound() {

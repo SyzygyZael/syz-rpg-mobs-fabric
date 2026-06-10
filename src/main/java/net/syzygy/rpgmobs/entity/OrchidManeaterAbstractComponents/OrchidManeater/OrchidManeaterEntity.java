@@ -10,18 +10,15 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.config.ModConfig;
@@ -40,13 +37,19 @@ public class OrchidManeaterEntity extends AnimalEntity {
     public final AnimationState attackAnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
     public final AnimationState spawnAnimationState = new AnimationState();
+    public final AnimationState walkAnimationState = new AnimationState();
 
     public OrchidManeaterEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
 
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
+    }
+
     public static final EntityModelLayer ORCHID_MANEATER =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "orchid_maneater"), "main");
+            new EntityModelLayer(Identifier.of(RPGMobs.MOD_ID, "orchid_maneater"), "main");
 
     @Override
     protected void initGoals() {
@@ -61,11 +64,11 @@ public class OrchidManeaterEntity extends AnimalEntity {
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED, (double)0.30F)
-                .add(EntityAttributes.GENERIC_ARMOR, (double)2.5F)
-                .add(EntityAttributes.GENERIC_ATTACK_DAMAGE, ModConfig.orchidManeaterAttackDamage)
-                .add(EntityAttributes.GENERIC_FOLLOW_RANGE, (double)32.0F)
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double)30.0F);
+                .add(EntityAttributes.MOVEMENT_SPEED, (double)0.30F)
+                .add(EntityAttributes.ARMOR, (double)2.5F)
+                .add(EntityAttributes.ATTACK_DAMAGE, ModConfig.orchidManeaterAttackDamage)
+                .add(EntityAttributes.FOLLOW_RANGE, (double)32.0F)
+                .add(EntityAttributes.MAX_HEALTH, (double)30.0F);
     }
 
     private void setupAnimationStates() {
@@ -96,14 +99,14 @@ public class OrchidManeaterEntity extends AnimalEntity {
             f = 0.0F;
         }
 
-        this.limbAnimator.updateLimbs(f, 0.2F);
+        this.limbAnimator.updateLimbs(f, 0.2F, 1.0F);
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (this.getWorld().isClient()) {
+        if (this.getEntityWorld().isClient()) {
             this.setupAnimationStates();
         }
     }
@@ -115,17 +118,17 @@ public class OrchidManeaterEntity extends AnimalEntity {
         spawnAnimationState.start(this.age);
     }
 
-    public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
-                world.getFluidState(pos).isEmpty() &&
-                world.getLightLevel(pos) >= 0;
-    }
+    // public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+    //     return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
+    //             world.getFluidState(pos).isEmpty() &&
+    //             world.getLightLevel(pos) >= 0;
+    // }
 
     @Override
-    protected void initDataTracker() {
-        super.initDataTracker();
-        this.dataTracker.startTracking(ATTACKING, false);
-        this.dataTracker.startTracking(DATA_ID_TYPE_VARIANT, 0);
+    protected void initDataTracker(DataTracker.Builder builder) {
+        super.initDataTracker(builder);
+        builder.add(ATTACKING, false);
+        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void setAttacking(boolean attacking) {
@@ -134,11 +137,6 @@ public class OrchidManeaterEntity extends AnimalEntity {
 
     public boolean isAttacking() {
         return this.dataTracker.get(ATTACKING);
-    }
-
-    @Override
-    protected boolean isDisallowedInPeaceful() {
-        return true;
     }
 
     @Override

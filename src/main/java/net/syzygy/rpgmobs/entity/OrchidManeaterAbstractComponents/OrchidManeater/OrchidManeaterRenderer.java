@@ -1,28 +1,34 @@
 package net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater;
 
-import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.render.entity.MobEntityRenderer;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.client.RPGMobsEntityModelLayers;
 
-public class OrchidManeaterRenderer extends MobEntityRenderer<OrchidManeaterEntity, OrchidManeaterModel<OrchidManeaterEntity>> {
-    private static final Identifier TEXTURE = new Identifier(RPGMobs.MOD_ID, "textures/entity/orchid_maneater.png");
+public class OrchidManeaterRenderer extends MobEntityRenderer<OrchidManeaterEntity, OrchidManeaterRenderState, OrchidManeaterModel> {
+    private static final Identifier TEXTURE = Identifier.of(RPGMobs.MOD_ID, "textures/entity/orchid_maneater.png");
 
-    public OrchidManeaterRenderer(EntityRendererFactory.Context ctx) {
-        super(ctx, new OrchidManeaterModel<>(ctx.getPart(OrchidManeaterEntity.ORCHID_MANEATER)), 0.7f);
+    public OrchidManeaterRenderer(EntityRendererFactory.Context context) {
+        super(context, new OrchidManeaterModel(context.getPart(RPGMobsEntityModelLayers.ORCHID_MANEATER)), 0.0F);
     }
 
     @Override
-    public Identifier getTexture(OrchidManeaterEntity entity) {
+    public OrchidManeaterRenderState createRenderState() {
+        return new OrchidManeaterRenderState();
+    }
+
+    @Override
+    public Identifier getTexture(OrchidManeaterRenderState state) {
         return TEXTURE;
     }
 
     @Override
-    public void render(OrchidManeaterEntity mobEntity, float f, float g, MatrixStack matrixStack,
-                       VertexConsumerProvider vertexConsumerProvider, int i) {
-        matrixStack.scale(1F, 1F, 1F);
-        super.render(mobEntity, f, g, matrixStack, vertexConsumerProvider, i);
+    public void updateRenderState(OrchidManeaterEntity livingEntity, OrchidManeaterRenderState livingEntityRenderState, float f) {
+        super.updateRenderState(livingEntity, livingEntityRenderState, f);
+
+        livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
+        livingEntityRenderState.walkingAnimationState.copyFrom(livingEntity.walkAnimationState);
+        livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.attackAnimationState);
     }
 }

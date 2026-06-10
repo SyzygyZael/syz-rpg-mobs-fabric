@@ -6,13 +6,13 @@ package net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeate
 
 import net.minecraft.client.model.*;
 import net.minecraft.client.render.VertexConsumer;
+import net.minecraft.client.render.entity.animation.Animation;
 import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.render.entity.model.SinglePartEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
+import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelAnimations;
 
-public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SinglePartEntityModel<T> {
+public class OrchidManeaterModel extends EntityModel<OrchidManeaterRenderState> {
     private final ModelPart orchid_maneater;
     private final ModelPart stem;
     private final ModelPart neck;
@@ -33,10 +33,16 @@ public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SingleP
     private final ModelPart leg_4;
     private final ModelPart leg4;
 
+    private final Animation idleAnimation;
+    private final Animation walkingAnimation;
+    private final Animation attack1Animation;
+
     public float headYaw;
     public float headPitch;
 
     public OrchidManeaterModel (ModelPart root) {
+        super(root);
+
         this.orchid_maneater = root.getChild("orchid_maneater");
         this.stem = this.orchid_maneater.getChild("stem");
         this.leg_1 = this.orchid_maneater.getChild("leg_1");
@@ -56,13 +62,17 @@ public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SingleP
         this.bottom_half = this.head.getChild("bottom_half");
         this.bottom_teeth = this.bottom_half.getChild("bottom_teeth");
         this.leaves = this.head.getChild("leaves");
+
+        this.idleAnimation = OrchidManeaterAnimations.idle_animation.createAnimation(root);
+        this.walkingAnimation = OrchidManeaterAnimations.walking_animation.createAnimation(root);
+        this.attack1Animation = OrchidManeaterAnimations.attack_animation.createAnimation(root);
     }
     public static TexturedModelData getTexturedModelData() {
         ModelData modelData = new ModelData();
         ModelPartData modelPartData = modelData.getRoot();
-        ModelPartData orchid_maneater = modelPartData.addChild("orchid_maneater", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 24.0F, 0.0F));
+        ModelPartData orchid_maneater = modelPartData.addChild("orchid_maneater", ModelPartBuilder.create(), ModelTransform.of(0.0F, 24.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 
-        ModelPartData stem = orchid_maneater.addChild("stem", ModelPartBuilder.create().uv(48, 28).cuboid(-1.0F, -6.0F, -1.0F, 2.0F, 6.0F, 2.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, -4.0F, 0.0F));
+        ModelPartData stem = orchid_maneater.addChild("stem", ModelPartBuilder.create().uv(48, 28).cuboid(-1.0F, -6.0F, -1.0F, 2.0F, 6.0F, 2.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -4.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r1 = stem.addChild("cube_r1", ModelPartBuilder.create().uv(8, 66).cuboid(-1.0F, -4.4024F, -0.7604F, 2.0F, 8.0F, 2.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -22.0F, 8.0F, -0.3927F, 0.0F, 0.0F));
 
@@ -70,13 +80,13 @@ public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SingleP
 
         ModelPartData cube_r3 = stem.addChild("cube_r3", ModelPartBuilder.create().uv(58, 56).cuboid(-1.0F, -8.0F, -1.0F, 2.0F, 8.0F, 2.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -6.0F, 0.0F, -0.2618F, 0.0F, 0.0F));
 
-        ModelPartData neck = stem.addChild("neck", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -25.0F, 10.0F));
+        ModelPartData neck = stem.addChild("neck", ModelPartBuilder.create(), ModelTransform.of(0.0F, -25.0F, 10.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r4 = neck.addChild("cube_r4", ModelPartBuilder.create().uv(66, 47).cuboid(-1.0F, -4.4024F, -0.7604F, 2.0F, 8.0F, 2.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -8.0F, -7.0F, 1.2217F, 0.0F, 0.0F));
 
         ModelPartData cube_r5 = neck.addChild("cube_r5", ModelPartBuilder.create().uv(16, 66).cuboid(-1.0F, -4.4024F, -0.7604F, 2.0F, 8.0F, 2.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -3.0F, -2.0F, 0.5236F, 0.0F, 0.0F));
 
-        ModelPartData head = neck.addChild("head", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, -6.0F, -10.0F));
+        ModelPartData head = neck.addChild("head", ModelPartBuilder.create(), ModelTransform.of(0.0F, -6.0F, -10.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData top_half = head.addChild("top_half", ModelPartBuilder.create().uv(0, 0).cuboid(-5.0F, -4.9128F, -13.9962F, 10.0F, 5.0F, 14.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, -3.0F, 0.0F, 0.1309F, 0.0F, 0.0F));
 
@@ -93,7 +103,7 @@ public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SingleP
                 .uv(1, 1).cuboid(-5.0F, -3.0F, -8.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F))
                 .uv(1, 1).cuboid(-5.0F, -3.0F, -10.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F))
                 .uv(1, 1).cuboid(-5.0F, -3.0F, -12.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F))
-                .uv(1, 1).cuboid(-5.0F, -3.0F, -14.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 3.0F, 0.0F));
+                .uv(1, 1).cuboid(-5.0F, -3.0F, -14.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 3.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r6 = top_teeth.addChild("cube_r6", ModelPartBuilder.create().uv(1, 1).cuboid(-1.0F, -2.0F, 0.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(4.0F, -1.0F, -13.0F, 0.0F, -1.5708F, 0.0F));
 
@@ -126,7 +136,7 @@ public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SingleP
                 .uv(1, 1).cuboid(5.0F, -6.0F, -7.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F))
                 .uv(1, 1).cuboid(5.0F, -6.0F, -9.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F))
                 .uv(1, 1).cuboid(5.0F, -6.0F, -11.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F))
-                .uv(1, 1).cuboid(5.0F, -6.0F, -13.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 3.5845F, 0.3888F));
+                .uv(1, 1).cuboid(5.0F, -6.0F, -13.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(0.0F, 3.5845F, 0.3888F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData cube_r14 = bottom_teeth.addChild("cube_r14", ModelPartBuilder.create().uv(1, 1).cuboid(-1.0F, -2.0F, 0.0F, 0.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(-5.0F, -4.0F, -15.0F, 0.0F, 1.5708F, 0.0F));
 
@@ -148,7 +158,7 @@ public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SingleP
 
         ModelPartData cube_r21 = right_leaf.addChild("cube_r21", ModelPartBuilder.create().uv(0, 56).cuboid(-1.0F, -3.2766F, -8.2943F, 3.0F, 0.0F, 10.0F, new Dilation(0.0F)), ModelTransform.of(1.0F, -2.4214F, 4.3372F, 0.4363F, 0.0F, 0.0F));
 
-        ModelPartData leg_1 = orchid_maneater.addChild("leg_1", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData leg_1 = orchid_maneater.addChild("leg_1", ModelPartBuilder.create(), ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData leg1 = leg_1.addChild("leg1", ModelPartBuilder.create(), ModelTransform.of(0.0F, 0.0F, 2.0F, 0.0F, 0.0F, 0.2618F));
 
@@ -158,7 +168,7 @@ public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SingleP
 
         ModelPartData cube_r24 = leg1.addChild("cube_r24", ModelPartBuilder.create().uv(42, 56).cuboid(0.0F, -16.0F, -1.0F, 1.0F, 16.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(-1.0F, -4.0F, -1.0F, -0.4363F, 0.0F, 0.4363F));
 
-        ModelPartData leg_2 = orchid_maneater.addChild("leg_2", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData leg_2 = orchid_maneater.addChild("leg_2", ModelPartBuilder.create(), ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData leg2 = leg_2.addChild("leg2", ModelPartBuilder.create(), ModelTransform.of(0.0F, 0.0F, 2.0F, -0.2378F, -1.4824F, 0.0242F));
 
@@ -168,7 +178,7 @@ public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SingleP
 
         ModelPartData cube_r27 = leg2.addChild("cube_r27", ModelPartBuilder.create().uv(46, 56).cuboid(-1.6905F, -19.2856F, -2.5321F, 1.0F, 16.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(-1.8856F, 0.0F, 0.1293F, -0.4363F, 0.0F, 0.4363F));
 
-        ModelPartData leg_3 = orchid_maneater.addChild("leg_3", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData leg_3 = orchid_maneater.addChild("leg_3", ModelPartBuilder.create(), ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData leg3 = leg_3.addChild("leg3", ModelPartBuilder.create(), ModelTransform.of(-1.0F, 0.0F, 0.0F, 2.971F, -0.0948F, 3.0984F));
 
@@ -178,7 +188,7 @@ public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SingleP
 
         ModelPartData cube_r30 = leg3.addChild("cube_r30", ModelPartBuilder.create().uv(38, 56).cuboid(-1.6345F, -14.0208F, -2.8776F, 1.0F, 20.0F, 1.0F, new Dilation(0.0F)), ModelTransform.of(9.0F, -13.0F, 10.0F, -2.2291F, 0.8638F, 0.2939F));
 
-        ModelPartData leg_4 = orchid_maneater.addChild("leg_4", ModelPartBuilder.create(), ModelTransform.pivot(0.0F, 0.0F, 0.0F));
+        ModelPartData leg_4 = orchid_maneater.addChild("leg_4", ModelPartBuilder.create(), ModelTransform.of(0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F));
 
         ModelPartData leg4 = leg_4.addChild("leg4", ModelPartBuilder.create(), ModelTransform.of(1.0F, 0.0F, 0.0F, 1.9636F, 1.3837F, 2.0213F));
 
@@ -191,16 +201,12 @@ public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SingleP
     }
 
     @Override
-    public void render(MatrixStack matrices, VertexConsumer vertexConsumer, int light, int overlay, float red, float green, float blue, float alpha) {
-        orchid_maneater.render(matrices, vertexConsumer, light, overlay, red, green, blue, alpha);
+    public void setAngles(OrchidManeaterRenderState state) {
+        super.setAngles(state);
+        this.setHeadAngles(state.headYaw, state.headPitch);
     }
 
-    @Override
-    public ModelPart getPart() {
-        return orchid_maneater;
-    }
-
-    private void setHeadAngles(OrchidManeaterEntity entity, float headYaw, float headPitch, float animationProgress) {
+    private void setHeadAngles(float headYaw, float headPitch) {
         headYaw	= MathHelper.clamp(headYaw, -30.0F, 30.0F);
         headPitch = MathHelper.clamp(headPitch, -25.0F, 45.0F);
 
@@ -216,16 +222,5 @@ public class OrchidManeaterModel<T extends OrchidManeaterEntity> extends SingleP
 
     public void setHeadPitch(float headPitch) {
         this.headPitch = headPitch;
-    }
-
-    @Override
-    public void setAngles(OrchidManeaterEntity entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-        this.getPart().traverse().forEach(ModelPart::resetTransform);
-        this.setHeadAngles(entity, netHeadYaw, headPitch, ageInTicks);
-
-        this.animateMovement(OrchidManeaterAnimations.walking_animation, limbSwing, limbSwingAmount, 2f, 2.5f);
-        this.updateAnimation(entity.idleAnimationState, OrchidManeaterAnimations.idle_animation, ageInTicks, 1f);
-        this.updateAnimation(entity.attackAnimationState, OrchidManeaterAnimations.attack_animation, ageInTicks, 1f);
-        this.updateAnimation(entity.spawnAnimationState, OrchidManeaterAnimations.spawn_animation, ageInTicks, 1f);
     }
 }

@@ -1,23 +1,20 @@
 package net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeaterFlower;
 
 import net.minecraft.client.render.entity.model.EntityModelLayer;
-import net.minecraft.entity.AnimationState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.SpawnReason;
 import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.mob.HostileEntity;
-import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.AnimalEntity;
 import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.random.Random;
-import net.minecraft.world.ServerWorldAccess;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.World;
+import net.minecraft.world.WorldView;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater.OrchidManeaterEntity;
@@ -26,18 +23,23 @@ import org.jetbrains.annotations.Nullable;
 public class OrchidManeaterFlowerEntity extends AnimalEntity {
 
     private final OrchidManeaterEntity orchidManeater =
-            new OrchidManeaterEntity(ModEntities.ORCHID_MANEATER, getWorld());
+            new OrchidManeaterEntity(ModEntities.ORCHID_MANEATER, getEntityWorld());
 
     public OrchidManeaterFlowerEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
     }
 
+    @Override
+    public boolean isBreedingItem(ItemStack stack) {
+        return false;
+    }
+
     public static final EntityModelLayer ORCHID_MANEATER_FLOWER =
-            new EntityModelLayer(new Identifier(RPGMobs.MOD_ID, "orchid_maneater_flower"), "main");
+            new EntityModelLayer(Identifier.of(RPGMobs.MOD_ID, "orchid_maneater_flower"), "main");
 
     public static DefaultAttributeContainer.Builder createAttributes() {
         return HostileEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, (double)30.0F);
+                .add(EntityAttributes.MAX_HEALTH, (double)30.0F);
     }
 
     @Override
@@ -46,8 +48,14 @@ public class OrchidManeaterFlowerEntity extends AnimalEntity {
     }
 
     @Override
-    protected boolean isDisallowedInPeaceful() {
-        return true;
+    public boolean canSpawn(WorldView world) {
+        if (world instanceof ServerWorld serverWorld) {
+            if (serverWorld.getDifficulty() ==  Difficulty.PEACEFUL) {
+                return false;
+            }
+        }
+
+        return super.canSpawn(world);
     }
 
     @Override
@@ -59,8 +67,8 @@ public class OrchidManeaterFlowerEntity extends AnimalEntity {
     public void tick() {
         super.tick();
 
-        if (!this.getWorld().isClient()) {
-            PlayerEntity nearbyPlayer = this.getWorld().getClosestPlayer(
+        if (!this.getEntityWorld().isClient()) {
+            PlayerEntity nearbyPlayer = this.getEntityWorld().getClosestPlayer(
                     this.getX(),
                     this.getY(),
                     this.getZ(),
@@ -77,17 +85,17 @@ public class OrchidManeaterFlowerEntity extends AnimalEntity {
                         this.getPitch()
                 );
 
-                this.getWorld().spawnEntity(orchidManeater);
+                this.getEntityWorld().spawnEntity(orchidManeater);
                 this.remove(Entity.RemovalReason.DISCARDED);
             }
         }
     }
 
-    public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-        return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
-                world.getFluidState(pos).isEmpty() &&
-                world.getLightLevel(pos) >= 0;
-    }
+    // public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+    //     return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
+    //             world.getFluidState(pos).isEmpty() &&
+    //             world.getLightLevel(pos) >= 0;
+    // }
 
     @Override
     public @Nullable PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {

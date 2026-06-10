@@ -1,9 +1,6 @@
 package net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater;
 
-import net.minecraft.client.render.entity.animation.Animation;
-import net.minecraft.client.render.entity.animation.AnimationHelper;
-import net.minecraft.client.render.entity.animation.Keyframe;
-import net.minecraft.client.render.entity.animation.Transformation;
+import net.minecraft.client.render.entity.animation.*;
 
 /**
  * Made with Blockbench 5.1.4
@@ -11,7 +8,7 @@ import net.minecraft.client.render.entity.animation.Transformation;
  * @author Author
  */
 public class OrchidManeaterAnimations {
-    public static final Animation walking_animation = Animation.Builder.create(1.0F).looping()
+    public static final AnimationDefinition walking_animation = AnimationDefinition.Builder.create(1.0F).looping()
             .addBoneAnimation("leg1", new Transformation(Transformation.Targets.ROTATE,
                     new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR)
             ))
@@ -82,7 +79,7 @@ public class OrchidManeaterAnimations {
             ))
             .build();
 
-    public static final Animation idle_animation = Animation.Builder.create(2.0F).looping()
+    public static final AnimationDefinition idle_animation = AnimationDefinition.Builder.create(2.0F).looping()
             .addBoneAnimation("head", new Transformation(Transformation.Targets.ROTATE,
                     new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(1.0F, AnimationHelper.createRotationalVector(-7.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -110,7 +107,7 @@ public class OrchidManeaterAnimations {
             ))
             .build();
 
-    public static final Animation attack_animation = Animation.Builder.create(1.0F)
+    public static final AnimationDefinition attack_animation = AnimationDefinition.Builder.create(1.0F)
             .addBoneAnimation("head", new Transformation(Transformation.Targets.ROTATE,
                     new Keyframe(0.0F, AnimationHelper.createRotationalVector(0.0F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.5F, AnimationHelper.createRotationalVector(-12.5F, 0.0F, 0.0F), Transformation.Interpolations.LINEAR),
@@ -150,7 +147,7 @@ public class OrchidManeaterAnimations {
             ))
             .build();
 
-    public static final Animation spawn_animation = Animation.Builder.create(0.1667F)
+    public static final AnimationDefinition spawn_animation = AnimationDefinition.Builder.create(0.1667F)
             .addBoneAnimation("orchid_maneater", new Transformation(Transformation.Targets.SCALE,
                     new Keyframe(0.0F, AnimationHelper.createScalingVector(0.1F, 0.1F, 0.1F), Transformation.Interpolations.LINEAR),
                     new Keyframe(0.1667F, AnimationHelper.createScalingVector(1.0F, 1.0F, 1.0F), Transformation.Interpolations.LINEAR)

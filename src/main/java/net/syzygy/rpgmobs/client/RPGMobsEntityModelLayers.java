@@ -22,6 +22,7 @@ public final class RPGMobsEntityModelLayers {
     public static final EntityModelLayer COBBLE_PROJECTILE = new EntityModelLayer(RPGMobs.makeID("cobble_projectile"), "main");
     public static final EntityModelLayer CRYSTALLINE_MAGMITE = new EntityModelLayer(RPGMobs.makeID("crystalline_magmite"), "main");
     public static final EntityModelLayer ORCHID_MANEATER = new EntityModelLayer(RPGMobs.makeID("orchid_maneater"), "main");
+    public static final EntityModelLayer ORCHID_MANEATER_FLOWER = new EntityModelLayer(RPGMobs.makeID("orchid_maneater_flower"), "main");
     public static final EntityModelLayer TWISTED_TREANT = new EntityModelLayer(RPGMobs.makeID("twisted_treant"), "main");
     public static final EntityModelLayer TWISTED_TREANT_STANDING = new EntityModelLayer(RPGMobs.makeID("twisted_treant_standing"), "main");
 
