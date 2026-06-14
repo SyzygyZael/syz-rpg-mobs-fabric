@@ -7,7 +7,6 @@ import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class DarkIronFragmentItem extends Item {

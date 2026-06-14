@@ -12,7 +12,7 @@ public class ModSounds {
     public static final SoundEvent ORCHID_MANEATER_DEATH = registerSoundEvent("orchid_maneater_death");
 
     private static SoundEvent registerSoundEvent(String name) {
-        Identifier identifier = new Identifier(RPGMobs.MOD_ID, name);
+        Identifier identifier = Identifier.of(RPGMobs.MOD_ID, name);
         return Registry.register(Registries.SOUND_EVENT, identifier, SoundEvent.of(identifier));
     }
 

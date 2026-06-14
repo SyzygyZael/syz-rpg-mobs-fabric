@@ -1,78 +1,36 @@
 package net.syzygy.rpgmobs.item;
 
-import net.minecraft.item.ArmorItem;
-import net.minecraft.item.ArmorMaterial;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.sound.SoundEvent;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentAsset;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
+import net.minecraft.item.equipment.EquipmentType;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import net.syzygy.rpgmobs.RPGMobs;
 
-import java.util.function.Supplier;
+import java.util.Map;
 
-public enum ModArmorMaterials implements ArmorMaterial {
-    CRYSTALLINE_MAGMITE("crystalline_magmite", 20, new int[] { 3, 7, 6, 3 }, 19,
-            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, 1.5f, 0.1f, () -> Ingredient.ofItems(ModItems.KANDRA_CORE));
+public class ModArmorMaterials {
 
-    private final String name;
-    private final int durabilityMultiplier;
-    private final int[] protectionAmounts;
-    private final int enchantability;
-    private final SoundEvent equipSound;
-    private final float toughness;
-    private final float knockbackResistance;
-    private final Supplier<Ingredient> repairIngredient;
+    public static final RegistryKey<EquipmentAsset> CRYSTALLINE_MAGMITE_KEY = RegistryKey.of(
+            EquipmentAssetKeys.REGISTRY_KEY,
+            Identifier.of(RPGMobs.MOD_ID, "crystalline_magmite")
+    );
 
-    private static final int[] BASE_DURABILITY = { 11, 16, 15, 13 };
-
-    ModArmorMaterials(String name, int durabilityMultiplier, int[] protectionAmounts, int enchantability, SoundEvent equipSound,
-                      float toughness, float knockbackResistance, Supplier<Ingredient> repairIngredient) {
-        this.name = name;
-        this.durabilityMultiplier = durabilityMultiplier;
-        this.protectionAmounts = protectionAmounts;
-        this.enchantability = enchantability;
-        this.equipSound = equipSound;
-        this.toughness = toughness;
-        this.knockbackResistance = knockbackResistance;
-        this.repairIngredient = repairIngredient;
-    }
-
-    @Override
-    public int getDurability(ArmorItem.Type type) {
-        return BASE_DURABILITY[type.ordinal()] * this.durabilityMultiplier;
-    }
-
-    @Override
-    public int getProtection(ArmorItem.Type type) {
-        return protectionAmounts[type.ordinal()];
-    }
-
-    @Override
-    public int getEnchantability() {
-        return this.enchantability;
-    }
-
-    @Override
-    public SoundEvent getEquipSound() {
-        return this.equipSound;
-    }
-
-    @Override
-    public Ingredient getRepairIngredient() {
-        return this.repairIngredient.get();
-    }
-
-    @Override
-    public String getName() {
-        return RPGMobs.MOD_ID + ":" + this.name;
-    }
-
-    @Override
-    public float getToughness() {
-        return this.toughness;
-    }
-
-    @Override
-    public float getKnockbackResistance() {
-        return this.knockbackResistance;
-    }
+    public static final ArmorMaterial CRYSTALLINE_MAGMITE = new ArmorMaterial(
+            20 * 25,  // base durability (multiplier * base)
+            Map.of(
+                    EquipmentType.HELMET,     3,
+                    EquipmentType.CHESTPLATE, 7,
+                    EquipmentType.LEGGINGS,   6,
+                    EquipmentType.BOOTS,      3
+            ),
+            19,
+            SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE,
+            1.5f,
+            0.1f,
+            ModToolMaterials.KANDRA_CORE_TAG,
+            CRYSTALLINE_MAGMITE_KEY
+    );
 }

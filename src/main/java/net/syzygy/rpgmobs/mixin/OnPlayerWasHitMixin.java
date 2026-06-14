@@ -20,9 +20,9 @@ public class OnPlayerWasHitMixin {
 	private void onPlayerDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 
-		if (entity instanceof PlayerEntity player && source.getAttacker() != null && !player.getWorld().isClient) {
+		if (entity instanceof PlayerEntity player && source.getAttacker() != null && !player.getEntityWorld().isClient()) {
 			if (source.getAttacker() instanceof LivingEntity && !(source.getAttacker() instanceof TwistedTreantEntity)) {
-				TwistedTreantEntity treant = new TwistedTreantEntity(ModEntities.TWISTED_TREANT, player.getWorld());
+				TwistedTreantEntity treant = new TwistedTreantEntity(ModEntities.TWISTED_TREANT, player.getEntityWorld());
 
 				ItemStack mainHandItem = player.getMainHandStack();
 				ItemStack offHandItem = player.getOffHandStack();
@@ -37,8 +37,8 @@ public class OnPlayerWasHitMixin {
 					treant.refreshPositionAndAngles(spawnX, spawnY, spawnZ, spawnYaw, spawnPitch);
 
 					treant.setOwner(player);
-					treant.setTamed(true);
-					player.getWorld().spawnEntity(treant);
+					treant.setTamed(true, true);
+					player.getEntityWorld().spawnEntity(treant);
 					treant.setStandingPet(player);
 
 					treant.incrementTreantCounter();

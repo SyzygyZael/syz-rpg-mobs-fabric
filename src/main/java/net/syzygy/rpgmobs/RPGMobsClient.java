@@ -2,9 +2,7 @@ package net.syzygy.rpgmobs;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.minecraft.client.render.entity.EntityRendererFactories;
-import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelModel;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelRenderer;
@@ -30,8 +28,6 @@ import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.T
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingModel;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingRenderer;
-
-import javax.swing.text.html.parser.Entity;
 
 public class RPGMobsClient implements ClientModInitializer {
     @Override
