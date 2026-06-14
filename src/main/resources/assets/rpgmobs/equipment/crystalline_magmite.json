@@ -1,6 +1,14 @@
 {
-  "layers": [
-    { "texture": "rpgmobs:crystalline_magmite_layer_1" },
-    { "texture": "rpgmobs:crystalline_magmite_layer_2" }
-  ]
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "rpgmobs:crystalline_magmite"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "rpgmobs:crystalline_magmite"
+      }
+    ]
+  }
 }

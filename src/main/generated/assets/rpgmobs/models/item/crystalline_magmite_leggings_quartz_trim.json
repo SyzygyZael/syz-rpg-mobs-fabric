@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "rpgmobs:item/crystalline_magmite_leggings",
-    "layer1": "rpgmobs:crystalline_magmite_quartz"
-  }
-}
