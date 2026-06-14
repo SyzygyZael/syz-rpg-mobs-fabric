@@ -15,14 +15,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.config.ModConfig;
-import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantAbstractEntity;
 
 public class TwistedTreantStandingEntity extends TwistedTreantAbstractEntity {
     private static final TrackedData<Boolean> ATTACKING =
             DataTracker.registerData(TwistedTreantStandingEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
-            DataTracker.registerData(TwistedTreantStandingEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     public final AnimationState standingIdleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -112,7 +109,6 @@ public class TwistedTreantStandingEntity extends TwistedTreantAbstractEntity {
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(ATTACKING, false);
-        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void setAttacking(boolean attacking) {

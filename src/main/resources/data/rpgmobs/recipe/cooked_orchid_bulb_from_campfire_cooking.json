@@ -3,8 +3,8 @@
   "category": "food",
   "cookingtime": 600,
   "experience": 0.35,
-  "ingredient": {
-    "item": "rpgmobs:orchid_bulb"
-  },
-  "result": "rpgmobs:cooked_orchid_bulb"
+  "ingredient": "rpgmobs:orchid_bulb",
+  "result": {
+    "id": "rpgmobs:cooked_orchid_bulb"
+  }
 }

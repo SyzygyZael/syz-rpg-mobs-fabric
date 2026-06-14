@@ -4,8 +4,8 @@
   "cookingtime": 200,
   "experience": 1.0,
   "group": "dark_iron_fragment",
-  "ingredient": {
-    "item": "rpgmobs:dark_iron_fragment"
-  },
-  "result": "rpgmobs:dark_iron_ingot"
+  "ingredient": "rpgmobs:dark_iron_fragment",
+  "result": {
+    "id": "rpgmobs:dark_iron_ingot"
+  }
 }

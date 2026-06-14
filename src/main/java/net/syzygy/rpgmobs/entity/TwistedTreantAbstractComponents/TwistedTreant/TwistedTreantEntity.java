@@ -31,8 +31,6 @@ import net.syzygy.rpgmobs.sound.ModSounds;
 public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
     private static final TrackedData<Boolean> ATTACKING =
             DataTracker.registerData(TwistedTreantEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
-            DataTracker.registerData(TwistedTreantEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -188,7 +186,6 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(ATTACKING, false);
-        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void startInvincibility(int durationTicks) {

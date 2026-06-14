@@ -38,8 +38,6 @@ public class ChimeraEntity extends AnimalEntity {
             DataTracker.registerData(ChimeraEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Boolean> SHOOTING =
             DataTracker.registerData(ChimeraEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
-            DataTracker.registerData(ArchangelEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
@@ -214,7 +212,6 @@ public class ChimeraEntity extends AnimalEntity {
 
         builder.add(ATTACKING, false);
         builder.add(SHOOTING, false);
-        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void setAttacking(boolean attacking) {

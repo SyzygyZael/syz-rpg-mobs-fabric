@@ -39,9 +39,6 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
     private static final TrackedData<Boolean> SHOOTING =
             DataTracker.registerData(CrystallineMagmiteEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
-    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
-            DataTracker.registerData(CrystallineMagmiteEntity.class, TrackedDataHandlerRegistry.INTEGER);
-
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     public final AnimationState attack1AnimationState = new AnimationState();
@@ -154,7 +151,6 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
         super.initDataTracker(builder);
         builder.add(ATTACKING, false);
         builder.add(SHOOTING, false);
-        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void setAttacking(boolean attacking) {

@@ -8,7 +8,7 @@ public class ModConfig extends MidnightConfig {
     public static final String ITEMS = "items";
 
 
-    @Entry(category = ENTITIES) public static int archangelSpawnWeight = 4;
+    @Entry(category = ENTITIES) public static int archangelSpawnWeight = 2;
     @Entry(category = ENTITIES) public static int crystallineMagmiteSpawnWeight = 7;
     @Entry(category = ENTITIES) public static int twistedTreantSpawnWeight = 7;
     @Entry(category = ENTITIES) public static int chimeraSpawnWeight = 2;
@@ -20,7 +20,7 @@ public class ModConfig extends MidnightConfig {
     @Entry(category = ENTITIES) public static boolean chimeraDoSpawn = true;
     @Entry(category = ENTITIES) public static boolean orchidManeaterDoSpawn = true;
 
-    @Entry(category = ENTITIES) public static double archangelAttackDamage = 6.8F;
+    @Entry(category = ENTITIES) public static double archangelAttackDamage = 7.0F;
     @Entry(category = ENTITIES) public static double crystallineMagmiteAttackDamage = 6.0F;
     @Entry(category = ENTITIES) public static double twistedTreantAttackDamage = 5.8F;
     @Entry(category = ENTITIES) public static double standingTwistedTreantAttackDamage = 6.8F;

@@ -1,6 +1,10 @@
 {
   "itemgroup.rpg_mobs_group": "Syz's RPG Mobs",
 
+  "tag.item.rpgmobs.chimera_heart_repair": "Chimera Heart",
+  "tag.item.rpgmobs.shard_blade_repair": "Shard Piece",
+  "tag.item.rpgmobs.kandra_core_repair": "Kandra Core",
+
   "entity.rpgmobs.crystalline_magmite": "Crystalline Magmite",
   "entity.rpgmobs.archangel": "Archangel",
   "entity.rpgmobs.twisted_treant": "Twisted Treant",

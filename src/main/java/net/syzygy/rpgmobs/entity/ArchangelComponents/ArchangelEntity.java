@@ -32,8 +32,6 @@ import org.jetbrains.annotations.Nullable;
 public class ArchangelEntity extends AnimalEntity {
     private static final TrackedData<Boolean> ATTACKING =
             DataTracker.registerData(ArchangelEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
-    private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
-            DataTracker.registerData(ArchangelEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState attack1AnimationState = new AnimationState();
@@ -67,7 +65,7 @@ public class ArchangelEntity extends AnimalEntity {
                 .add(EntityAttributes.MOVEMENT_SPEED, (double)0.30F)
                 .add(EntityAttributes.ATTACK_DAMAGE, (double) ModConfig.archangelAttackDamage)
                 .add(EntityAttributes.ARMOR, (double)3.0F)
-                .add(EntityAttributes.MAX_HEALTH, (double)45.0F);
+                .add(EntityAttributes.MAX_HEALTH, (double)60.0F);
     }
 
     private void setupAnimationStates() {
@@ -148,7 +146,6 @@ public class ArchangelEntity extends AnimalEntity {
     protected void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(ATTACKING, false);
-        builder.add(DATA_ID_TYPE_VARIANT, 0);
     }
 
     public void setAttacking(boolean attacking) {
