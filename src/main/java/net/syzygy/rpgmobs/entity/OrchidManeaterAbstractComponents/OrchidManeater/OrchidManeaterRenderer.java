@@ -30,5 +30,8 @@ public class OrchidManeaterRenderer extends MobEntityRenderer<OrchidManeaterEnti
         livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
         livingEntityRenderState.walkingAnimationState.copyFrom(livingEntity.walkAnimationState);
         livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.attackAnimationState);
+
+        livingEntityRenderState.limbFrequency = livingEntity.limbAnimator.getAnimationProgress(f);
+        livingEntityRenderState.limbAmplitudeMultiplier = livingEntity.limbAnimator.getAmplitude(f);
     }
 }

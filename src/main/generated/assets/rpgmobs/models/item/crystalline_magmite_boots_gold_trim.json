@@ -2,6 +2,6 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "rpgmobs:item/crystalline_magmite_boots",
-    "layer1": "minecraft:trims/items/boots_trim_gold"
+    "layer1": "rpgmobs:crystalline_magmite_gold"
   }
 }

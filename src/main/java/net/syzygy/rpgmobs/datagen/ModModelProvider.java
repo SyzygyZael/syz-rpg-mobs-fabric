@@ -1,12 +1,15 @@
 package net.syzygy.rpgmobs.datagen;
 
+import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider;
-import net.minecraft.data.client.BlockStateModelGenerator;
-import net.minecraft.data.client.ItemModelGenerator;
-import net.minecraft.data.client.Models;
-import net.minecraft.item.ArmorItem;
+import net.minecraft.client.data.BlockStateModelGenerator;
+import net.minecraft.client.data.ItemModelGenerator;
+import net.minecraft.client.data.Models;
+import net.minecraft.util.Identifier;
+import net.syzygy.rpgmobs.RPGMobs;
+import net.syzygy.rpgmobs.item.ModArmorMaterials;
 import net.syzygy.rpgmobs.item.ModItems;
+import org.jspecify.annotations.NonNull;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -14,7 +17,7 @@ public class ModModelProvider extends FabricModelProvider {
     }
 
     @Override
-    public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
+    public void generateBlockStateModels(@NonNull BlockStateModelGenerator blockStateModelGenerator) {
 
     }
 
@@ -29,9 +32,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ORCHID_BULB, Models.GENERATED);
         itemModelGenerator.register(ModItems.COOKED_ORCHID_BULB, Models.GENERATED);
 
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.CRYSTALLINE_MAGMITE_HELMET));
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.CRYSTALLINE_MAGMITE_CHESTPLATE));
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.CRYSTALLINE_MAGMITE_LEGGINGS));
-        itemModelGenerator.registerArmor(((ArmorItem) ModItems.CRYSTALLINE_MAGMITE_BOOTS));
+        itemModelGenerator.registerArmor(ModItems.CRYSTALLINE_MAGMITE_HELMET, ModArmorMaterials.CRYSTALLINE_MAGMITE_KEY, Identifier.of(RPGMobs.MOD_ID, "crystalline_magmite"), false);
+        itemModelGenerator.registerArmor(ModItems.CRYSTALLINE_MAGMITE_CHESTPLATE, ModArmorMaterials.CRYSTALLINE_MAGMITE_KEY, Identifier.of(RPGMobs.MOD_ID, "crystalline_magmite"), false);
+        itemModelGenerator.registerArmor(ModItems.CRYSTALLINE_MAGMITE_LEGGINGS, ModArmorMaterials.CRYSTALLINE_MAGMITE_KEY, Identifier.of(RPGMobs.MOD_ID, "crystalline_magmite"), false);
+        itemModelGenerator.registerArmor(ModItems.CRYSTALLINE_MAGMITE_BOOTS, ModArmorMaterials.CRYSTALLINE_MAGMITE_KEY, Identifier.of(RPGMobs.MOD_ID, "crystalline_magmite"), false);
     }
 }

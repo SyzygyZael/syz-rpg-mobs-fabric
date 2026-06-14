@@ -9,12 +9,16 @@ import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.data.TrackedDataHandlerRegistry;
 import net.minecraft.entity.mob.HostileEntity;
+import net.minecraft.entity.mob.MobEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.ServerWorldAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldView;
 import net.syzygy.rpgmobs.RPGMobs;
@@ -42,11 +46,17 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
     private int treantCounter = 0;
     private int timesInvincible = 0;
     private int standingAnimationCounter = 0;
-    private final TwistedTreantStandingEntity standingTreant =
-            new TwistedTreantStandingEntity(ModEntities.TWISTED_TREANT_STANDING, getEntityWorld());
+    private TwistedTreantStandingEntity standingTreant = null;
 
     public TwistedTreantEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
+    }
+
+    private TwistedTreantStandingEntity getStandingTreant() {
+        if (standingTreant == null) {
+            standingTreant = new TwistedTreantStandingEntity(ModEntities.TWISTED_TREANT_STANDING, this.getEntityWorld());
+        }
+        return standingTreant;
     }
 
     public static final EntityModelLayer TWISTED_TREANT =
@@ -146,7 +156,7 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
             }
 
             if (this.getInvincibilityTicks() == 0 && this.treantCounter == 0 && this.timesInvincible == 1 && !this.getEntityWorld().isClient()) {
-                standingTreant.refreshPositionAndAngles(
+                getStandingTreant().refreshPositionAndAngles(
                         this.getX(),
                         this.getY(),
                         this.getZ(),
@@ -154,11 +164,11 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
                         this.getPitch()
                 );
                 if (spawnedFromStaff) {
-                    standingTreant.age = this.age;
+                    getStandingTreant().age = this.age;
                 }
 
-                this.getEntityWorld().spawnEntity(standingTreant);
-                standingTreant.setHealth(18f);
+                this.getEntityWorld().spawnEntity(getStandingTreant());
+                getStandingTreant().setHealth(18f);
                 this.standingAnimationState.stop();
                 this.remove(Entity.RemovalReason.DISCARDED);
             }
@@ -199,8 +209,8 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
 
     public void setStandingPet(PlayerEntity staffOwner) {
         setSpawnedFromStaff(true);
-        standingTreant.setOwner(staffOwner);
-        standingTreant.setTamed(true, true);
+        getStandingTreant().setOwner(staffOwner);
+        getStandingTreant().setTamed(true, true);
     }
 
     @Override
@@ -214,9 +224,9 @@ public class TwistedTreantEntity extends TwistedTreantAbstractEntity {
         return super.canSpawn(world);
     }
 
-    // public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-    //     return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
-    //             world.getFluidState(pos).isEmpty() &&
-    //             world.getLightLevel(pos) >= 0;
-    // }
+    public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
+                world.getFluidState(pos).isEmpty() &&
+                world.getLightLevel(pos) >= 0;
+    }
 }

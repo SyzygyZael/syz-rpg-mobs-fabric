@@ -1,7 +1,6 @@
 {
   "layers": [
-    {
-      "texture": "rpgmobs:crystalline_magmite"
-    }
+    { "texture": "rpgmobs:crystalline_magmite_layer_1" },
+    { "texture": "rpgmobs:crystalline_magmite_layer_2" }
   ]
 }

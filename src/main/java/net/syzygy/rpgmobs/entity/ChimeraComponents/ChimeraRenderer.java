@@ -36,5 +36,8 @@ public class ChimeraRenderer extends MobEntityRenderer<ChimeraEntity, ChimeraRen
         livingEntityRenderState.slamAnimationState.copyFrom(livingEntity.slamAnimationState);
         livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.attack1AnimationState);
         livingEntityRenderState.attack2AnimationState.copyFrom(livingEntity.attack2AnimationState);
+
+        livingEntityRenderState.limbFrequency = livingEntity.limbAnimator.getAnimationProgress(f);
+        livingEntityRenderState.limbAmplitudeMultiplier = livingEntity.limbAnimator.getAmplitude(f);
     }
 }

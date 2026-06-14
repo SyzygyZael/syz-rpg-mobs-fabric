@@ -36,5 +36,8 @@ public class TwistedTreantRenderer extends MobEntityRenderer<TwistedTreantEntity
         livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.attack1AnimationState);
         livingEntityRenderState.attack2AnimationState.copyFrom(livingEntity.attack2AnimationState);
         livingEntityRenderState.standUpAnimationState.copyFrom(livingEntity.standingAnimationState);
+
+        livingEntityRenderState.limbFrequency = livingEntity.limbAnimator.getAnimationProgress(f);
+        livingEntityRenderState.limbAmplitudeMultiplier = livingEntity.limbAnimator.getAmplitude(f);
     }
 }

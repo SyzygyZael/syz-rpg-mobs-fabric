@@ -233,11 +233,11 @@ public class ChimeraEntity extends AnimalEntity {
         return this.dataTracker.get(SHOOTING);
     }
 
-    // public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-    //     return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
-    //             world.getFluidState(pos).isEmpty() &&
-    //             world.getLightLevel(pos) >= 0;
-    // }
+    public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
+                world.getFluidState(pos).isEmpty() &&
+                world.getLightLevel(pos) >= 0;
+    }
 
     @Override
     public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {

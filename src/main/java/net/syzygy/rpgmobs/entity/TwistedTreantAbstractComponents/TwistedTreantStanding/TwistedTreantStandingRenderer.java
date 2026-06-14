@@ -24,4 +24,17 @@ public class TwistedTreantStandingRenderer extends MobEntityRenderer<TwistedTrea
     public TwistedTreantStandingRenderState createRenderState() {
         return new TwistedTreantStandingRenderState();
     }
+
+    @Override
+    public void updateRenderState(TwistedTreantStandingEntity livingEntity, TwistedTreantStandingRenderState livingEntityRenderState, float f) {
+        super.updateRenderState(livingEntity, livingEntityRenderState, f);
+
+        livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.standingIdleAnimationState);
+        livingEntityRenderState.walkingAnimationState.copyFrom(livingEntity.standingWalkAnimationState);
+        livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.standingAttack1AnimationState);
+        livingEntityRenderState.attack2AnimationState.copyFrom(livingEntity.standingAttack2AnimationState);
+
+        livingEntityRenderState.limbFrequency = livingEntity.limbAnimator.getAnimationProgress(f);
+        livingEntityRenderState.limbAmplitudeMultiplier = livingEntity.limbAnimator.getAmplitude(f);
+    }
 }

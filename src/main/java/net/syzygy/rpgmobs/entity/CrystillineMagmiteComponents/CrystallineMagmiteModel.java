@@ -1,11 +1,11 @@
 package net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents;
 
 import net.minecraft.client.model.*;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.animation.Animation;
+import net.minecraft.client.render.entity.animation.AnimationHelper;
 import net.minecraft.client.render.entity.model.EntityModel;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.math.MathHelper;
+
 
 // Made with Blockbench 4.12.3
 // Exported for Minecraft version 1.17+ for Yarn
@@ -107,9 +107,10 @@ public class CrystallineMagmiteModel extends EntityModel<CrystallineMagmiteRende
 		this.setHeadAngles(state.netHeadYaw, state.netHeadPitch);
 
 		this.idleAnimation.apply(state.idleAnimationState, state.age);
-		this.walkAnimation.apply(state.walkAnimationState, state.age);
 		this.attack1Animation.apply(state.attack1AnimationState, state.age);
 		this.attack2Animation.apply(state.attack2AnimationState, state.age);
+
+		this.walkAnimation.applyWalking(state.limbFrequency, state.limbAmplitudeMultiplier, 2f, 2.5f);
 	}
 
 	private void setHeadAngles(float headYaw, float headPitch) {

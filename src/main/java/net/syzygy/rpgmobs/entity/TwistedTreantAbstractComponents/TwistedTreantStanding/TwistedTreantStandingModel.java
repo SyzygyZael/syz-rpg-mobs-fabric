@@ -230,9 +230,10 @@ public class TwistedTreantStandingModel extends EntityModel<TwistedTreantStandin
 		this.setHeadAngles(state.netHeadYaw, state.headPitch);
 
 		this.idleAnimation.apply(state.idleAnimationState, state.age);
-		this.walkingAnimation.apply(state.walkingAnimationState, state.age);
 		this.attack1Animation.apply(state.attack1AnimationState, state.age);
 		this.attack2Animation.apply(state.attack2AnimationState, state.age);
+
+		this.walkingAnimation.applyWalking(state.limbFrequency, state.limbAmplitudeMultiplier, 2f, 2.5f);
 	}
 
 	private void setHeadAngles(float headYaw, float headPitch) {

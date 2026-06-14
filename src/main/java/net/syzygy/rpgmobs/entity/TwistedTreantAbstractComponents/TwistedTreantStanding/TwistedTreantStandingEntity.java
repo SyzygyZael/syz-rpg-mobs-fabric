@@ -20,15 +20,16 @@ import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantAb
 
 public class TwistedTreantStandingEntity extends TwistedTreantAbstractEntity {
     private static final TrackedData<Boolean> ATTACKING =
-            DataTracker.registerData(TwistedTreantEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
+            DataTracker.registerData(TwistedTreantStandingEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
     private static final TrackedData<Integer> DATA_ID_TYPE_VARIANT =
-            DataTracker.registerData(TwistedTreantEntity.class, TrackedDataHandlerRegistry.INTEGER);
+            DataTracker.registerData(TwistedTreantStandingEntity.class, TrackedDataHandlerRegistry.INTEGER);
 
     public final AnimationState standingIdleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
     public final AnimationState standingAttack1AnimationState = new AnimationState();
     public final AnimationState standingAttack2AnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
+    public final AnimationState standingWalkAnimationState = new AnimationState();
 
     public TwistedTreantStandingEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);

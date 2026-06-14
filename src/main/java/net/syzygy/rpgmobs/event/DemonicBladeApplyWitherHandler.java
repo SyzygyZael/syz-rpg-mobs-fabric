@@ -12,11 +12,12 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 import net.syzygy.rpgmobs.item.ModItems;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 public class DemonicBladeApplyWitherHandler implements AttackEntityCallback {
     @Override
-    public ActionResult interact(PlayerEntity playerEntity, World world, Hand hand, Entity entity,
-                                 @Nullable EntityHitResult entityHitResult) {
+    public @NonNull ActionResult interact(@NonNull PlayerEntity playerEntity, @NonNull World world, @NonNull Hand hand, @NonNull Entity entity,
+                                          @Nullable EntityHitResult entityHitResult) {
 
         if (entity instanceof LivingEntity target && !world.isClient() && !playerEntity.isSpectator()) {
             if (playerEntity.getStackInHand(hand).getItem() == ModItems.DEMONIC_BLADE) {

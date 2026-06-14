@@ -10,6 +10,8 @@ public class TwistedTreantRenderState extends LivingEntityRenderState {
 
     public float netHeadYaw;
     public float headPitch;
+    public float limbFrequency;
+    public float limbAmplitudeMultiplier;
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState walkingAnimationState = new AnimationState();

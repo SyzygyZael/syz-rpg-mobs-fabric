@@ -8,6 +8,8 @@ import net.minecraft.entity.AnimationState;
 public class OrchidManeaterRenderState extends LivingEntityRenderState {
     public float headYaw;
     public float headPitch;
+    public float limbFrequency;
+    public float limbAmplitudeMultiplier;
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState walkingAnimationState = new AnimationState();

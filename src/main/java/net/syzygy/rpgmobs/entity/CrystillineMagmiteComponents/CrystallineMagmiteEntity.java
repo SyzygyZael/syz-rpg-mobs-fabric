@@ -47,6 +47,7 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
     public final AnimationState attack1AnimationState = new AnimationState();
     public int attackAnimationTimeout = 0;
     public final AnimationState attack2AnimationState = new AnimationState();
+    public final AnimationState walkAnimationState = new AnimationState();
 
     private LivingEntity attacker;
 
@@ -237,11 +238,11 @@ public class CrystallineMagmiteEntity extends AnimalEntity {
         return super.canSpawn(world);
     }
 
-    // public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
-    //     return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
-    //             world.getFluidState(pos).isEmpty() &&
-    //             world.getLightLevel(pos) >= 0;
-    // }
+    public static boolean canSpawn(EntityType<? extends MobEntity> type, ServerWorldAccess world, SpawnReason spawnReason, BlockPos pos, Random random) {
+        return world.getBlockState(pos.down()).isSolidBlock(world, pos.down()) &&
+                world.getFluidState(pos).isEmpty() &&
+                world.getLightLevel(pos) >= 0;
+    }
 
     @Override
     protected @Nullable SoundEvent getAmbientSound() {

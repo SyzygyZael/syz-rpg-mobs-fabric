@@ -40,7 +40,7 @@ public class ModEntitySpawns {
                     BiomeKeys.SNOWY_PLAINS,
                     BiomeKeys.SUNFLOWER_PLAINS
             ), SpawnGroup.MONSTER, ModEntities.CRYSTALLINE_MAGMITE, ModConfig.crystallineMagmiteSpawnWeight, 1, 1);
-            SpawnRestriction.register(ModEntities.CRYSTALLINE_MAGMITE, SpawnRestriction.Location.ON_GROUND,
+            SpawnRestriction.register(ModEntities.CRYSTALLINE_MAGMITE, SpawnRestriction.getLocation(ModEntities.CRYSTALLINE_MAGMITE),
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, CrystallineMagmiteEntity::canSpawn);
         }
 
@@ -65,7 +65,7 @@ public class ModEntitySpawns {
                     BiomeKeys.SNOWY_PLAINS,
                     BiomeKeys.SUNFLOWER_PLAINS
             ), SpawnGroup.MONSTER, ModEntities.ARCHANGEL, ModConfig.archangelSpawnWeight, 1, 1);
-            SpawnRestriction.register(ModEntities.ARCHANGEL, SpawnRestriction.Location.ON_GROUND,
+            SpawnRestriction.register(ModEntities.ARCHANGEL, SpawnRestriction.getLocation(ModEntities.ARCHANGEL),
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ArchangelEntity::canSpawn);
         }
 
@@ -88,7 +88,7 @@ public class ModEntitySpawns {
                     BiomeKeys.BAMBOO_JUNGLE,
                     BiomeKeys.FOREST
             ), SpawnGroup.MONSTER, ModEntities.TWISTED_TREANT, ModConfig.twistedTreantSpawnWeight, 1, 2);
-            SpawnRestriction.register(ModEntities.TWISTED_TREANT, SpawnRestriction.Location.ON_GROUND,
+            SpawnRestriction.register(ModEntities.TWISTED_TREANT, SpawnRestriction.getLocation(ModEntities.TWISTED_TREANT),
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, TwistedTreantEntity::canSpawn);
         }
 
@@ -109,7 +109,7 @@ public class ModEntitySpawns {
                     BiomeKeys.NETHER_WASTES,
                     BiomeKeys.SOUL_SAND_VALLEY
             ), SpawnGroup.MONSTER, ModEntities.CHIMERA, ModConfig.chimeraSpawnWeight, 1, 1);
-            SpawnRestriction.register(ModEntities.CHIMERA, SpawnRestriction.Location.ON_GROUND,
+            SpawnRestriction.register(ModEntities.CHIMERA, SpawnRestriction.getLocation(ModEntities.CHIMERA),
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, ChimeraEntity::canSpawn);
         }
 
@@ -147,7 +147,7 @@ public class ModEntitySpawns {
                     BiomeKeys.BAMBOO_JUNGLE,
                     BiomeKeys.FOREST
             ), SpawnGroup.MONSTER, ModEntities.ORCHID_MANEATER_FLOWER, ModConfig.orchidManeaterSpawnWeight, 1, 2);
-            SpawnRestriction.register(ModEntities.ORCHID_MANEATER_FLOWER, SpawnRestriction.Location.ON_GROUND,
+            SpawnRestriction.register(ModEntities.ORCHID_MANEATER_FLOWER, SpawnRestriction.getLocation(ModEntities.ORCHID_MANEATER_FLOWER),
                     Heightmap.Type.MOTION_BLOCKING_NO_LEAVES, OrchidManeaterFlowerEntity::canSpawn);
         }
     }

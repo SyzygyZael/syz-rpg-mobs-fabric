@@ -30,5 +30,9 @@ public class CrystallineMagmiteRenderer extends MobEntityRenderer<CrystallineMag
         livingEntityRenderState.idleAnimationState.copyFrom(livingEntity.idleAnimationState);
         livingEntityRenderState.attack1AnimationState.copyFrom(livingEntity.attack1AnimationState);
         livingEntityRenderState.attack2AnimationState.copyFrom(livingEntity.attack2AnimationState);
+        livingEntityRenderState.walkAnimationState.copyFrom(livingEntity.walkAnimationState);
+
+        livingEntityRenderState.limbFrequency = livingEntity.limbAnimator.getAnimationProgress(f);
+        livingEntityRenderState.limbAmplitudeMultiplier = livingEntity.limbAnimator.getAmplitude(f);
     }
 }

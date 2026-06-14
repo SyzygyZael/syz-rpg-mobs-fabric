@@ -8,6 +8,8 @@ import net.minecraft.entity.AnimationState;
 public class CrystallineMagmiteRenderState extends LivingEntityRenderState {
     public float netHeadYaw;
     public float netHeadPitch;
+    public float limbFrequency;
+    public float limbAmplitudeMultiplier;
 
     public final AnimationState idleAnimationState = new AnimationState();
     public final AnimationState walkAnimationState = new AnimationState();

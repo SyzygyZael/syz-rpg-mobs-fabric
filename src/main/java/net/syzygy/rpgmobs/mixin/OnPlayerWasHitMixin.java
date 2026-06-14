@@ -4,6 +4,7 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.world.ServerWorld;
 import net.syzygy.rpgmobs.config.ModConfig;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
@@ -16,13 +17,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public class OnPlayerWasHitMixin {
 
-    @Inject(method = "damage", at = @At("HEAD"))
-	private void onPlayerDamage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
+	@Inject(method = "damage", at = @At("HEAD"))
+	private void onPlayerDamage(ServerWorld world, DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 		LivingEntity entity = (LivingEntity) (Object) this;
 
-		if (entity instanceof PlayerEntity player && source.getAttacker() != null && !player.getEntityWorld().isClient()) {
+		if (entity instanceof PlayerEntity player && source.getAttacker() != null && !world.isClient()) {
 			if (source.getAttacker() instanceof LivingEntity && !(source.getAttacker() instanceof TwistedTreantEntity)) {
-				TwistedTreantEntity treant = new TwistedTreantEntity(ModEntities.TWISTED_TREANT, player.getEntityWorld());
+				TwistedTreantEntity treant = new TwistedTreantEntity(ModEntities.TWISTED_TREANT, world);
 
 				ItemStack mainHandItem = player.getMainHandStack();
 				ItemStack offHandItem = player.getOffHandStack();
@@ -35,12 +36,10 @@ public class OnPlayerWasHitMixin {
 					float spawnPitch = player.getPitch();
 
 					treant.refreshPositionAndAngles(spawnX, spawnY, spawnZ, spawnYaw, spawnPitch);
-
 					treant.setOwner(player);
 					treant.setTamed(true, true);
-					player.getEntityWorld().spawnEntity(treant);
+					world.spawnEntity(treant);
 					treant.setStandingPet(player);
-
 					treant.incrementTreantCounter();
 				}
 			}
