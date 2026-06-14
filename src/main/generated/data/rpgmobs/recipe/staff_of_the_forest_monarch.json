@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "P": "rpgmobs:treant_essence_gem",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    " SP",
+    " SS",
+    "S  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "rpgmobs:staff_of_the_forest_monarch"
+  }
+}
