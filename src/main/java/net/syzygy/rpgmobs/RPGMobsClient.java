@@ -15,6 +15,9 @@ import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileRend
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteEntity;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteModel;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteRenderer;
+import net.syzygy.rpgmobs.entity.MaleficSorceressComponents.MaleficSorceressEntity;
+import net.syzygy.rpgmobs.entity.MaleficSorceressComponents.MaleficSorceressModel;
+import net.syzygy.rpgmobs.entity.MaleficSorceressComponents.MaleficSorceressRenderer;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater.OrchidManeaterEntity;
 import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater.OrchidManeaterModel;
@@ -28,6 +31,9 @@ import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.T
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingModel;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingRenderer;
+import net.syzygy.rpgmobs.entity.WarpedBladeComponents.WarpedBladeEntity;
+import net.syzygy.rpgmobs.entity.WarpedBladeComponents.WarpedBladeModel;
+import net.syzygy.rpgmobs.entity.WarpedBladeComponents.WarpedBladeRenderer;
 
 public class RPGMobsClient implements ClientModInitializer {
     @Override
@@ -55,5 +61,11 @@ public class RPGMobsClient implements ClientModInitializer {
 
         EntityModelLayerRegistry.registerModelLayer(OrchidManeaterFlowerEntity.ORCHID_MANEATER_FLOWER, OrchidManeaterFlowerModel::getTexturedModelData);
         EntityRendererRegistry.register(ModEntities.ORCHID_MANEATER_FLOWER, OrchidManeaterFlowerRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(MaleficSorceressEntity.MALEFIC_SORCERESS, MaleficSorceressModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.MALEFIC_SORCERESS, MaleficSorceressRenderer::new);
+
+        EntityModelLayerRegistry.registerModelLayer(WarpedBladeEntity.WARPED_BLADE, WarpedBladeModel::getTexturedModelData);
+        EntityRendererRegistry.register(ModEntities.WARPED_BLADE_PROJECTILE, WarpedBladeRenderer::new);
     }
 }

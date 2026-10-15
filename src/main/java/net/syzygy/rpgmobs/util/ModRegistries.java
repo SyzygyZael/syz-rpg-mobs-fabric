@@ -6,6 +6,7 @@ import net.syzygy.rpgmobs.RPGMobs;
 import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
 import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraEntity;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteEntity;
+import net.syzygy.rpgmobs.entity.MaleficSorceressComponents.MaleficSorceressEntity;
 import net.syzygy.rpgmobs.entity.ModEntities;
 import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater.OrchidManeaterEntity;
 import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeaterFlower.OrchidManeaterFlowerEntity;
@@ -30,6 +31,7 @@ public class ModRegistries {
         FabricDefaultAttributeRegistry.register(ModEntities.CHIMERA, ChimeraEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ORCHID_MANEATER,  OrchidManeaterEntity.createAttributes());
         FabricDefaultAttributeRegistry.register(ModEntities.ORCHID_MANEATER_FLOWER, OrchidManeaterFlowerEntity.createAttributes());
+        FabricDefaultAttributeRegistry.register(ModEntities.MALEFIC_SORCERESS, MaleficSorceressEntity.createAttributes());
     }
 
     private static void registerEvents() {

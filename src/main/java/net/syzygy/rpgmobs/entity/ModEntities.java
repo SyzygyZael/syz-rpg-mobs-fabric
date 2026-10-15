@@ -1,6 +1,7 @@
 package net.syzygy.rpgmobs.entity;
 
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -12,10 +13,13 @@ import net.syzygy.rpgmobs.entity.ArchangelComponents.ArchangelEntity;
 import net.syzygy.rpgmobs.entity.ChimeraComponents.ChimeraEntity;
 import net.syzygy.rpgmobs.entity.CobbleProjectileComponents.CobbleProjectileEntity;
 import net.syzygy.rpgmobs.entity.CrystillineMagmiteComponents.CrystallineMagmiteEntity;
+import net.syzygy.rpgmobs.entity.MaleficSorceressComponents.MaleficSorceressEntity;
+import net.syzygy.rpgmobs.entity.MaleficSorceressComponents.MaleficSorceressModel;
 import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeater.OrchidManeaterEntity;
 import net.syzygy.rpgmobs.entity.OrchidManeaterAbstractComponents.OrchidManeaterFlower.OrchidManeaterFlowerEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreant.TwistedTreantEntity;
 import net.syzygy.rpgmobs.entity.TwistedTreantAbstractComponents.TwistedTreantStanding.TwistedTreantStandingEntity;
+import net.syzygy.rpgmobs.entity.WarpedBladeComponents.WarpedBladeEntity;
 
 public class ModEntities {
 
@@ -28,6 +32,11 @@ public class ModEntities {
             new Identifier(RPGMobs.MOD_ID, "cobble_projectile"),
             FabricEntityTypeBuilder.<CobbleProjectileEntity>create(SpawnGroup.MISC, CobbleProjectileEntity::new)
                     .dimensions(EntityDimensions.fixed(1f, 1f)).build());
+
+    public static final EntityType<WarpedBladeEntity> WARPED_BLADE_PROJECTILE = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(RPGMobs.MOD_ID, "warped_blade"),
+            FabricEntityTypeBuilder.<WarpedBladeEntity>create(SpawnGroup.MISC, WarpedBladeEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.5f, 1.6f)).build());
 
     public static final EntityType<ArchangelEntity> ARCHANGEL = Registry.register(Registries.ENTITY_TYPE,
             new Identifier(RPGMobs.MOD_ID, "archangel"),
@@ -56,6 +65,10 @@ public class ModEntities {
             new Identifier(RPGMobs.MOD_ID, "orchid_maneater_flower"),
             FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, OrchidManeaterFlowerEntity::new)
                     .dimensions(EntityDimensions.fixed(0.3f,0.3f)).build());
+    public static final EntityType<MaleficSorceressEntity> MALEFIC_SORCERESS = Registry.register(Registries.ENTITY_TYPE,
+            new Identifier(RPGMobs.MOD_ID, "malefic_sorceress"),
+            FabricEntityTypeBuilder.create(SpawnGroup.MONSTER, MaleficSorceressEntity::new)
+                    .dimensions(EntityDimensions.fixed(1f, 1.7f)).build());
 
     public static void registerModEntites() {
         RPGMobs.LOGGER.info("Registering ModEntities for " + RPGMobs.MOD_ID);

@@ -42,6 +42,7 @@ public class ArchangelModel<T extends ArchangelEntity> extends SinglePartEntityM
 		this.right_leg = this.main.getChild("right_leg");
 		this.left_leg = this.main.getChild("left_leg");
 	}
+
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
 		ModelPartData modelPartData = modelData.getRoot();
